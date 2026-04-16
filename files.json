@@ -53,5 +53,22 @@
             "The concepts are easy to understand, but it is just a bunch of text, so maybe turning it into slides and letting students create sentences would be a good class activity.",
             "The lecture part is what would take the longest, but the actual tool shouldn't take very long. It also only has one parameter: Temperature which 'Changes the output probability distribution and randomness of next token. '"
         ]
+    },
+    {
+        "title": "Artificial Neuron",
+        "url": "https://ellipsisedu.com/en/hourofai-artificialneuron",
+        "file": "files/Artificial Neuron/neurons.zip",
+        "image": "files/Artificial Neuron/single-neuron.png",
+        "tags": [
+            "Hour of AI",
+            "Activity",
+            "Lecture",
+            "1 hour",
+            "Beginner"
+        ],
+        "description": [
+            "This is a guided lecture with activities and a quiz. It's very well done, not very difficult, but good for teaching about inputs, weights, bias, and artificial neurons.",
+            "Files included are just two screenshots of the activities. Also, no account is needed for this, so maybe asking for screenshots of the results in a document could be a way to give a score."
+        ]
     }
 ]
