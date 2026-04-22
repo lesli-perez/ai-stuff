@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>AI Assisted Coding Assignment</title>
+  <title>AI Assisted Coding References</title>
 
   <link rel="stylesheet" href="../../style.css">
 </head>
@@ -11,83 +11,91 @@
 
 <div class="page">
 
-    <a class="back-link" href="../../index.html">
-        ← Back to Resource Hub
-    </a>
+  <h1>💻 AI Assisted Coding</h1>
 
-  <h1>📄 AI Assisted Coding Assignment</h1>
+  <div class="example-banner">
+    Assignment Page and Example Submission – AI Assisted Coding Assignment
+  </div>
 
-  <div class="assignment-card">
-    <h2>Introduction</h2>
+  <a class="back-link" href="../../index.html">
+    ← Back to Resource Hub
+  </a>
+
+
+  <!-- CONTEXT -->
+<div class="assignment-card">
+    <h2>Project Overview</h2>
+
     <p>
-      In this assignment, you will create your own version of the Connections game
-      inspired by the New York Times.
+      This page includes an example submission for the AI Assisted Coding Assignment and an Assignment Page for students.
+    </p>
+
+    <p>
+      The original activity was based on the Hour of AI website. Since the online IDE environment was not accessible,
+      the assignment was recreated as a standalone web project that does not require external tools to run.
+    </p>
+
+  </div>
+
+  <!-- CONTENTS -->
+  <div class="assignment-card">
+    <h2>Content</h2>
+    <ul>
+      <li>Two Connections-style games using two different prompts (HTML/CSS/JS)</li>
+      <li>AI Assisted Coding Assignment page and PDF</li>
+      <li>Prompt engineering comparison (simple vs detailed prompts)</li>
+    </ul>
+  </div>
+
+  <!-- VIEW ASSIGNMENT -->
+  <div class="assignment-card clickable"
+       data-link="../../files/AI Assisted Code/AICode-assignment.html">
+
+    <h2>View Assignment Page</h2>
+    <p>
+      Click to view the full AI Assisted Coding Assignment page, including instructions,
+      screenshots, and game explanation.
+    </p>
+
+  </div>
+  <!-- PROMPT COMPARISON -->
+  <div class="assignment-card">
+    <h2>Prompt Engineering Comparison</h2>
+
+    <p>
+      Two different AI prompts were used to compare output quality and required debugging effort.
+    </p>
+
+    <h3>Simple Prompt</h3>
+    <p>
+      A basic instruction requested a Connections-style game using HTML, CSS, and JavaScript.
+      The output provided a functional starting point but required significant refinement in layout,
+      interaction design, and structure.
+    </p>
+
+    <h3>Detailed Prompt</h3>
+    <p>
+      A more advanced prompt included specific requirements such as UI structure,
+      responsive layout behavior, and component organization.
+      This version produced more complete and structured output with fewer required corrections.
     </p>
   </div>
 
-  <div class="assignment-card">
-    <h2>How to Play Connections</h2>
-    <img src="img/connections1.png" alt="Try to find words that belong together.">
-    <p>Try to find words that belong together.</p>
-    <p>Select <strong>four words</strong> that form a group and submit them.</p>
-    <p>You are only allowed <strong>4 mistakes</strong>.</p>
-    <p>You win by completing all groups before running out of mistakes.</p>
-  </div>
 
-  <div class="assignment-card">
-    <h2>Example</h2>
+
+  <!-- DOWNLOAD -->
+  <div class="assignment-card clickable"
+       data-link="../../files/AI Assisted Code/AI Assisted Coding Assignment.zip">
+
+    <h2>Download Project Files</h2>
     <p>
-      The words <strong>Tassel, Gown, Cap, Diploma</strong> belong under
-      <strong>Graduation Gear</strong>.
+      Click to download the full project package example including all HTML, CSS, JavaScript files
+      for the simple prompt and the detailed prompt. Also includes a PDF version of the assignment and the prompts used to create the examples.
     </p>
-  </div>
 
-  <div class="assignment-card">
-    <h2>AI Chatbot Options</h2>
-    <ul>
-      <li>ChatGPT</li>
-      <li>Gemini</li>
-      <li>Copilot</li>
-    </ul>
-  </div>
-
-  <div class="assignment-card">
-    <h2>Tips</h2>
-    <ul>
-      <li>Be descriptive when prompting the AI.</li>
-      <li>Work in small steps.</li>
-      <li>Expect debugging and iteration.</li>
-    </ul>
-  </div>
-
-  <div class="assignment-card clickable" data-link="https://www.nytimes.com/games/connections">
-    <h2>Requirements</h2>
-
-    <p>You must create the following files:</p>
-    <ul>
-      <li>index.html</li>
-      <li>style.css</li>
-      <li>script.js</li>
-    </ul>
-
-    <p>You must also write a one-page reflection including:</p>
-    <ul>
-      <li>AI tools used</li>
-      <li>Code quality</li>
-      <li>Debugging process</li>
-    </ul>
-
-    <p>
-      <a href="https://www.nytimes.com/games/connections" target="_blank">
-        View original Connections game →
-      </a>
-    </p>
   </div>
 
 </div>
-
-</body>
-</html>
 
 <script>
 document.querySelectorAll(".clickable").forEach(card => {
@@ -99,3 +107,6 @@ document.querySelectorAll(".clickable").forEach(card => {
   });
 });
 </script>
+
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Assisted Coding Assignment</title>
+
+  <link rel="stylesheet" href="../../style.css">
+</head>
+
+<body>
+
+<div class="page">
+
+
+
+  <h1>📄 AI Assisted Coding Assignment</h1>
+
+
+  <a class="back-link" href="../../index.html">
+    ← Back to Resource Hub
+  </a>
+
+  <div class="assignment-card">
+    <h2>Introduction</h2>
+    <p>
+      In this assignment, you will create your own version of the Connections game
+      inspired by the New York Times using AI generated code to assist you.
+    </p>
+  </div>
+
+    <div class="assignment-card">
+
+    <h2>How to Play Connections</h2>
+
+    <div class="step">
+        <img src="img/connections1.png" alt="Find word groups">
+        <div class="step-text">
+        <h3>Step 1</h3>
+        <p>Try to find words that belong together.</p>
+        </div>
+    </div>
+
+    <div class="step">
+        <img src="img/connections2.png" alt="Select four words">
+        <div class="step-text">
+        <h3>Step 2</h3>
+        <p>Select <strong>four words</strong> that form a group and submit them.</p>
+        </div>
+    </div>
+
+    <div class="step">
+        <img src="img/connections3.png" alt="Limited mistakes">
+        <div class="step-text">
+        <h3>Step 3</h3>
+        <p>Try to find all four groups, but remember you are only allowed <strong>4 mistakes</strong>.</p>
+        </div>
+    </div>
+
+    <div class="step">
+        <img src="img/connections4.png" alt="Win condition">
+        <div class="step-text">
+        <h3>Step 4</h3>
+        <p>You win by completing all groups before running out of mistakes.</p>
+        </div>
+    </div>
+
+    </div>
+
+  <div class="assignment-card">
+    <h2>Example</h2>
+    <p>
+      The words <strong>Tassel, Gown, Cap, and Diploma</strong> belong under
+      <strong>Graduation Gear</strong>.
+    </p>
+  </div>
+
+  <div class="assignment-card">
+    <h2>AI Chatbot Options</h2>
+    <p>You can complete this project using any chatbot that allows you to ask coding-related questions. There are many AI Chatbots to choose from. Here are a few suggestions:
+</p>
+    <ul>
+      <li>ChatGPT</li>
+      <li>Gemini</li>
+      <li>Copilot</li>
+    </ul>
+
+    <p>Each AI assistant (ChatGPT, Gemini, Copilot, etc.) may explain or format code differently. Some tools provide full files, while others give short snippets.
+
+        If one chatbot gives confusing output, try asking a different one or rephrasing your request.
+        Always review, test, and debug the code yourself—even AI-generated programs will need adjustments!
+    </p>
+  </div>
+
+  <div class="assignment-card">
+    <h2>Tips</h2>
+    <ul>
+      <li>Be descriptive when prompting the AI.</li>
+      <li>Plan out what you want to accomplish, and take small steps to reach your end goal.</li>
+      <li>Expect debugging and many iterations.</li>
+    </ul>
+  </div>
+
+  <div class="assignment-card clickable" data-link="https://www.nytimes.com/games/connections">
+    <h2>Requirements</h2>
+
+    <p>You must create the following files:</p>
+    <ul>
+      <li>index.html</li>
+      <li>style.css</li>
+      <li>script.js</li>
+    </ul>
+
+    <p>You must also write a one-page reflection including:</p>
+    <ul>
+      <li>AI tools used</li>
+      <li>Quality of the code provided by the AI</li>
+      <li>Debugging process and tweaks made after the initial prompt</li>
+    </ul>
+
+    <p>
+      <a href="https://www.nytimes.com/games/connections" target="_blank">
+        View original Connections game →
+      </a>
+    </p>
+  </div>
+
+</div>
+
+</body>
+</html>
+
+<script>
+document.querySelectorAll(".clickable").forEach(card => {
+  card.addEventListener("click", () => {
+    const link = card.getAttribute("data-link");
+    if (link) {
+      window.open(link, "_blank");
+    }
+  });
+});
+</script>

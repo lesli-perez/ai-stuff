@@ -330,14 +330,66 @@ input {
 
 .back-link {
   display: inline-block;
-  margin-bottom: 20px;
+  margin-top: 25px;
+  margin-bottom: 10px;
 
-  color: #ff7ccd;
+  color: #ac618f;
   text-decoration: none;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .back-link:hover {
   text-decoration: underline;
+}
+
+.step {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.step:last-child {
+  border-bottom: none;
+}
+
+.step img {
+  width: 300px;
+  height: auto;
+  border-radius: 10px;
+
+  border: 1px solid #eee;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+
+  flex-shrink: 0;
+}
+
+.step-text h3 {
+  margin: 0 0 5px 0;
+  font-size: 16px;
+  color: #111;
+}
+
+.step-text p {
+  margin: 0;
+  color: #444;
+  font-size: 14.5px;
+  line-height: 1.5;
+}
+
+/* RESPONSIVE */
+@media (max-width: 700px) {
+  .step {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+@media (max-width: 700px) {
+  .step img {
+    width: 100%;
+  }
+}
 }
