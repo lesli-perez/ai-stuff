@@ -268,3 +268,76 @@ input {
     margin-top: 10px;
   }
 }
+
+
+/* PAGE WRAPPER */
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ASSIGNMENT CARDS */
+.assignment-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 16px;
+
+  padding: 18px;
+  margin: 15px 0;
+
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+
+/* HEADINGS */
+.assignment-card h2 {
+  margin-top: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111;
+}
+
+/* TEXT */
+.assignment-card p,
+.assignment-card li {
+  color: #444;
+  line-height: 1.6;
+  font-size: 14.5px;
+}
+
+/* LISTS */
+.assignment-card ul {
+  padding-left: 18px;
+}
+
+/* LINK STYLE MATCHING YOUR HUB */
+.assignment-card a {
+  color: #ff7ccd;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.clickable {
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.clickable:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(214, 105, 172, 0.15);
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 20px;
+
+  color: #ff7ccd;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}

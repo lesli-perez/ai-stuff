@@ -19,7 +19,7 @@
     },
     {
         "title": "Introduction to AI-Assisted Coding",
-        "url": "https://codehs.com/editor/playlist/connection/18504464/38244/26975",
+        "url": "./files/AI Assisted Code/AICode.html",
         "file": "files/AI Assisted Code/AI Assisted Coding Assignment.zip",
         "image": "files/AI Assisted Code/connections-prompt.png",
         "tags": [
@@ -32,7 +32,8 @@
         "description": [
             "I found this activity in the Hour of AI website, but couldn't get the Online IDE to work, so I recreated the assignment (see 'Introduction to AI Assisted Coding Assignment' file) so it doesn't need the website at all, but it is linked in the title anyways for reference.",
             "This could be useful for learning about prompt engineering and fixing/analysing code. Maybe only letting the students prompt the AI once and then they have to fix the rest themselves. This could also be done with other games like NYT - Wordle. I did two prompts for comparison, one simple prompt, and one detailed prompt, both had their issues. I provided the prompts and the results under 'Prompt Engineering Comparison' and I included the code under the Detailed and Simple Prompt folders.",
-            "I think this is good for beginners or more advanced students depending on the activity requirements, but it can also can teach students about web dev."
+            "I think this is good for beginners or more advanced students depending on the activity requirements, but it can also can teach students about web dev.",
+            "https://codehs.com/editor/playlist/connection/18504464/38244/26975"
         ]
     },
     {

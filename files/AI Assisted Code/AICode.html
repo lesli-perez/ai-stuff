@@ -3,82 +3,99 @@
 <head>
   <meta charset="UTF-8">
   <title>AI Assisted Coding Assignment</title>
+
   <link rel="stylesheet" href="../../style.css">
 </head>
+
 <body>
 
-  <div class="page">
+<div class="page">
 
-    <h1>AI Assisted Coding Assignment</h1>
+    <a class="back-link" href="../../index.html">
+        ← Back to Resource Hub
+    </a>
 
-    <section>
-      <h2>Introduction</h2>
-      <p>
-        In this assignment, you will create your own version of the Connections game
-        inspired by the New York Times.
-      </p>
-    </section>
+  <h1>📄 AI Assisted Coding Assignment</h1>
 
-    <section>
-      <h2>How to Play</h2>
-      <p>Try to find words that match or belong together.</p>
-      <p>Select FOUR words that form a group and submit them.</p>
-      <p>You are only allowed 4 mistakes.</p>
-      <p>You win by finding all groups before running out of mistakes.</p>
-    </section>
-
-    <section>
-      <h2>Example</h2>
-      <p>
-        The words <strong>Tassel, Gown, Cap, Diploma</strong> all belong under the
-        category <strong>Graduation Gear</strong>.
-      </p>
-    </section>
-
-    <section>
-      <h2>AI Chatbot Options</h2>
-      <ul>
-        <li>ChatGPT</li>
-        <li>Gemini</li>
-        <li>Copilot</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Tips</h2>
-      <ul>
-        <li>Be descriptive when prompting the AI.</li>
-        <li>Work in small steps.</li>
-        <li>Expect to debug and revise your code.</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Requirements</h2>
-      <p>You must create the following files:</p>
-      <ul>
-        <li>index.html</li>
-        <li>style.css</li>
-        <li>script.js</li>
-      </ul>
-
-      <p>
-        You must also write a one-page reflection explaining:
-      </p>
-      <ul>
-        <li>Which AI chatbot(s) you used</li>
-        <li>The quality of the code</li>
-        <li>How much debugging was required</li>
-      </ul>
-
-      <p>
-        <a href="https://www.nytimes.com/games/connections" target="_blank">
-          View the original game
-        </a>
-      </p>
-    </section>
-
+  <div class="assignment-card">
+    <h2>Introduction</h2>
+    <p>
+      In this assignment, you will create your own version of the Connections game
+      inspired by the New York Times.
+    </p>
   </div>
+
+  <div class="assignment-card">
+    <h2>How to Play Connections</h2>
+    <img src="img/connections1.png" alt="Try to find words that belong together.">
+    <p>Try to find words that belong together.</p>
+    <p>Select <strong>four words</strong> that form a group and submit them.</p>
+    <p>You are only allowed <strong>4 mistakes</strong>.</p>
+    <p>You win by completing all groups before running out of mistakes.</p>
+  </div>
+
+  <div class="assignment-card">
+    <h2>Example</h2>
+    <p>
+      The words <strong>Tassel, Gown, Cap, Diploma</strong> belong under
+      <strong>Graduation Gear</strong>.
+    </p>
+  </div>
+
+  <div class="assignment-card">
+    <h2>AI Chatbot Options</h2>
+    <ul>
+      <li>ChatGPT</li>
+      <li>Gemini</li>
+      <li>Copilot</li>
+    </ul>
+  </div>
+
+  <div class="assignment-card">
+    <h2>Tips</h2>
+    <ul>
+      <li>Be descriptive when prompting the AI.</li>
+      <li>Work in small steps.</li>
+      <li>Expect debugging and iteration.</li>
+    </ul>
+  </div>
+
+  <div class="assignment-card clickable" data-link="https://www.nytimes.com/games/connections">
+    <h2>Requirements</h2>
+
+    <p>You must create the following files:</p>
+    <ul>
+      <li>index.html</li>
+      <li>style.css</li>
+      <li>script.js</li>
+    </ul>
+
+    <p>You must also write a one-page reflection including:</p>
+    <ul>
+      <li>AI tools used</li>
+      <li>Code quality</li>
+      <li>Debugging process</li>
+    </ul>
+
+    <p>
+      <a href="https://www.nytimes.com/games/connections" target="_blank">
+        View original Connections game →
+      </a>
+    </p>
+  </div>
+
+</div>
 
 </body>
 </html>
+
+<script>
+document.querySelectorAll(".clickable").forEach(card => {
+  card.addEventListener("click", () => {
+    const link = card.getAttribute("data-link");
+    if (link) {
+      window.open(link, "_blank");
+    }
+  });
+});
+</script>
