@@ -38,7 +38,7 @@
     {
         "title": "Interactive Transformer Visualization of GPT-2",
         "url": "https://myai101.com/hourofai/gpt2",
-        "file": "files/Interactive Transformer/transformer-visualization.png",
+        "file": "files/Interactive Transformer/visualizers.zip",
         "image": "files/Interactive Transformer/transformer-visualization.png",
         "tags": [
             "Hour of AI",
@@ -52,7 +52,8 @@
             "This tool generates one word at a time and visualizes the steps it takes to guess the next word. Using the tool is very easy, the website includes a bunch of text at the bottom explaining what the transformer is doing.",
             "The concepts are easy to understand, but it is just a bunch of text, so maybe turning it into slides and letting students create sentences would be a good class activity.",
             "The lecture part is what would take the longest, but the actual tool shouldn't take very long. It also only has one parameter: Temperature which 'Changes the output probability distribution and randomness of next token. '",
-            "The site also includes a 'Tokenizer Visualizer': https://myai101.com/hourofai/tokenizer and a lecture on transformers: https://myai101.com/hourofai/transformer"
+            "The site also includes a 'Tokenizer Visualizer': https://myai101.com/hourofai/tokenizer and a lecture on transformers: https://myai101.com/hourofai/transformer",
+            "Files included are just screenshots of the Transformer and Tokenizer Visualizers. "
         ]
     },
     {
@@ -68,9 +69,9 @@
             "Beginner"
         ],
         "description": [
-            "This is a guided lecture with activities and a quiz. It's very well done, not very difficult, but good for teaching about inputs, weights, bias, and artificial neurons.",
-            "Files included are just two screenshots of the activities. Also, no account is needed for this, so maybe asking for screenshots of the results in a document could be a way to give a score.",
-            "This website on 'How to Think Like a Neuron' is similar to this activity: https://ai4ga.org/think-like-a-neuron-part-2/"
+            "This is a guided lecture with activities and a quiz. It's very well done, not very difficult, but good for teaching about inputs, weights, bias, and artificial neurons. No account is needed, so maybe asking for screenshots of the results in a document could be a way to give a score.",
+            "This website on 'How to Think Like a Neuron' is similar to this activity: https://ai4ga.org/think-like-a-neuron-part-2/ ",
+            "Files included are just screenshots of the activities and of the other Think Like a Neuron website. "
         ]
     }
 ]
