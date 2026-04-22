@@ -1,78 +1,90 @@
 [
-    {
-        "title": "Google Teachable Machine",
-        "url": "https://teachablemachine.withgoogle.com/train",
-        "file": "files/Teachable Machine/teachable-machine.zip",
-        "image": "files/Teachable Machine/teachable-machine-test.png",
-        "tags": [
-            "Plug and Play",
-            "5 mins.",
-            "Activity",
-            "Tool",
-            "Beginner"
-        ],
-        "description": [
-            "Incredibly easy to start using it. Set up takes less than a minute. Possible activities to use this tool with include:\n",
-            "<ul><li>Use different inputs/number of image samples (many samples vs few samples) and see how this affects the model.</li> <li>Change the parameters (epochs, batch size, learning rate) to see how it affects the test results. Look at the accuracy/loss and plot them.</li><li>Check for biases/imbalances in the data set and attempt to correct it. Example: Class 1 is 'highlighters', but only yellow ones are used in training, so the model might fail to recognize other colors.</li><li>Add noise to the input images/audio to see how it affects results.</li></ul>\n",
-            "It isn't very technically difficult and doesn't require a lot of background knowledge, but seems like a very useful tool to introduce the topic. Also, lots of activities can be created and implemented. I attached an Image Project .tm file that can be opened using the website linked in the title of this card. To open: click the link, then click on the hamburger menu on the top left of the site, then select 'Open project from file'."
-        ]
-    },
-    {
-        "title": "Introduction to AI-Assisted Coding",
-        "url": "./files/AI Assisted Code/aicode.html",
-        "file": "files/AI Assisted Code/AI Assisted Coding Assignment.zip",
-        "image": "files/AI Assisted Code/connections-prompt.png",
-        "tags": [
-            "Hour of AI",
-            "Activity",
-            "AI Assisted Coding",
-            "1 hour",
-            "Intermediate"
-        ],
-        "description": [
-            "I found this activity in the Hour of AI website, but couldn't get the Online IDE to work, so I recreated the assignment (see 'Introduction to AI Assisted Coding Assignment' file) so it doesn't need the website at all, but it is linked in the title anyways for reference.",
-            "This could be useful for learning about prompt engineering and fixing/analysing code. Maybe only letting the students prompt the AI once and then they have to fix the rest themselves. This could also be done with other games like NYT - Wordle. I did two prompts for comparison, one simple prompt, and one detailed prompt, both had their issues. I provided the prompts and the results under 'Prompt Engineering Comparison' and I included the code under the Detailed and Simple Prompt folders.",
-            "I think this is good for beginners or more advanced students depending on the activity requirements, but it can also can teach students about web dev.",
-            "https://codehs.com/editor/playlist/connection/18504464/38244/26975"
-        ]
-    },
-    {
-        "title": "Interactive Transformer Visualization of GPT-2",
-        "url": "https://myai101.com/hourofai/gpt2",
-        "file": "files/Interactive Transformer/visualizers.zip",
-        "image": "files/Interactive Transformer/transformer-visualization.png",
-        "tags": [
-            "Hour of AI",
-            "Tool",
-            "Lecture",
-            "5 mins.",
-            "Intermediate",
-            "Plug and Play"
-        ],
-        "description": [
-            "This tool generates one word at a time and visualizes the steps it takes to guess the next word. Using the tool is very easy, the website includes a bunch of text at the bottom explaining what the transformer is doing.",
-            "The concepts are easy to understand, but it is just a bunch of text, so maybe turning it into slides and letting students create sentences would be a good class activity.",
-            "The lecture part is what would take the longest, but the actual tool shouldn't take very long. It also only has one parameter: Temperature which 'Changes the output probability distribution and randomness of next token. '",
-            "The site also includes a 'Tokenizer Visualizer': https://myai101.com/hourofai/tokenizer and a lecture on transformers: https://myai101.com/hourofai/transformer",
-            "Files included are just screenshots of the Transformer and Tokenizer Visualizers. "
-        ]
-    },
-    {
-        "title": "Artificial Neuron",
-        "url": "https://ellipsisedu.com/en/hourofai-artificialneuron",
-        "file": "files/Artificial Neuron/neurons.zip",
-        "image": "files/Artificial Neuron/single-neuron.png",
-        "tags": [
-            "Hour of AI",
-            "Activity",
-            "Lecture",
-            "1 hour",
-            "Beginner"
-        ],
-        "description": [
-            "This is a guided lecture with activities and a quiz. It's very well done, not very difficult, but good for teaching about inputs, weights, bias, and artificial neurons. No account is needed, so maybe asking for screenshots of the results in a document could be a way to give a score.",
-            "This website on 'How to Think Like a Neuron' is similar to this activity: https://ai4ga.org/think-like-a-neuron-part-2/ ",
-            "Files included are just screenshots of the activities and of the other Think Like a Neuron website. "
-        ]
-    }
+  {
+    "title": "Google Teachable Machine",
+    "url": "https://teachablemachine.withgoogle.com/train",
+    "file": "files/Teachable Machine/teachable-machine.zip",
+    "image": "files/Teachable Machine/teachable-machine-test.png",
+    "tags": [
+      "Plug and Play",
+      "5 mins.",
+      "Activity",
+      "Tool",
+      "Beginner",
+      "Machine Learning",
+      "No Code",
+      "AI"
+    ],
+    "description": [
+      "This tool provides a simple interface for creating machine learning models without requiring coding experience. Setup time is minimal, making it suitable for introductory AI exploration.",
+      "<ul><li>Compare model performance using different quantities of training samples (few vs many).</li><li>Adjust parameters such as epochs, batch size, and learning rate to observe their impact on accuracy and loss.</li><li>Investigate dataset bias or imbalance (e.g., training on only one color of object may reduce generalization).</li><li>Test model robustness by introducing noise into image or audio inputs.</li></ul>",
+      "This tool is well suited for introductory machine learning lessons and supports a wide range of classroom experiments focused on data, training, and model behavior. Project files can be opened through the platform using the built-in import feature."
+    ]
+  },
+  {
+    "title": "Introduction to AI-Assisted Coding",
+    "url": "./files/AI Assisted Code/aicode.html",
+    "file": "files/AI Assisted Code/AI Assisted Coding Assignment.zip",
+    "image": "files/AI Assisted Code/connections-prompt.png",
+    "tags": [
+      "Hour of AI",
+      "Activity",
+      "AI Assisted Coding",
+      "1 hour",
+      "Intermediate",
+      "Beginner",
+      "Web Development",
+      "Prompt Engineering",
+      "AI"
+    ],
+    "description": [
+      "This activity explores AI-assisted programming through the recreation of a Connections-style game. The original online IDE environment was unavailable, so the assignment was rebuilt as a standalone web project.",
+      "The exercise is designed to support learning in prompt engineering and code analysis. A structured approach can be used where students generate code using AI once, then focus on debugging and improving the output independently.",
+      "Two prompt variations are included in the download folder for comparison: a simple prompt and a detailed prompt. The outputs were analyzed to evaluate differences in structure, completeness, and required debugging effort.",
+      "This activity is suitable for both beginner and intermediate learners and can also serve as an introduction to web development concepts and AI-assisted workflow design."
+    ]
+  },
+  {
+    "title": "Interactive Transformer Visualization of GPT-2",
+    "url": "https://myai101.com/hourofai/gpt2",
+    "file": "files/Interactive Transformer/visualizers.zip",
+    "image": "files/Interactive Transformer/transformer-visualization.png",
+    "tags": [
+      "Hour of AI",
+      "Tool",
+      "Lecture",
+      "5 mins.",
+      "Intermediate",
+      "Plug and Play",
+      "AI"
+    ],
+    "description": [
+      "This tool visualizes how transformer-based language models generate text one token at a time, illustrating the step-by-step prediction process.",
+      "The interface includes explanatory text that describes how the model processes input and produces output. The main adjustable parameter is temperature, which controls randomness in token selection.",
+      "Suggested classroom applications include converting the explanation into guided slides or having students construct sentences while observing model behavior.",
+      "Additional resources include a 'Tokenizer Visualizer': https://myai101.com/hourofai/tokenizer and a lecture on transformers: https://myai101.com/hourofai/transformer which provide further insight into model structure and token processing. Included files consist of screenshots of these tools."
+    ]
+  },
+  {
+    "title": "Artificial Neuron",
+    "url": "https://ellipsisedu.com/en/hourofai-artificialneuron",
+    "file": "files/Artificial Neuron/neurons.zip",
+    "image": "files/Artificial Neuron/single-neuron.png",
+    "tags": [
+      "Hour of AI",
+      "Activity",
+      "Lecture",
+      "1 hour",
+      "Beginner",
+      "AI",
+      "Machine Learning",
+      "Neural Networks"
+    ],
+    "description": [
+      "This guided activity introduces the concept of artificial neurons through interactive explanations and embedded quizzes. It focuses on foundational machine learning concepts such as inputs, weights, and bias.",
+      "The activity is designed to support conceptual understanding rather than advanced technical implementation, making it suitable for introductory learners.",
+      "Assessment can be supported through documentation or screenshot-based submissions of completed activities.",
+      "Supplementary materials include screenshots of the activity and related external resources that reinforce the concept of neural computation.",
+      "This website on 'How to Think Like a Neuron' is similar to this activity: https://ai4ga.org/think-like-a-neuron-part-2/. It provides an additional perspective on neural network concepts and reinforces understanding of how artificial neurons process information."
+    ]
+  }
 ]

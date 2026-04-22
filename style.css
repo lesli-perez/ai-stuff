@@ -43,7 +43,7 @@ h1 {
   gap: 10px;
 }
 
-/* SEARCH (FIXED ALIGNMENT) */
+/* SEARCH */
 input {
   display: block;
   width: 100%;
@@ -54,10 +54,6 @@ input {
 
   margin-bottom: 15px;
   box-sizing: border-box;
-
-  max-width: 1100px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 /* RESET BUTTON */
@@ -96,7 +92,7 @@ input {
 
   padding: 8px;
 
-  width: 220px; /* tighter = removes “dead space” */
+  width: 220px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.08);
   z-index: 100;
 
@@ -110,35 +106,30 @@ input {
   display: block;
 }
 
-/* EACH ITEM */
+/* FILTER ITEMS */
 .filter-item {
   display: flex;
   align-items: center;
   justify-content: flex-start;
 
-  gap: 6px;              /* controls spacing precisely */
+  gap: 6px;
   padding: 4px 6px;
-  margin: 0;
 
   font-size: 13.5px;
   cursor: pointer;
 
-  width: fit-content;    /* prevents full-width stretching */
   white-space: nowrap;
 }
 
 .filter-item input {
-  margin: 0;
-  padding: 0;
-
   width: 14px;
   height: 14px;
+  margin: 0;
 
-  flex: 0 0 auto;
   accent-color: #ff7ccd;
 }
 
-/* hover only around content, not full row */
+/* hover */
 .filter-item:hover {
   background: #f5f5f5;
   border-radius: 6px;
@@ -162,9 +153,7 @@ input {
 
 .card:hover {
   transform: translateY(-3px);
-  box-shadow:
-    0 10px 25px rgba(214, 105, 172, 0.18),
-    0 4px 12px rgba(0,0,0,0.04);
+  box-shadow: 0 10px 25px rgba(214, 105, 172, 0.18);
 }
 
 /* LEFT */
@@ -256,6 +245,27 @@ input {
   text-decoration: none;
 }
 
+/* GLOBAL LINK FIX (IMPORTANT) */
+.right a,
+.assignment-card a,
+.card a {
+  color: #ff7ccd;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.right a:hover,
+.assignment-card a:hover,
+.card a:hover {
+  text-decoration: underline;
+}
+
+.right a:visited,
+.assignment-card a:visited,
+.card a:visited {
+  color: #ff7ccd;
+}
+
 /* RESPONSIVE */
 @media (max-width: 900px) {
   .card {
@@ -268,7 +278,6 @@ input {
     margin-top: 10px;
   }
 }
-
 
 /* PAGE WRAPPER */
 .page {
@@ -286,9 +295,7 @@ input {
   margin: 15px 0;
 
   box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
-
 
 /* HEADINGS */
 .assignment-card h2 {
@@ -311,13 +318,7 @@ input {
   padding-left: 18px;
 }
 
-/* LINK STYLE MATCHING YOUR HUB */
-.assignment-card a {
-  color: #ff7ccd;
-  font-weight: 500;
-  text-decoration: none;
-}
-
+/* CLICKABLE CARD */
 .clickable {
   cursor: pointer;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
@@ -328,6 +329,7 @@ input {
   box-shadow: 0 8px 20px rgba(214, 105, 172, 0.15);
 }
 
+/* BACK LINK */
 .back-link {
   display: inline-block;
   margin-top: 25px;
@@ -343,6 +345,7 @@ input {
   text-decoration: underline;
 }
 
+/* STEPS (assignment screenshots) */
 .step {
   display: flex;
   gap: 15px;
@@ -380,16 +383,14 @@ input {
   line-height: 1.5;
 }
 
-/* RESPONSIVE */
+/* RESPONSIVE FIX */
 @media (max-width: 700px) {
   .step {
     flex-direction: column;
     align-items: flex-start;
   }
 
-@media (max-width: 700px) {
   .step img {
     width: 100%;
   }
-}
 }
