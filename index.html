@@ -2,8 +2,7 @@
 <html>
 <head>
   <title>Resource Hub</title>
-  <link rel="stylesheet" href="styles.css">
-  <!-- Include marked.js for Markdown support -->
+  <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 
@@ -12,8 +11,21 @@
 <h1>📁 Resource Hub</h1>
 
 <div class="topbar">
-  <div class="status" id="statusText">Viewing All Files - click on a tag to add a filter.</div>
-  <button class="reset-btn" onclick="resetFilter()">Show All</button>
+  <div class="status" id="statusText">
+    Viewing All Files
+  </div>
+
+  <div class="top-actions">
+    <button class="reset-btn" onclick="resetFilter()">Show All</button>
+
+    <div class="filter-wrapper">
+      <button class="filter-btn" onclick="toggleFilterMenu()">
+        🔽 Filters
+      </button>
+
+      <div id="filterMenu" class="filter-menu"></div>
+    </div>
+  </div>
 </div>
 
 <input type="text" id="search" placeholder="Search..." onkeyup="filter()">
@@ -22,40 +34,176 @@
 
 <script>
 let data = [];
-let currentFilter = null;
+let searchQuery = "";
+let activeTags = new Set();
 
-// Load JSON file
 fetch('files.json')
   .then(res => res.json())
   .then(json => {
     data = json;
     render(data);
+    buildTagMenu();
   });
 
-// Render function
+/* CLOSE ON OUTSIDE CLICK */
+document.addEventListener("click", function (e) {
+  const menu = document.getElementById("filterMenu");
+  const btn = document.querySelector(".filter-btn");
+
+  if (!menu.contains(e.target) && !btn.contains(e.target)) {
+    menu.classList.remove("show");
+  }
+});
+
+/* BUILD FILTER MENU */
+function buildTagMenu() {
+  const menu = document.getElementById("filterMenu");
+
+  const allTags = [...new Set(data.flatMap(d => d.tags))];
+
+  menu.innerHTML = allTags.map(tag => `
+    <label class="filter-item">
+      <input type="checkbox"
+        onchange="toggleTag('${tag}')"
+        ${activeTags.has(tag) ? "checked" : ""}>
+      ${tag}
+    </label>
+  `).join("");
+}
+
+function toggleFilterMenu() {
+  document.getElementById("filterMenu").classList.toggle("show");
+}
+
+/* OR FILTER LOGIC */
+function toggleTag(tag) {
+  if (activeTags.has(tag)) {
+    activeTags.delete(tag);
+  } else {
+    activeTags.add(tag);
+  }
+
+  buildTagMenu();
+  applyFilters();
+}
+
+/* SEARCH */
+function filter() {
+  searchQuery = document.getElementById("search").value.toLowerCase();
+  applyFilters();
+}
+
+/* APPLY FILTERS */
+function applyFilters() {
+  let filtered = data;
+
+  if (searchQuery) {
+    filtered = filtered.filter(d =>
+      d.title.toLowerCase().includes(searchQuery) ||
+      d.tags.join(" ").toLowerCase().includes(searchQuery)
+    );
+  }
+
+  if (activeTags.size > 0) {
+    filtered = filtered.filter(d =>
+      [...activeTags].some(tag => d.tags.includes(tag))
+    );
+  }
+
+  updateStatus();
+  render(filtered);
+}
+
+/* RESET */
+function resetFilter() {
+  searchQuery = "";
+  activeTags.clear();
+  document.getElementById("search").value = "";
+  applyFilters();
+}
+
+/* STATUS */
+function updateStatus() {
+  const status = document.getElementById("statusText");
+
+  status.textContent =
+    activeTags.size === 0 && !searchQuery
+      ? "Viewing All Files"
+      : `Filters: ${[...activeTags].join(", ")} ${searchQuery ? "| Search: " + searchQuery : ""}`;
+}
+
+/* TOGGLE MORE TAGS */
+function toggleMore(el) {
+  const hidden = el.nextElementSibling;
+  hidden.classList.toggle("show");
+
+  el.textContent = hidden.classList.contains("show")
+    ? "Show less"
+    : `+${hidden.children.length} more`;
+}
+
+/* RENDER */
 function render(items) {
   const container = document.getElementById("container");
   container.innerHTML = "";
 
   items.forEach(item => {
+
+    const descriptionHtml = Array.isArray(item.description)
+      ? item.description.join("\n\n")
+      : item.description || "";
+
     const div = document.createElement("div");
     div.className = "card";
 
-    // Join description array into a single string
-    const descriptionHtml = Array.isArray(item.description) 
-      ? item.description.join("\n\n") 
-      : item.description || "";
+    div.addEventListener("click", () => {
+      window.open(item.url, "_blank");
+    });
+
+    const visibleTags = item.tags.slice(0, 3);
+    const hiddenTags = item.tags.slice(3);
 
     div.innerHTML = `
       <div class="left">
-        <h3>  
-            <a href="${item.url}" target="_blank">${item.title}</a>
-        </h3>
-        ${item.image ? `<img src="${item.image}" width="200">` : ""}
-        <p>
-          ${item.tags.map(tag => `<span class="tag" onclick="filterTag('${tag}')">${tag}</span>`).join("")}
-        </p>
-        <a href="${item.file}" target="_blank" onclick="markDownloaded(this)">Open/Download Files</a>
+        <h3>${item.title}</h3>
+
+        ${item.image ? `<img src="${item.image}" class="card-img">` : ""}
+
+        <div class="bottom">
+          <div class="tags">
+
+            ${visibleTags.map(tag => `
+              <span class="tag"
+                onclick="toggleTag('${tag}'); event.stopPropagation();">
+                ${tag}
+              </span>
+            `).join("")}
+
+            ${hiddenTags.length > 0 ? `
+              <span class="tag more"
+                onclick="toggleMore(this); event.stopPropagation();">
+                +${hiddenTags.length} more
+              </span>
+
+              <div class="hidden-tags">
+                ${hiddenTags.map(tag => `
+                  <span class="tag"
+                    onclick="toggleTag('${tag}'); event.stopPropagation();">
+                    ${tag}
+                  </span>
+                `).join("")}
+              </div>
+            ` : ""}
+
+          </div>
+
+          <a class="download"
+            href="${item.file}"
+            target="_blank"
+            onclick="event.stopPropagation()">
+            Open/Download Files
+          </a>
+        </div>
       </div>
 
       <div class="right">
@@ -65,50 +213,6 @@ function render(items) {
 
     container.appendChild(div);
   });
-}
-
-// Search filter
-function filter() {
-  const q = document.getElementById("search").value.toLowerCase();
-  currentFilter = q || null;
-  updateStatus();
-
-  render(data.filter(d =>
-    d.title.toLowerCase().includes(q) ||
-    d.tags.join(" ").toLowerCase().includes(q)
-  ));
-}
-
-// Filter by tag
-function filterTag(tag) {
-  currentFilter = tag;
-  updateStatus();
-
-  render(data.filter(d => d.tags.includes(tag)));
-}
-
-// Reset filters
-function resetFilter() {
-  document.getElementById("search").value = "";
-  currentFilter = null;
-  updateStatus();
-  render(data);
-}
-
-// Update status bar
-function updateStatus() {
-  const status = document.getElementById("statusText");
-  if (!currentFilter) {
-    status.textContent = "Viewing All Files - click on a tag to add a filter.";
-  } else {
-    status.textContent = "Filtered by: " + currentFilter;
-  }
-}
-
-// Mark card as downloaded
-function markDownloaded(link) {
-  const card = link.closest(".card");
-  card.classList.add("downloaded");
 }
 </script>
 
