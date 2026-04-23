@@ -86,5 +86,28 @@
       "Supplementary materials include screenshots of the activity and related external resources that reinforce the concept of neural computation.",
       "This website on 'How to Think Like a Neuron' is similar to this activity: https://ai4ga.org/think-like-a-neuron-part-2/. It provides an additional perspective on neural network concepts and reinforces understanding of how artificial neurons process information."
     ]
+  },
+
+  {
+    "title": "API Explorer - Class Activity",
+    "url": "https://class-lecture-api.vercel.app/",
+    "file": "files/API-Explorer/api-activity.png",
+    "image": "files/API-Explorer/api-activity.png",
+    "tags": [
+      "Activity",
+      "Tool",
+      "API",
+      "Web Development",
+      "App Development",
+      "JavaScript",
+      "Beginner",
+      "Intermediate",
+      "1 hour"
+    ],
+    "description": [
+      "This interactive activity introduces students to working with APIs using JavaScript fetch requests. It provides a sandbox environment where users can modify API calls and observe real-time JSON responses.",
+      "<ul><li>Practice using query parameters to filter and sort data (e.g., category, platform, popularity).</li><li>Learn how to retrieve a single resource using path parameters (e.g., fetching a game by ID).</li><li>Understand how API keys work by testing requests with and without authentication.</li><li>Explore error handling by comparing valid and invalid requests and analyzing status codes.</li></ul>",
+      "The activity is well suited for introductory web development or computer science courses and reinforces core concepts such as client-server communication, JSON data structures, and debugging API responses."
+    ]
   }
 ]

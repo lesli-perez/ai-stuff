@@ -126,7 +126,7 @@ input {
   height: 14px;
   margin: 0;
 
-  accent-color: #ff7ccd;
+  accent-color: #f0dde8;
 }
 
 /* hover */
@@ -168,9 +168,10 @@ input {
 
 .left h3 {
   font-size: 22px;
-  font-weight: 600;
-  margin: 0;
-  color: #111;
+  font-weight: 400;
+  margin-bottom: 15px;
+  margin-top: 0px;
+  color: #75084c;
 }
 
 /* RIGHT */
@@ -241,7 +242,7 @@ input {
 /* DOWNLOAD */
 .download {
   font-weight: bold;
-  color: #ff7ccd;
+  color: #af277b;
   text-decoration: none;
 }
 
@@ -249,7 +250,7 @@ input {
 .right a,
 .assignment-card a,
 .card a {
-  color: #ff7ccd;
+  color: #af277b;
   text-decoration: none;
   font-weight: 500;
 }
@@ -258,12 +259,13 @@ input {
 .assignment-card a:hover,
 .card a:hover {
   text-decoration: underline;
+  color: #75084c;
 }
 
 .right a:visited,
 .assignment-card a:visited,
 .card a:visited {
-  color: #ff7ccd;
+  color: #75084c;
 }
 
 /* RESPONSIVE */
