@@ -45,7 +45,6 @@ fetch('files.json')
     buildTagMenu();
   });
 
-/* CLOSE ON OUTSIDE CLICK */
 document.addEventListener("click", function (e) {
   const menu = document.getElementById("filterMenu");
   const btn = document.querySelector(".filter-btn");
@@ -55,10 +54,9 @@ document.addEventListener("click", function (e) {
   }
 });
 
-/* BUILD FILTER MENU */
+/* TAG MENU */
 function buildTagMenu() {
   const menu = document.getElementById("filterMenu");
-
   const allTags = [...new Set(data.flatMap(d => d.tags))];
 
   menu.innerHTML = allTags.map(tag => `
@@ -75,25 +73,19 @@ function toggleFilterMenu() {
   document.getElementById("filterMenu").classList.toggle("show");
 }
 
-/* OR FILTER LOGIC */
 function toggleTag(tag) {
-  if (activeTags.has(tag)) {
-    activeTags.delete(tag);
-  } else {
-    activeTags.add(tag);
-  }
+  if (activeTags.has(tag)) activeTags.delete(tag);
+  else activeTags.add(tag);
 
   buildTagMenu();
   applyFilters();
 }
 
-/* SEARCH */
 function filter() {
   searchQuery = document.getElementById("search").value.toLowerCase();
   applyFilters();
 }
 
-/* APPLY FILTERS */
 function applyFilters() {
   let filtered = data;
 
@@ -114,22 +106,18 @@ function applyFilters() {
   render(filtered);
 }
 
-/* RESET */
 function resetFilter() {
   document.getElementById("search").value = "";
-  currentFilter = null;
+  activeTags.clear();
 
-  updateStatus();
-
-  // CLEAR ALL CHECKBOXES
   document.querySelectorAll(".filter-menu input[type='checkbox']").forEach(cb => {
     cb.checked = false;
   });
 
+  updateStatus();
   render(data);
 }
 
-/* STATUS */
 function updateStatus() {
   const status = document.getElementById("statusText");
 
@@ -137,16 +125,6 @@ function updateStatus() {
     activeTags.size === 0 && !searchQuery
       ? "Viewing All Files"
       : `Filters: ${[...activeTags].join(", ")} ${searchQuery ? "| Search: " + searchQuery : ""}`;
-}
-
-/* TOGGLE MORE TAGS */
-function toggleMore(el) {
-  const hidden = el.nextElementSibling;
-  hidden.classList.toggle("show");
-
-  el.textContent = hidden.classList.contains("show")
-    ? "Show less"
-    : `+${hidden.children.length} more`;
 }
 
 /* RENDER */
@@ -163,7 +141,8 @@ function render(items) {
     const div = document.createElement("div");
     div.className = "card";
 
-    div.addEventListener("click", () => {
+    div.addEventListener("click", (e) => {
+      if (e.target.closest("a")) return;
       window.open(item.url, "_blank");
     });
 

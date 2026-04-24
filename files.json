@@ -108,5 +108,49 @@
       "<ul><li>Practice using query parameters to filter and sort data (e.g., category, platform, popularity).</li><li>Learn how to retrieve a single resource using path parameters (e.g., fetching a game by ID).</li><li>Understand how API keys work by testing requests with and without authentication.</li><li>Explore error handling by comparing valid and invalid requests and analyzing status codes.</li></ul>",
       "The activity is well suited for introductory web development or computer science courses and reinforces core concepts such as client-server communication, JSON data structures, and debugging API responses."
     ]
+  },
+  {
+    "title": "Godot 4 Multiplayer Tutorial",
+    "url": "https://www.youtube.com/watch?v=M0LJ9EsS_Ak",
+    "file": "files/Godot-multiplayer/godot4-multiplayer.png",
+    "image": "files/Godot-multiplayer/godot4-multiplayer.png",
+    "tags": [
+      "Tutorial",
+      "Game Development",
+      "Godot 4",
+      "Multiplayer",
+      "Computer Networking",      
+      "3D Game",
+      "Intermediate",
+      "30 minutes"
+    ],
+    "description": [
+      "This tutorial demonstrates how to create a basic 3D multiplayer game in Godot 4 using built-in networking tools. It walks through setting up a host and client system, spawning players, and synchronizing gameplay across multiple instances.",
+      "<ul><li>Host and join system using ENet multiplayer peer.</li><li>Player spawning with MultiplayerSpawner.</li><li>RPCs for syncing and removing players.</li><li>Position and rotation sync with MultiplayerSynchronizer.</li></ul>",
+      "This tutorial is best suited for intermediate users who already understand basic Godot concepts and want to learn how multiplayer networking works.."
+    ]
+  },
+  {
+    "title": "Intro to Computer Science",
+    "url": "https://learn.koriel.net",
+    "file": "files/Koriel-intro/intro-cs.png",
+    "image": "files/Koriel-intro/intro-cs.png",
+    "tags": [
+      "Course",
+      "Computer Science",
+      "Beginner",
+      "Self-paced",
+      "Binary",
+      "Logic",
+      "Hardware",
+      "History of CS"
+    ],
+    "description": [
+      "A self-paced introductory course covering the fundamentals of computer science and programming.",
+     "<ul><li><a href=\"https://learn.koriel.net/modules/binary\" target=\"_blank\">Binary Module:</a> How computers store and process data using 0s and 1s.</li><li><a href=\"https://learn.koriel.net/modules/logic\" target=\"_blank\">Logic Module:</a> How computers use boolean values to make decisions.</li><li><a href=\"https://learn.koriel.net/modules/hardware\" target=\"_blank\">Hardware Module:</a> evolution of computers and how software runs on physical systems.</li></ul>",
+      "Designed for complete beginners with no prior experience, introducing core concepts that underpin all modern computing."
+    ]
   }
+
+
 ]

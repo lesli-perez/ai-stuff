@@ -141,7 +141,7 @@ input {
   border-radius: 16px;
   padding: 18px;
   margin: 15px 0;
-
+  position: relative;
   background-color: #fff;
   display: flex;
   gap: 20px;
@@ -154,6 +154,12 @@ input {
 .card:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 25px rgba(214, 105, 172, 0.18);
+}
+
+.card-click-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
 }
 
 /* LEFT */
@@ -190,6 +196,9 @@ input {
   color: #444;
 
   overflow-wrap: break-word;
+
+  position: relative;
+  z-index: 0;
 }
 
 /* IMAGE */
@@ -253,6 +262,8 @@ input {
   color: #af277b;
   text-decoration: none;
   font-weight: 500;
+  position: relative;
+  z-index: 2;
 }
 
 .right a:hover,
