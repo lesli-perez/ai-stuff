@@ -1,95 +1,87 @@
 const state = {
   data: [],
   searchQuery: "",
-  activeTags: new Set()
+  activeTags: new Set(),
+  allTagsByCategory: {},
+  flatTagCache: new WeakMap()
+};
+
+/* =========================
+   CACHE HELPERS
+========================= */
+function getAllTags(item) {
+  if (state.flatTagCache.has(item)) {
+    return state.flatTagCache.get(item);
+  }
+  const tags = Object.values(item.tags).flat();
+  state.flatTagCache.set(item, tags);
+  return tags;
+}
+
+/* =========================
+   DOM CACHE
+========================= */
+const el = {
+  container: document.getElementById("container"),
+  menu: document.getElementById("filterMenu"),
+  search: document.getElementById("search"),
+  status: document.getElementById("statusText"),
+  arrow: document.getElementById("filterArrow"),
+  filterBtn: document.getElementById("filterBtn")
 };
 
 /* =========================
    INIT
 ========================= */
 document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("resetBtn").addEventListener("click", showAll);
-  document.getElementById("clearFiltersBtn").addEventListener("click", resetFilter);
-  document.getElementById("filterBtn").addEventListener("click", toggleFilterMenu);
-  document.getElementById("search").addEventListener("keyup", filter);
+  document.getElementById("resetBtn").addEventListener("click", resetAll);
+  document.getElementById("clearFiltersBtn").addEventListener("click", resetAll);
+  el.filterBtn.addEventListener("click", toggleFilterMenu);
 
-  document.getElementById("filterMenu").addEventListener("click", (e) => {
-    e.stopPropagation();
-  });
+  document.addEventListener("click", closeMenuOnOutsideClick);
+  document.addEventListener("keydown", handleEsc);
 
-  document.addEventListener("keydown", handleEscKey);
+  setupSearchDebounce();
 
   fetch("files.json")
     .then(res => res.json())
     .then(json => {
       state.data = json;
-      buildTagMenu();
+      buildTagIndex();
       render(state.data);
     });
 });
 
-document.addEventListener("click", (e) => {
-  const menu = document.getElementById("filterMenu");
-  const wrapper = document.querySelector(".filter-wrapper");
-  const clearBtn = document.getElementById("clearFiltersBtn");
-  const arrow = document.getElementById("filterArrow");
-
-  const clickedInside = wrapper.contains(e.target);
-  const clickedClear = clearBtn && clearBtn.contains(e.target);
-
-  if (!clickedInside && !clickedClear) {
-    menu.classList.remove("show");
-
-    // sync arrow state
-    if (arrow) arrow.textContent = "▼";
-  }
-});
-
 /* =========================
-   ESC KEY CLOSE
+   TAG INDEX (BUILD ONCE)
 ========================= */
-function handleEscKey(e) {
-  if (e.key === "Escape") {
-    document.getElementById("filterMenu").classList.remove("show");
-    document.getElementById("filterArrow").textContent = "▼";
-  }
-}
-
-/* =========================
-   TAG HELPERS
-========================= */
-function getAllTags(item) {
-  return Object.values(item.tags).flat();
-}
-
-/* =========================
-   FILTER MENU (CATEGORIZED)
-========================= */
-function buildTagMenu() {
-  const menu = document.getElementById("filterMenu");
-
-  const categories = {};
+function buildTagIndex() {
+  const map = {};
 
   state.data.forEach(item => {
-    for (let category in item.tags) {
-      if (!categories[category]) categories[category] = new Set();
-
-      item.tags[category].forEach(tag => {
-        categories[category].add(tag);
-      });
+    for (let cat in item.tags) {
+      if (!map[cat]) map[cat] = new Set();
+      item.tags[cat].forEach(t => map[cat].add(t));
     }
   });
 
-  const sortedCategories = Object.keys(categories).sort();
+  state.allTagsByCategory = map;
+  renderTagMenu();
+}
 
-  menu.innerHTML = sortedCategories.map(category => {
-    const tags = [...categories[category]]
-      .sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" }));
+/* =========================
+   MENU RENDER (ONLY ON CHANGE)
+========================= */
+function renderTagMenu() {
+  const categories = Object.keys(state.allTagsByCategory).sort();
+
+  el.menu.innerHTML = categories.map(cat => {
+    const tags = [...state.allTagsByCategory[cat]]
+      .sort((a,b) => a.localeCompare(b));
 
     return `
       <div class="filter-group">
-        <div class="filter-title">${category}</div>
-
+        <div class="filter-title">${cat}</div>
         ${tags.map(tag => `
           <label class="filter-item">
             <input type="checkbox"
@@ -102,114 +94,135 @@ function buildTagMenu() {
     `;
   }).join("");
 
-  menu.querySelectorAll("input[type='checkbox']").forEach(cb => {
+  el.menu.querySelectorAll("input").forEach(cb => {
     cb.addEventListener("change", () => toggleTag(cb.dataset.tag));
   });
 }
 
 /* =========================
-   DROPDOWN TOGGLE 
+   TAG TOGGLE (FAST)
 ========================= */
-function toggleFilterMenu(e) {
-  e.stopPropagation();
+function toggleTag(tag) {
+  // safety guard
+  if (!tag || tag.includes("more")) return;
 
-  const menu = document.getElementById("filterMenu");
-  const arrow = document.getElementById("filterArrow");
+  if (state.activeTags.has(tag)) {
+    state.activeTags.delete(tag);
+  } else {
+    state.activeTags.add(tag);
+  }
 
-  const isOpen = menu.classList.toggle("show");
-
-  arrow.textContent = isOpen ? "▲" : "▼";
+  renderTagMenu();
+  applyFilters();
 }
 
 /* =========================
-   FILTER LOGIC
+   SEARCH (DEBOUNCED)
 ========================= */
-function toggleTag(tag) {
-  if (state.activeTags.has(tag)) state.activeTags.delete(tag);
-  else state.activeTags.add(tag);
-
-  buildTagMenu();
-  applyFilters();
+function setupSearchDebounce() {
+  let t;
+  el.search.addEventListener("input", (e) => {
+    clearTimeout(t);
+    t = setTimeout(() => {
+      state.searchQuery = e.target.value.toLowerCase();
+      applyFilters();
+    }, 150);
+  });
 }
 
-function filter() {
-  state.searchQuery = document.getElementById("search").value.toLowerCase();
-  applyFilters();
-}
-
+/* =========================
+   FILTER ENGINE
+========================= */
 function applyFilters() {
-  let filtered = state.data;
+  let results = state.data;
 
-  if (state.searchQuery) {
-    filtered = filtered.filter(d =>
-      d.title.toLowerCase().includes(state.searchQuery) ||
-      getAllTags(d).join(" ").toLowerCase().includes(state.searchQuery)
+  const query = state.searchQuery;
+  const tags = state.activeTags;
+
+  if (query) {
+    results = results.filter(item =>
+      item.title.toLowerCase().includes(query) ||
+      getAllTags(item).join(" ").toLowerCase().includes(query)
     );
   }
 
-  if (state.activeTags.size > 0) {
-    filtered = filtered.filter(d =>
-      [...state.activeTags].some(tag =>
-        getAllTags(d).includes(tag)
+  if (tags.size > 0) {
+    results = results.filter(item =>
+      [...tags].every(tag =>
+        getAllTags(item).includes(tag)
       )
     );
   }
 
   updateStatus();
-  render(filtered);
+  render(results);
 }
 
 /* =========================
-   RESET FUNCTIONS
+   RESET
 ========================= */
-function resetFilter() {
-  document.getElementById("search").value = "";
+function resetAll(closeMenu = false) {
   state.searchQuery = "";
   state.activeTags.clear();
+  el.search.value = "";
 
-  buildTagMenu();
-  updateStatus();
-  render(state.data);
+  if (closeMenu) {
+    el.menu.classList.remove("show");
+    el.arrow.textContent = "▼";
+  }
+
+  renderTagMenu();
+  applyFilters();
 }
 
-function showAll() {
-  document.getElementById("search").value = "";
-  state.searchQuery = "";
-  state.activeTags.clear();
-
-  document.getElementById("filterMenu").classList.remove("show");
-  document.getElementById("filterArrow").textContent = "▼";
-
-  buildTagMenu();
-  updateStatus();
-  render(state.data);
+/* =========================
+   MENU TOGGLE
+========================= */
+function toggleFilterMenu(e) {
+  e.stopPropagation();
+  const open = el.menu.classList.toggle("show");
+  el.arrow.textContent = open ? "▲" : "▼";
 }
+
+/* =========================
+   OUTSIDE CLICK CLOSE
+========================= */
+function closeMenuOnOutsideClick(e) {
+  if (!e.target.closest(".filter-wrapper")) {
+    el.menu.classList.remove("show");
+    el.arrow.textContent = "▼";
+  }
+}
+
+/* =========================
+   ESC KEY
+========================= */
+function handleEsc(e) {
+  if (e.key === "Escape") {
+    el.menu.classList.remove("show");
+    el.arrow.textContent = "▼";
+  }
+}
+
 /* =========================
    STATUS
 ========================= */
 function updateStatus() {
-  const status = document.getElementById("statusText");
+  const tags = [...state.activeTags];
 
-  status.textContent =
-    state.activeTags.size === 0 && !state.searchQuery
+  el.status.textContent =
+    tags.length === 0 && !state.searchQuery
       ? "Viewing All Files"
-      : `Filters: ${[...state.activeTags].join(", ")} ${
-          state.searchQuery ? "| Search: " + state.searchQuery : ""
-        }`;
+      : `Filters: ${tags.join(", ")}${state.searchQuery ? " | Search: " + state.searchQuery : ""}`;
 }
 
 /* =========================
    RENDER
 ========================= */
 function render(items) {
-  const container = document.getElementById("container");
-  container.innerHTML = "";
+  el.container.innerHTML = "";
 
   items.forEach(item => {
-    const descriptionHtml = Array.isArray(item.description)
-      ? item.description.join("\n\n")
-      : item.description || "";
-
     const div = document.createElement("div");
     div.className = "card";
 
@@ -218,9 +231,13 @@ function render(items) {
       window.open(item.url, "_blank");
     });
 
-    const allTags = getAllTags(item);
-    const visibleTags = allTags.slice(0, 3);
-    const hiddenTags = allTags.slice(3);
+    const tags = getAllTags(item);
+    const visible = tags.slice(0, 3);
+    const hidden = tags.slice(3);
+
+    const desc = Array.isArray(item.description)
+      ? item.description.join("\n\n")
+      : item.description || "";
 
     div.innerHTML = `
       <div class="left">
@@ -230,27 +247,14 @@ function render(items) {
 
         <div class="bottom">
           <div class="tags">
+            ${visible.map(t => `<span class="tag">${t}</span>`).join("")}
 
-            ${visibleTags.map(tag => `
-              <span class="tag" data-tag="${tag}">
-                ${tag}
-              </span>
-            `).join("")}
-
-            ${hiddenTags.length > 0 ? `
-              <span class="tag more" data-more>
-                +${hiddenTags.length} more
-              </span>
-
+            ${hidden.length ? `
+              <span class="tag more">+${hidden.length} more</span>
               <div class="hidden-tags">
-                ${hiddenTags.map(tag => `
-                  <span class="tag" data-tag="${tag}">
-                    ${tag}
-                  </span>
-                `).join("")}
+                ${hidden.map(t => `<span class="tag">${t}</span>`).join("")}
               </div>
             ` : ""}
-
           </div>
 
           <a class="download" href="${item.file}" target="_blank">
@@ -260,25 +264,26 @@ function render(items) {
       </div>
 
       <div class="right">
-        ${marked.parse(descriptionHtml)}
+        ${marked.parse(desc)}
       </div>
     `;
 
-    div.querySelectorAll("[data-tag]").forEach(el => {
-      el.addEventListener("click", (e) => {
+    div.querySelectorAll(".tag:not(.more)").forEach(t => {
+    t.addEventListener("click", (e) => {
         e.stopPropagation();
-        toggleTag(el.dataset.tag);
-      });
+        toggleTag(t.textContent.trim());
+    });
     });
 
-    const moreBtn = div.querySelector("[data-more]");
-    if (moreBtn) {
-      moreBtn.addEventListener("click", (e) => {
+    const more = div.querySelector(".more");
+
+    if (more) {
+    more.addEventListener("click", (e) => {
         e.stopPropagation();
         div.querySelector(".hidden-tags").classList.toggle("show");
-      });
+    });
     }
 
-    container.appendChild(div);
+    el.container.appendChild(div);
   });
 }

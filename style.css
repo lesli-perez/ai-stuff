@@ -102,10 +102,18 @@ input {
   overflow-y: auto;
 
   text-align: left;
+
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  transform: translateY(-5px);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .filter-menu.show {
   display: block;
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* FILTER ITEMS */
@@ -232,6 +240,11 @@ input {
   border-radius: 6px;
   font-size: 13px;
   cursor: pointer;
+   user-select: none;
+}
+
+.tag:hover {
+  background: #eee;
 }
 
 /* MORE TAGS */
@@ -244,6 +257,8 @@ input {
 
 .hidden-tags.show {
   display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
 }
 
 .tag.more {
