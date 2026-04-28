@@ -7,6 +7,16 @@ const state = {
 };
 
 /* =========================
+   SAFE HELPERS
+========================= */
+function safeList(input) {
+  if (!input) return "";
+  if (input instanceof Set) return [...input].join(", ");
+  if (Array.isArray(input)) return input.join(", ");
+  return String(input);
+}
+
+/* =========================
    CACHE HELPERS
 ========================= */
 function getAllTags(item) {
@@ -18,6 +28,42 @@ function getAllTags(item) {
   return tags;
 }
 
+const advancedUI = {
+  open: false
+};
+
+function refreshAdvancedOperators() {
+  const rows = [...document.querySelectorAll(".advanced-row")];
+
+  rows.forEach((row, index) => {
+    const existing = row.querySelector(".adv-op");
+
+    // FIRST ROW: no operator allowed
+    if (index === 0) {
+      if (existing) existing.remove();
+    } else {
+      // ensure operator exists
+      if (!existing) {
+        const select = document.createElement("select");
+        select.className = "adv-op";
+        select.innerHTML = `
+          <option>AND</option>
+          <option>OR</option>
+        `;
+        row.insertBefore(select, row.firstChild);
+      }
+    }
+
+    const chips = row.querySelector(".adv-selected-tags");
+    if (chips) {
+      chips.style.minHeight = "28px";
+    }
+  });
+
+  requestAnimationFrame(() => {
+    document.querySelector(".advanced-body")?.offsetHeight;
+  });
+}
 /* =========================
    DOM CACHE
 ========================= */
@@ -53,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* =========================
-   TAG INDEX (BUILD ONCE)
+   TAG INDEX
 ========================= */
 function buildTagIndex() {
   const map = {};
@@ -70,40 +116,299 @@ function buildTagIndex() {
 }
 
 /* =========================
-   MENU RENDER (ONLY ON CHANGE)
+   MENU RENDER
 ========================= */
 function renderTagMenu() {
   const categories = Object.keys(state.allTagsByCategory).sort();
 
-  el.menu.innerHTML = categories.map(cat => {
+  const tagHTML = categories.map(cat => {
     const tags = [...state.allTagsByCategory[cat]]
-      .sort((a,b) => a.localeCompare(b));
+      .sort((a, b) => a.localeCompare(b));
 
     return `
-      <div class="filter-group">
-        <div class="filter-title">${cat}</div>
-        ${tags.map(tag => `
-          <label class="filter-item">
-            <input type="checkbox"
-              data-tag="${tag}"
-              ${state.activeTags.has(tag) ? "checked" : ""}>
-            ${tag}
-          </label>
-        `).join("")}
+      <div class="filter-group" data-category="${cat}">
+        <div class="tag-category-title">${cat}</div>
+
+        <div class="filter-items">
+          ${tags.map(tag => `
+            <label class="filter-item" data-tag="${tag}">
+              <input type="checkbox"
+                data-tag="${tag}"
+                ${state.activeTags.has(tag) ? "checked" : ""}>
+              ${tag}
+            </label>
+          `).join("")}
+        </div>
       </div>
     `;
   }).join("");
 
-  el.menu.querySelectorAll("input").forEach(cb => {
+    el.menu.innerHTML = `
+        <input type="text" id="filterSearch" placeholder="Search tags...">
+
+        ${tagHTML}
+
+        <hr>
+
+        <div class="advanced-entry" id="advancedEntryBtn">
+            ⚙ Advanced Filtering
+        </div>
+    `;
+  const btn = document.getElementById("advancedEntryBtn");
+  if (btn) btn.onclick = openAdvancedModal;
+
+  // checkbox logic
+  el.menu.querySelectorAll("input[type='checkbox']").forEach(cb => {
     cb.addEventListener("change", () => toggleTag(cb.dataset.tag));
+  });
+
+  // search logic
+  const search = document.getElementById("filterSearch");
+
+  search.addEventListener("input", () => {
+    const val = search.value.toLowerCase();
+
+    const groups = el.menu.querySelectorAll(".filter-group");
+
+    groups.forEach(group => {
+      const items = group.querySelectorAll(".filter-item");
+
+      let visibleCount = 0;
+
+      items.forEach(item => {
+        const tag = item.dataset.tag.toLowerCase();
+
+        const match = tag.includes(val);
+
+        item.style.display = match ? "flex" : "none";
+
+        if (match) visibleCount++;
+      });
+
+      // hide category if no matches
+      group.style.display = visibleCount ? "block" : "none";
+    });
   });
 }
 
 /* =========================
-   TAG TOGGLE (FAST)
+   ADVANCED MODAL
+========================= */
+function createAdvancedModal() {
+  const existing = document.getElementById("advancedModal");
+  if (existing) return;
+
+  const modal = document.createElement("div");
+  modal.id = "advancedModal";
+  modal.className = "advanced-modal hidden";
+
+  modal.innerHTML = `
+    <div class="advanced-card">
+
+      <div class="advanced-header">
+        <h3>Advanced Filtering</h3>
+        <button id="closeAdvanced" class="icon-btn">✕</button>
+      </div>
+
+      <div class="advanced-body">
+        <div id="advancedRows"></div>
+
+        <button id="addAdvancedRow" class="advanced-add">
+          + Add Filter Row
+        </button>
+      </div>
+
+      <div class="advanced-footer">
+        <button id="applyAdvanced" class="apply-btn">
+          Apply
+        </button>
+      </div>
+
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  modal.querySelector("#closeAdvanced").onclick = closeAdvancedModal;
+
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) closeAdvancedModal();
+  });
+
+  addAdvancedRow();
+
+  modal.querySelector("#addAdvancedRow").onclick = addAdvancedRow;
+
+  modal.querySelector("#applyAdvanced").onclick = () => {
+    closeAdvancedModal();
+  };
+}
+
+function openAdvancedModal() {
+  createAdvancedModal();
+  document.getElementById("advancedModal").classList.remove("hidden");
+}
+
+function closeAdvancedModal() {
+  const modal = document.getElementById("advancedModal");
+  if (modal) modal.classList.add("hidden");
+}
+
+function addAdvancedRow() {
+  const container = document.getElementById("advancedRows");
+  if (!container) return;
+
+  const isFirstRow = container.children.length === 0;
+
+  const row = document.createElement("div");
+  row.className = "advanced-row";
+
+  row.innerHTML = `
+    ${!isFirstRow ? `
+      <select class="adv-op">
+        <option>AND</option>
+        <option>OR</option>
+      </select>
+    ` : `<div></div>`}
+
+    <div class="adv-selected-tags"></div>
+
+    <button class="add-tag-btn">+ Add Tag</button>
+
+    <button class="adv-remove icon-btn">✕</button>
+
+    <div class="tag-dropdown hidden"></div>
+  `;
+
+  const dropdown = row.querySelector(".tag-dropdown");
+  const addBtn = row.querySelector(".add-tag-btn");
+
+  addBtn.onclick = () => toggleTagDropdown(row, dropdown);
+
+  row.querySelector(".adv-remove").onclick = () => {
+    row.remove();
+    refreshAdvancedOperators();
+  };
+
+  container.appendChild(row);
+}
+
+/* =========================
+   TAG DROPDOWN
+========================= */
+function toggleTagDropdown(row, dropdown) {
+  const isOpen = !dropdown.classList.contains("hidden");
+
+  if (isOpen) {
+    dropdown.classList.add("hidden");
+    dropdown.innerHTML = "";
+    return;
+  }
+
+  dropdown.classList.remove("hidden");
+
+  const categories = Object.keys(state.allTagsByCategory).sort();
+
+  const buildHTML = categories.map(cat => {
+    const tags = [...state.allTagsByCategory[cat]]
+      .sort((a, b) => a.localeCompare(b));
+
+    return `
+      <div class="tag-category">
+        <div class="tag-category-title">${cat}</div>
+
+        <div class="tag-list">
+          ${tags.map(tag => `
+            <div class="tag-option" data-tag="${tag}">
+              <span class="tag-name">${tag}</span>
+              <span class="tag-x">✕</span>
+            </div>
+          `).join("")}
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  dropdown.innerHTML = `
+    <input type="text" class="tag-search" placeholder="Search tags...">
+    ${buildHTML}
+  `;
+
+  const search = dropdown.querySelector(".tag-search");
+
+  // ----------------------------
+  // SYNC FUNCTION 
+  // ----------------------------
+  const syncSelectedState = () => {
+    const selectedTags = [...row.querySelectorAll(".adv-chip")]
+      .map(c => c.dataset.tag);
+
+    dropdown.querySelectorAll(".tag-option").forEach(opt => {
+      const tag = opt.dataset.tag;
+      opt.classList.toggle("selected", selectedTags.includes(tag));
+    });
+  };
+
+  syncSelectedState();
+
+  // ----------------------------
+  // SEARCH
+  // ----------------------------
+  search.oninput = () => {
+    const val = search.value.toLowerCase();
+
+    dropdown.querySelectorAll(".tag-option").forEach(el => {
+      const match = el.textContent.toLowerCase().includes(val);
+      el.style.display = match ? "flex" : "none";
+    });
+
+    syncSelectedState();
+  };
+
+  // ----------------------------
+  // CLICK HANDLER (TOGGLE)
+  // ----------------------------
+  dropdown.querySelectorAll(".tag-option").forEach(opt => {
+    opt.onclick = () => {
+      const tag = opt.dataset.tag;
+      const selected = row.querySelector(".adv-selected-tags");
+
+      const existing = [...selected.querySelectorAll(".adv-chip")]
+        .find(c => c.dataset.tag === tag);
+
+      // REMOVE
+      if (existing) {
+        existing.remove();
+      }
+      // ADD
+      else {
+        const chip = document.createElement("span");
+        chip.className = "adv-chip";
+        chip.textContent = tag;
+        chip.dataset.tag = tag;
+
+        chip.onclick = () => {
+          chip.remove();
+          opt.classList.remove("selected");
+        };
+
+        selected.appendChild(chip);
+      }
+
+      // update UI state
+      syncSelectedState();
+
+      // close dropdown
+      dropdown.classList.add("hidden");
+      dropdown.innerHTML = "";
+    };
+  });
+}
+
+/* =========================
+   TAG TOGGLE
 ========================= */
 function toggleTag(tag) {
-  // safety guard
   if (!tag || tag.includes("more")) return;
 
   if (state.activeTags.has(tag)) {
@@ -112,12 +417,11 @@ function toggleTag(tag) {
     state.activeTags.add(tag);
   }
 
-  renderTagMenu();
   applyFilters();
 }
 
 /* =========================
-   SEARCH (DEBOUNCED)
+   SEARCH
 ========================= */
 function setupSearchDebounce() {
   let t;
@@ -161,15 +465,10 @@ function applyFilters() {
 /* =========================
    RESET
 ========================= */
-function resetAll(closeMenu = false) {
+function resetAll() {
   state.searchQuery = "";
   state.activeTags.clear();
   el.search.value = "";
-
-  if (closeMenu) {
-    el.menu.classList.remove("show");
-    el.arrow.textContent = "▼";
-  }
 
   renderTagMenu();
   applyFilters();
@@ -185,7 +484,7 @@ function toggleFilterMenu(e) {
 }
 
 /* =========================
-   OUTSIDE CLICK CLOSE
+   OUTSIDE CLICK
 ========================= */
 function closeMenuOnOutsideClick(e) {
   if (!e.target.closest(".filter-wrapper")) {
@@ -195,7 +494,7 @@ function closeMenuOnOutsideClick(e) {
 }
 
 /* =========================
-   ESC KEY
+   ESC
 ========================= */
 function handleEsc(e) {
   if (e.key === "Escape") {
@@ -213,7 +512,9 @@ function updateStatus() {
   el.status.textContent =
     tags.length === 0 && !state.searchQuery
       ? "Viewing All Files"
-      : `Filters: ${tags.join(", ")}${state.searchQuery ? " | Search: " + state.searchQuery : ""}`;
+      : `Filters: ${safeList(tags)}${
+          state.searchQuery ? " | Search: " + state.searchQuery : ""
+        }`;
 }
 
 /* =========================
@@ -225,11 +526,6 @@ function render(items) {
   items.forEach(item => {
     const div = document.createElement("div");
     div.className = "card";
-
-    div.addEventListener("click", (e) => {
-      if (e.target.closest("a")) return;
-      window.open(item.url, "_blank");
-    });
 
     const tags = getAllTags(item);
     const visible = tags.slice(0, 3);
@@ -247,12 +543,12 @@ function render(items) {
 
         <div class="bottom">
           <div class="tags">
-            ${visible.map(t => `<span class="tag">${t}</span>`).join("")}
+            ${visible.map(t => `<span class="tag">${String(t)}</span>`).join("")}
 
             ${hidden.length ? `
               <span class="tag more">+${hidden.length} more</span>
               <div class="hidden-tags">
-                ${hidden.map(t => `<span class="tag">${t}</span>`).join("")}
+                ${hidden.map(t => `<span class="tag">${String(t)}</span>`).join("")}
               </div>
             ` : ""}
           </div>
@@ -269,19 +565,19 @@ function render(items) {
     `;
 
     div.querySelectorAll(".tag:not(.more)").forEach(t => {
-    t.addEventListener("click", (e) => {
+      t.addEventListener("click", (e) => {
         e.stopPropagation();
         toggleTag(t.textContent.trim());
-    });
+      });
     });
 
     const more = div.querySelector(".more");
 
     if (more) {
-    more.addEventListener("click", (e) => {
+      more.addEventListener("click", (e) => {
         e.stopPropagation();
         div.querySelector(".hidden-tags").classList.toggle("show");
-    });
+      });
     }
 
     el.container.appendChild(div);
