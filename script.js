@@ -86,6 +86,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("click", closeMenuOnOutsideClick);
   document.addEventListener("keydown", handleEsc);
+  document.getElementById("addAdvancedRow")?.addEventListener("click", addAdvancedRow);
+  document.getElementById("clearAdvanced")?.addEventListener("click", () => {
+    const rows = document.getElementById("advancedRows");
+    if (!rows) return;
+
+    rows.innerHTML = "";
+    addAdvancedRow();
+  });
+
+  document.getElementById("applyAdvanced")?.addEventListener("click", () => {
+    document.querySelector(".layout")?.classList.remove("filters-open");
+  });
 
   setupSearchDebounce();
 
@@ -99,6 +111,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //SCROLL TO TOP BUTTON
     const scrollBtn = document.getElementById("scrollTopBtn");
+
+    const layout = document.querySelector(".layout");
+    const panel = document.getElementById("advancedPanel");
+    const addBtn = document.getElementById("addAdvancedRow");
+    const clearBtn = document.getElementById("clearAdvanced");
+    const applyBtn = document.getElementById("applyAdvanced");
 
     // show/hide on scroll
     window.addEventListener("scroll", () => {
@@ -213,46 +231,21 @@ function renderTagMenu() {
 
 function openAdvancedModal() {
   const layout = document.querySelector(".layout");
-
-  layout.classList.toggle("filters-open");
-}
-
-function createAdvancedPanel() {
   const panel = document.getElementById("advancedPanel");
 
-  if (!panel.innerHTML) {
-    panel.innerHTML = `
-      <div id="advancedRows"></div>
+  layout.classList.toggle("filters-open");
 
-      <button id="addAdvancedRow" class="advanced-add">
-        + Add Filter Row
-      </button>
-
-      <div class="advanced-footer">
-        <button id="clearAdvanced" class="clear-all-btn">Clear All</button>
-        <button id="applyAdvanced" class="apply-btn">Apply</button>
-      </div>
-    `;
-
-    addAdvancedRow();
-
-    panel.querySelector("#addAdvancedRow").onclick = addAdvancedRow;
-
-    panel.querySelector("#clearAdvanced").onclick = () => {
-      document.getElementById("advancedRows").innerHTML = "";
+  // ensure at least one row exists when opened
+  if (layout.classList.contains("filters-open")) {
+    const rows = document.querySelector("#advancedRows");
+    if (rows && rows.children.length === 0) {
       addAdvancedRow();
-    };
-
-    panel.querySelector("#applyAdvanced").onclick = () => {
-      panel.classList.remove("show");
-    };
+    }
   }
-
-  panel.classList.toggle("show");
 }
 
 function addAdvancedRow() {
-  const container = document.getElementById("advancedRows");
+  const container = document.querySelector("#advancedRows");
   if (!container) return;
 
   const isFirstRow = container.children.length === 0;
