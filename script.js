@@ -96,6 +96,26 @@ document.addEventListener("DOMContentLoaded", () => {
       buildTagIndex();
       render(state.data);
     });
+
+    //SCROLL TO TOP BUTTON
+    const scrollBtn = document.getElementById("scrollTopBtn");
+
+    // show/hide on scroll
+    window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+        scrollBtn.classList.add("show");
+    } else {
+        scrollBtn.classList.remove("show");
+    }
+    });
+
+    // scroll to top
+    scrollBtn.addEventListener("click", () => {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+    });
 });
 
 /* =========================

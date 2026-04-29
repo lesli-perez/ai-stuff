@@ -731,3 +731,43 @@ input {
 .icon-btn:active {
   transform: scale(0.95);
 }
+
+/* SCROLL TO TOP BUTTON */
+.scroll-top-btn {
+  position: fixed;
+  bottom: 50px;
+  right: 25px;
+
+  background: none;
+  border: 1px solid #75084c;
+  border-radius: 50%;
+
+  color: #75084c;
+  font-size: 25px;
+  aspect-ratio: 1 / 1;
+  font-weight: 600;
+  line-height: 1;    
+
+  cursor: pointer;
+
+  padding: 5px 15px 10px;
+  box-sizing: border-box;
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: opacity 0.2s ease, color 0.2s ease;
+  z-index: 9999;
+}
+
+.scroll-top-btn.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.scroll-top-btn:hover {
+  box-shadow: 0 0px 25px rgba(214, 105, 172, 0.692);
+}
+.scroll-top-btn:active {
+  transform: scale(0.95);
+}
