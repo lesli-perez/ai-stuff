@@ -628,14 +628,29 @@ input {
 }
 
 
-.advanced-entry {
-  margin-top: 6px;
-  font-size: 13px;
-  color: #555;
+#advancedEntryBtn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  gap: 6px;
+  padding: 4px 6px;
+
+  font-size: 13.5px;
+  cursor: pointer;
+
+  white-space: nowrap;
+
+  border-radius: 6px;
 }
 
-.advanced-entry:hover {
-  background: rgba(0, 0, 0, 0.05);
+#advancedEntryBtn:hover {
+  background: #f5f5f5;
+}
+
+#advancedEntryBtn {
+  cursor: pointer;
+  user-select: none;
 }
 
 .layout {
