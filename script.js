@@ -589,10 +589,18 @@ function render(items) {
     const more = div.querySelector(".more");
 
     if (more) {
-      more.addEventListener("click", (e) => {
-        e.stopPropagation();
-        div.querySelector(".hidden-tags").classList.toggle("show");
-      });
+        more.addEventListener("click", (e) => {
+            e.stopPropagation();
+
+            const hiddenTags = div.querySelector(".hidden-tags");
+            const isOpen = hiddenTags.classList.toggle("show");
+
+            if (isOpen) {
+            more.textContent = "Show less";
+            } else {
+            more.textContent = `+${hidden.length} more`;
+            }
+        });
     }
 
     el.container.appendChild(div);
