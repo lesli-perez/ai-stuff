@@ -56,14 +56,6 @@ input {
   box-sizing: border-box;
 }
 
-/* RESET BUTTON */
-.reset-btn {
-  background: #fff;
-  border: 1px solid #e0e0e0;
-  padding: 6px 14px;
-  border-radius: 8px;
-  cursor: pointer;
-}
 
 /* FILTER WRAPPER */
 .filter-wrapper {
@@ -166,11 +158,6 @@ input {
   box-shadow: 0 10px 25px rgba(214, 105, 172, 0.18);
 }
 
-.card-click-layer {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-}
 
 /* LEFT */
 .left {
@@ -424,30 +411,31 @@ input {
   }
 }
 
-/*CLEAR FILTERS BUTTON*/
-.clear-btn {
+.btn {
   background: #fff;
   border: 1px solid #e0e0e0;
   padding: 6px 14px;
   border-radius: 8px;
   cursor: pointer;
+
+  font-size: 13px;
+  transition: background 0.15s ease, transform 0.1s ease;
 }
 
-.clear-btn:hover {
+.btn:hover {
   background: #f5f5f5;
 }
 
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn.secondary {
+  background: #fff;
+  color: #666;
+}
 
 /*ADVANCED FILTERING*/
-.advanced-modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
 
 /* TITLE */
 .advanced-title {
@@ -458,49 +446,15 @@ input {
 }
 
 
-.advanced-modal.hidden {
-  display: none;
-}
-
-.advanced-card {
-  width: 420px;
-  background: white;
-  border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-}
-
-.advanced-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-
-
 .advanced-body {
   padding: 10px 0;
 }
-
 
 .adv-values {
   display: flex;
   gap: 6px;
   flex-wrap: wrap;
   align-items: center;
-}
-
-.adv-chip {
-  font-size: 12px;
-  padding: 4px 8px;
-  border-radius: 999px;
-  background: #f3f3f3;
-  cursor: pointer;
-  user-select: none;
-}
-
-.adv-chip:hover {
-  background: #e8e8e8;
 }
 
 .advanced-add {
@@ -520,29 +474,6 @@ input {
   background: #f5f5f5;
 }
 
-
-/* header row (optional toggle feel) */
-.advanced-entry {
-  padding: 6px 10px;
-  margin: 4px 0;
-
-  border-radius: 8px;
-  cursor: pointer;
-
-  font-size: 13px;
-  user-select: none;
-
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-
-  background: #fff;
-  border: 1px solid #eee;
-}
-
-.advanced-entry:hover {
-  background: #f5f5f5;
-}
 
 /* rows stay same but compact */
 .advanced-row {
@@ -696,9 +627,6 @@ input {
   margin-bottom: 8px;
 }
 
-.filter-group:last-child {
-  border-bottom: none;
-}
 
 .advanced-entry {
   margin-top: 6px;
@@ -833,3 +761,4 @@ input {
 .scroll-top-btn:active {
   transform: scale(0.95);
 }
+
