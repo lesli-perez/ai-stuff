@@ -49,6 +49,7 @@ function refreshAdvancedOperators() {
         select.innerHTML = `
           <option>AND</option>
           <option>OR</option>
+          <option>NOT</option>
         `;
         row.insertBefore(select, row.firstChild);
       }
@@ -270,22 +271,33 @@ function addAdvancedRow() {
 
     <div class="adv-selected-tags"></div>
 
-    <button class="add-tag-btn">+ Add Tag</button>
-
-    <button class="adv-remove icon-btn">✕</button>
+    <div class="row-actions">
+      ${!isFirstRow ? `<button class="delete-row-btn">− Del Row</button>` : ``}
+      <button class="add-tag-btn">+ Add Tag</button>
+    </div>
 
     <div class="tag-dropdown hidden"></div>
   `;
 
   const dropdown = row.querySelector(".tag-dropdown");
   const addBtn = row.querySelector(".add-tag-btn");
+  const deleteBtn = row.querySelector(".delete-row-btn");
 
-  addBtn.onclick = () => toggleTagDropdown(row, dropdown);
+  // SAFE binding (this is what fixed your bug)
+  if (addBtn) {
+    addBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleTagDropdown(row, dropdown);
+    });
+  }
 
-  row.querySelector(".adv-remove").onclick = () => {
-    row.remove();
-    refreshAdvancedOperators();
-  };
+  if (deleteBtn) {
+    deleteBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      row.remove();
+      refreshAdvancedOperators();
+    });
+  }
 
   container.appendChild(row);
 }
