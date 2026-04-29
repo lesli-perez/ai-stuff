@@ -564,6 +564,21 @@ function render(items) {
       </div>
     `;
 
+    div.addEventListener("click", (e) => {
+        // Prevent card click if clicking:
+        // - a tag
+        // - a link
+        // - the download button
+        if (
+            e.target.closest(".tag") ||
+            e.target.closest("a")
+        ) {
+            return;
+        }
+
+        window.open(item.url, "_blank");
+    });
+
     div.querySelectorAll(".tag:not(.more)").forEach(t => {
       t.addEventListener("click", (e) => {
         e.stopPropagation();
