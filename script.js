@@ -449,7 +449,7 @@ function applyFilters() {
 
   if (tags.size > 0) {
     results = results.filter(item =>
-      [...tags].every(tag =>
+      [...tags].some(tag =>
         getAllTags(item).includes(tag)
       )
     );
