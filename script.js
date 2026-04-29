@@ -81,7 +81,10 @@ const el = {
 ========================= */
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("resetBtn").addEventListener("click", resetAll);
-  document.getElementById("clearFiltersBtn").addEventListener("click", resetAll);
+  document.getElementById("clearFiltersBtn").addEventListener("click", (e) => {
+    e.stopPropagation(); 
+    resetFilter();
+  });
   el.filterBtn.addEventListener("click", toggleFilterMenu);
 
   document.getElementById("closeAdvancedPanel")?.addEventListener("click", () => {
@@ -466,6 +469,22 @@ function resetAll() {
 
   renderTagMenu();
   applyFilters();
+}
+
+/* =========================
+   RESET FILTERS
+========================= */
+function resetFilter() {
+  document.getElementById("search").value = "";
+  state.searchQuery = "";
+  state.activeTags.clear();
+
+  el.menu.querySelectorAll("input[type='checkbox']").forEach(cb => {
+    cb.checked = false;
+  });
+
+  applyFilters();
+  updateStatus();
 }
 
 /* =========================
