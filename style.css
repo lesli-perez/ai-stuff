@@ -467,50 +467,13 @@ input {
   align-items: center;
 }
 
-.fake-row {
-  margin-top: 10px;
-  padding: 8px;
-  background: #f5f5f5;
-  border-radius: 6px;
-}
 
-.advanced-entry {
-  padding: 6px 10px;
-  margin: 4px 6px 8px 6px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 13px;
-  user-select: none;
-
-  display: flex;
-  align-items: center;
-  gap: 6px;
-
-  transition: background 0.15s ease;
-}
-
-.advanced-entry:hover {
-  background: rgba(0, 0, 0, 0.06);
-}
-
-.advanced-entry:active {
-  background: rgba(0, 0, 0, 0.1);
-}
 
 .advanced-body {
   padding: 10px 0;
 }
 
-.advanced-row {
-  display: grid;
-  grid-template-columns: 110px 1fr auto 30px;
-  gap: 10px;
 
-  align-items: center;
-
-  margin-bottom: 12px; 
-  padding: 6px 0;
-}
 .adv-values {
   display: flex;
   gap: 6px;
@@ -548,9 +511,45 @@ input {
   background: #f5f5f5;
 }
 
+
+/* header row (optional toggle feel) */
+.advanced-entry {
+  padding: 6px 10px;
+  margin: 4px 0;
+
+  border-radius: 8px;
+  cursor: pointer;
+
+  font-size: 13px;
+  user-select: none;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  background: #fff;
+  border: 1px solid #eee;
+}
+
+.advanced-entry:hover {
+  background: #f5f5f5;
+}
+
+/* rows stay same but compact */
+.advanced-row {
+  display: grid;
+  grid-template-columns: 80px 1fr auto 30px;
+  gap: 10px;
+
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+/* footer inline */
 .advanced-footer {
   display: flex;
   justify-content: flex-end;
+  gap: 10px;
   padding-top: 10px;
   border-top: 1px solid #eee;
 }
@@ -700,6 +699,60 @@ input {
 
 .advanced-entry:hover {
   background: rgba(0, 0, 0, 0.05);
+}
+
+.layout {
+  max-width: 1100px;
+  margin: 0 auto;
+
+  display: block; /* default = CLOSED state */
+}
+
+/* =========================
+   OPEN STATE (ONLY WHEN PANEL OPEN)
+========================= */
+
+.layout.filters-open {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+/* PANEL hidden by default */
+.advanced-panel {
+  display: none;
+}
+
+/* PANEL visible only when open */
+.layout.filters-open .advanced-panel {
+  display: block;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+
+  padding: 12px;
+
+  position: sticky;
+  top: 20px;
+}
+
+/* CARD AREA */
+.main-content {
+  min-width: 0;
+}
+
+/* =========================
+   ONLY WHEN OPEN → TIGHTER UI
+========================= */
+
+.layout.filters-open .card {
+  padding: 14px;
+  gap: 15px;
+}
+
+.layout.filters-open .left h3 {
+  font-size: 20px;
 }
 
 /*EXIT BUTTONS/DELETE BUTTONS*/

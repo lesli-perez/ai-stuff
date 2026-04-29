@@ -211,67 +211,44 @@ function renderTagMenu() {
   });
 }
 
-/* =========================
-   ADVANCED MODAL
-========================= */
-function createAdvancedModal() {
-  const existing = document.getElementById("advancedModal");
-  if (existing) return;
+function openAdvancedModal() {
+  const layout = document.querySelector(".layout");
 
-  const modal = document.createElement("div");
-  modal.id = "advancedModal";
-  modal.className = "advanced-modal hidden";
+  layout.classList.toggle("filters-open");
+}
 
-  modal.innerHTML = `
-    <div class="advanced-card">
+function createAdvancedPanel() {
+  const panel = document.getElementById("advancedPanel");
 
-      <div class="advanced-header">
-        <h3>Advanced Filtering</h3>
-        <button id="closeAdvanced" class="icon-btn">✕</button>
-      </div>
+  if (!panel.innerHTML) {
+    panel.innerHTML = `
+      <div id="advancedRows"></div>
 
-      <div class="advanced-body">
-        <div id="advancedRows"></div>
-
-        <button id="addAdvancedRow" class="advanced-add">
-          + Add Filter Row
-        </button>
-      </div>
+      <button id="addAdvancedRow" class="advanced-add">
+        + Add Filter Row
+      </button>
 
       <div class="advanced-footer">
-        <button id="applyAdvanced" class="apply-btn">
-          Apply
-        </button>
+        <button id="clearAdvanced" class="clear-all-btn">Clear All</button>
+        <button id="applyAdvanced" class="apply-btn">Apply</button>
       </div>
+    `;
 
-    </div>
-  `;
+    addAdvancedRow();
 
-  document.body.appendChild(modal);
+    panel.querySelector("#addAdvancedRow").onclick = addAdvancedRow;
 
-  modal.querySelector("#closeAdvanced").onclick = closeAdvancedModal;
+    panel.querySelector("#clearAdvanced").onclick = () => {
+      document.getElementById("advancedRows").innerHTML = "";
+      addAdvancedRow();
+    };
 
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) closeAdvancedModal();
-  });
+    panel.querySelector("#applyAdvanced").onclick = () => {
+      panel.classList.remove("show");
+    };
+  }
 
-  addAdvancedRow();
-
-  modal.querySelector("#addAdvancedRow").onclick = addAdvancedRow;
-
-  modal.querySelector("#applyAdvanced").onclick = () => {
-    closeAdvancedModal();
-  };
-}
-
-function openAdvancedModal() {
-  createAdvancedModal();
-  document.getElementById("advancedModal").classList.remove("hidden");
-}
-
-function closeAdvancedModal() {
-  const modal = document.getElementById("advancedModal");
-  if (modal) modal.classList.add("hidden");
+  panel.classList.toggle("show");
 }
 
 function addAdvancedRow() {
