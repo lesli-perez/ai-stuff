@@ -436,6 +436,33 @@ input {
 }
 
 /*ADVANCED FILTERING*/
+/*close button*/
+.panel-close-btn {
+  background: transparent;
+  border: none;
+
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  font-size: 14px;
+  font-weight: 400;
+
+  color: #75084c;
+
+  padding: 0;
+  margin: 0;
+
+  line-height: 1;
+  transform: translateY(-5px); 
+
+  transition: background 0.15s ease, transform 0.1s ease, color 0.15s ease;
+}
 
 /* TITLE */
 .advanced-title {
@@ -445,6 +472,15 @@ input {
   color: #111;
 }
 
+.advanced-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 10px;
+
+  line-height: 1;
+}
 
 .advanced-body {
   padding: 10px 0;

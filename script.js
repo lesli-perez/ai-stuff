@@ -84,6 +84,10 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("clearFiltersBtn").addEventListener("click", resetAll);
   el.filterBtn.addEventListener("click", toggleFilterMenu);
 
+  document.getElementById("closeAdvancedPanel")?.addEventListener("click", () => {
+    document.querySelector(".layout")?.classList.remove("filters-open");
+  });
+
   document.addEventListener("click", closeMenuOnOutsideClick);
   document.addEventListener("keydown", handleEsc);
   document.getElementById("addAdvancedRow")?.addEventListener("click", addAdvancedRow);
