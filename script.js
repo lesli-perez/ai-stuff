@@ -16,6 +16,9 @@ function safeList(input) {
   return String(input);
 }
 
+    
+let activeRow = null;
+
 /* =========================
    CACHE HELPERS
 ========================= */
@@ -41,18 +44,6 @@ function refreshAdvancedOperators() {
     // FIRST ROW: no operator allowed
     if (index === 0) {
       if (existing) existing.remove();
-    } else {
-      // ensure operator exists
-      if (!existing) {
-        const select = document.createElement("select");
-        select.className = "adv-op";
-        select.innerHTML = `
-          <option>AND</option>
-          <option>OR</option>
-          <option>NOT</option>
-        `;
-        row.insertBefore(select, row.firstChild);
-      }
     }
 
     const chips = row.querySelector(".adv-selected-tags");
@@ -126,6 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const clearBtn = document.getElementById("clearAdvanced");
     const applyBtn = document.getElementById("applyAdvanced");
 
+
     // show/hide on scroll
     window.addEventListener("scroll", () => {
     if (window.scrollY > 300) {
@@ -142,6 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
         behavior: "smooth"
     });
     });
+    
 });
 
 /* =========================
@@ -252,6 +245,94 @@ function openAdvancedModal() {
   }
 }
 
+function openTagDropdown(row, selectedBox, dropdown) {
+  const rect = row.getBoundingClientRect();
+
+  dropdown.style.top = `${rect.bottom + window.scrollY}px`;
+  dropdown.style.left = `${rect.left + window.scrollX}px`;
+
+  activeRow = row;
+
+  if (!dropdown) {
+  console.warn("globalTagDropdown not found in DOM");
+  return;
+}
+
+  dropdown.classList.remove("hidden");
+
+  const categories = Object.keys(state.allTagsByCategory).sort();
+
+  dropdown.innerHTML = `
+    <input name="tagSearch" type="text" class="tag-search" placeholder="Search tags...">
+    ${categories.map(cat => {
+      const tags = [...state.allTagsByCategory[cat]].sort();
+
+      return `
+        <div class="tag-category">
+          <div class="tag-category-title">${cat}</div>
+          <div class="tag-list">
+            ${tags.map(tag => `
+              <div class="tag-option" data-tag="${tag}">
+                ${tag}
+              </div>
+            `).join("")}
+          </div>
+        </div>
+      `;
+    }).join("")}
+  `;
+
+  const search = dropdown.querySelector(".tag-search");
+
+  const sync = () => {
+    const selected = [...selectedBox.querySelectorAll(".adv-chip")]
+      .map(c => c.dataset.tag);
+
+    dropdown.querySelectorAll(".tag-option").forEach(opt => {
+      opt.classList.toggle("selected", selected.includes(opt.dataset.tag));
+    });
+  };
+
+  sync();
+
+  search.addEventListener("input", () => {
+    const val = search.value.toLowerCase();
+
+    dropdown.querySelectorAll(".tag-option").forEach(opt => {
+      opt.style.display = opt.textContent.toLowerCase().includes(val)
+        ? "flex"
+        : "none";
+    });
+
+    sync();
+  });
+
+  dropdown.querySelectorAll(".tag-option").forEach(opt => {
+    opt.addEventListener("click", () => {
+      const tag = opt.dataset.tag;
+
+      const existing = [...selectedBox.querySelectorAll(".adv-chip")]
+        .find(c => c.dataset.tag === tag);
+
+      if (existing) {
+        existing.remove();
+      } else {
+        const chip = document.createElement("span");
+        chip.className = "adv-chip";
+        chip.textContent = tag;
+        chip.dataset.tag = tag;
+
+        chip.onclick = () => chip.remove();
+
+        selectedBox.appendChild(chip);
+      }
+
+      dropdown.classList.add("hidden");
+      dropdown.innerHTML = "";
+    });
+  });
+}
+
 function addAdvancedRow() {
   const container = document.querySelector("#advancedRows");
   if (!container) return;
@@ -262,12 +343,19 @@ function addAdvancedRow() {
   row.className = "advanced-row";
 
   row.innerHTML = `
-    ${!isFirstRow ? `
-      <select class="adv-op">
-        <option>AND</option>
-        <option>OR</option>
-      </select>
-    ` : `<div></div>`}
+    <div class="adv-op-wrap ${isFirstRow ? "disabled" : ""}">
+      ${!isFirstRow ? `
+        <button type="button" class="adv-op-btn">
+          <span class="adv-op-value">AND</span>
+          <span class="adv-op-arrow">▼</span>
+        </button>
+
+        <div class="adv-op-menu hidden">
+          <div class="adv-op-option" data-value="AND">AND</div>
+          <div class="adv-op-option" data-value="NOT">NOT</div>
+        </div>
+      ` : ``}
+    </div>
 
     <div class="adv-selected-tags"></div>
 
@@ -275,27 +363,46 @@ function addAdvancedRow() {
       ${!isFirstRow ? `<button class="delete-row-btn">− Del Row</button>` : ``}
       <button class="add-tag-btn">+ Add Tag</button>
     </div>
-
-    <div class="tag-dropdown hidden"></div>
   `;
 
-  const dropdown = row.querySelector(".tag-dropdown");
+  const dropdown = document.getElementById("globalTagDropdown");
   const addBtn = row.querySelector(".add-tag-btn");
   const deleteBtn = row.querySelector(".delete-row-btn");
+  const selectedBox = row.querySelector(".adv-selected-tags");
 
-  // SAFE binding (this is what fixed your bug)
-  if (addBtn) {
-    addBtn.addEventListener("click", (e) => {
+  const opBtn = row.querySelector(".adv-op-btn");
+  const opMenu = row.querySelector(".adv-op-menu");
+  const opValue = row.querySelector(".adv-op-value");
+
+  if (opBtn && opMenu) {
+    opBtn.addEventListener("click", (e) => {
       e.stopPropagation();
-      toggleTagDropdown(row, dropdown);
+      opMenu.classList.toggle("hidden");
+    });
+
+    opMenu.querySelectorAll(".adv-op-option").forEach(opt => {
+      opt.addEventListener("click", () => {
+        opValue.textContent = opt.dataset.value;
+        opMenu.classList.add("hidden");
+      });
     });
   }
 
+  // -------------------------
+  // ADD TAG BUTTON
+  // -------------------------
+  addBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    openTagDropdown(row, selectedBox, dropdown);
+  });
+
+  // -------------------------
+  // DELETE ROW
+  // -------------------------
   if (deleteBtn) {
     deleteBtn.addEventListener("click", (e) => {
       e.stopPropagation();
       row.remove();
-      refreshAdvancedOperators();
     });
   }
 
@@ -305,7 +412,7 @@ function addAdvancedRow() {
 /* =========================
    TAG DROPDOWN
 ========================= */
-function toggleTagDropdown(row, dropdown) {
+function toggleTagDropdown(dropdown) {
   const isOpen = !dropdown.classList.contains("hidden");
 
   if (isOpen) {
@@ -349,7 +456,7 @@ function toggleTagDropdown(row, dropdown) {
   // SYNC FUNCTION 
   // ----------------------------
   const syncSelectedState = () => {
-    const selectedTags = [...row.querySelectorAll(".adv-chip")]
+    const selectedTags = [...selectedBox.querySelectorAll(".adv-chip")]
       .map(c => c.dataset.tag);
 
     dropdown.querySelectorAll(".tag-option").forEach(opt => {
@@ -380,7 +487,7 @@ function toggleTagDropdown(row, dropdown) {
   dropdown.querySelectorAll(".tag-option").forEach(opt => {
     opt.onclick = () => {
       const tag = opt.dataset.tag;
-      const selected = row.querySelector(".adv-selected-tags");
+      const selected = activeRow.querySelector(".adv-selected-tags");
 
       const existing = [...selected.querySelectorAll(".adv-chip")]
         .find(c => c.dataset.tag === tag);
