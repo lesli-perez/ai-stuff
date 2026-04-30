@@ -18,7 +18,17 @@ function safeList(input) {
 
     
 let activeRow = null;
+let activeDropdown = null;
+document.addEventListener("click", (e) => {
+  if (!activeDropdown) return;
 
+  const clickedInsideDropdown = activeDropdown.contains(e.target);
+  const clickedAddButton = e.target.closest(".add-tag-btn");
+
+  if (!clickedInsideDropdown && !clickedAddButton) {
+    closeTagDropdown();
+  }
+});
 /* =========================
    CACHE HELPERS
 ========================= */
@@ -245,18 +255,40 @@ function openAdvancedModal() {
   }
 }
 
+function closeTagDropdown() {
+  if (!activeDropdown) return;
+
+  activeDropdown.classList.add("hidden");
+  activeDropdown.innerHTML = "";
+
+  activeRow = null;
+  activeDropdown = null;
+}
+
 function openTagDropdown(row, selectedBox, dropdown) {
+    if (!dropdown) {
+      console.warn("globalTagDropdown not found in DOM");
+      return;
+    }
+
   const rect = row.getBoundingClientRect();
 
   dropdown.style.top = `${rect.bottom + window.scrollY}px`;
   dropdown.style.left = `${rect.left + window.scrollX}px`;
 
-  activeRow = row;
+  const isSameRow =
+    activeRow === row &&
+    activeDropdown &&
+    !activeDropdown.classList.contains("hidden");
 
-  if (!dropdown) {
-  console.warn("globalTagDropdown not found in DOM");
-  return;
-}
+
+  if (isSameRow) {
+    closeTagDropdown();
+    return;
+  }
+
+  activeRow = row;
+  activeDropdown = dropdown;
 
   dropdown.classList.remove("hidden");
 
