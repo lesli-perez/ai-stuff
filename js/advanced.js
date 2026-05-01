@@ -1,21 +1,20 @@
 import { state, activeRow, activeDropdown, setActiveRow, setActiveDropdown } from "./state.js";
 import { applyFilters } from "./filters.js";
+import { CATEGORY_ORDER, TAG_ORDER } from "./state.js";
 
 /* =========================
    GLOBAL CLICK HANDLING
 ========================= */
 document.addEventListener("click", (e) => {
-  // close tag dropdown
   if (activeDropdown) {
-    const clickedInside = activeDropdown.contains(e.target);
-    const clickedBtn = e.target.closest(".add-tag-btn");
+    const inside = activeDropdown.contains(e.target);
+    const addBtn = e.target.closest(".add-tag-btn");
 
-    if (!clickedInside && !clickedBtn) {
+    if (!inside && !addBtn) {
       closeTagDropdown();
     }
   }
 
-  // close AND/NOT dropdowns
   document.querySelectorAll(".adv-op-wrap.open").forEach(wrap => {
     if (!wrap.contains(e.target)) {
       wrap.classList.remove("open");
@@ -24,20 +23,69 @@ document.addEventListener("click", (e) => {
 });
 
 /* =========================
-   ADV PANEL TOGGLE
+   OPEN PANEL
 ========================= */
 export function openAdvancedModal() {
   const layout = document.querySelector(".layout");
   layout.classList.toggle("filters-open");
 
   const rows = document.querySelector("#advancedRows");
+
   if (rows && rows.children.length === 0) {
     addAdvancedRow();
   }
 }
 
 /* =========================
-   CLOSE TAG DROPDOWN
+   GET RULES FROM UI
+========================= */
+export function getAdvancedRules() {
+  const rows = document.querySelectorAll(".advanced-row");
+
+  const rules = [];
+
+  rows.forEach(row => {
+    const op = row.querySelector(".adv-op-value")?.textContent || "AND";
+
+    const tags = [...row.querySelectorAll(".adv-chip")]
+      .map(t => t.dataset.tag);
+
+    if (tags.length === 0) return;
+
+    rules.push({ op, tags });
+  });
+
+  return rules;
+}
+
+/* =========================
+   APPLY ADVANCED FILTERS
+========================= */
+export function applyAdvancedFilters(data) {
+  const rules = getAdvancedRules();
+
+  if (rules.length === 0) return data;
+
+  return data.filter(item => {
+    const itemTags = new Set(Object.values(item.tags).flat());
+
+    return rules.every(rule => {
+      if (!rule.tags || rule.tags.length === 0) return true;
+
+      const matchesAny = rule.tags.some(tag => itemTags.has(tag));
+
+      if (rule.op === "NOT") {
+        return !matchesAny;
+      }
+
+      // OR logic inside row
+      return matchesAny;
+    });
+  });
+}
+
+/* =========================
+   TAG DROPDOWN
 ========================= */
 export function closeTagDropdown() {
   if (!activeDropdown) return;
@@ -49,9 +97,6 @@ export function closeTagDropdown() {
   setActiveDropdown(null);
 }
 
-/* =========================
-   OPEN TAG DROPDOWN
-========================= */
 export function openTagDropdown(row, selectedBox, dropdown) {
   if (!dropdown) return;
 
@@ -60,12 +105,12 @@ export function openTagDropdown(row, selectedBox, dropdown) {
   dropdown.style.top = `${rect.bottom + window.scrollY}px`;
   dropdown.style.left = `${rect.left + window.scrollX}px`;
 
-  const isSame =
+  const same =
     activeRow === row &&
     activeDropdown &&
     !activeDropdown.classList.contains("hidden");
 
-  if (isSame) {
+  if (same) {
     closeTagDropdown();
     return;
   }
@@ -75,13 +120,36 @@ export function openTagDropdown(row, selectedBox, dropdown) {
 
   dropdown.classList.remove("hidden");
 
-  const categories = Object.keys(state.allTagsByCategory).sort();
+    const categories = Object.keys(state.allTagsByCategory)
+    .sort((a, b) => {
+        const ia = CATEGORY_ORDER.indexOf(a);
+        const ib = CATEGORY_ORDER.indexOf(b);
+
+        if (ia === -1 && ib === -1) return a.localeCompare(b);
+        if (ia === -1) return 1;
+        if (ib === -1) return -1;
+
+        return ia - ib;
+    });
+
 
   dropdown.innerHTML = `
     <input type="text" class="tag-search" placeholder="Search tags...">
 
     ${categories.map(cat => {
-      const tags = [...state.allTagsByCategory[cat]].sort();
+
+        const tags = [...state.allTagsByCategory[cat]].sort((a, b) => {
+        const order = TAG_ORDER[cat] || [];
+
+        const ia = order.indexOf(a);
+        const ib = order.indexOf(b);
+
+        if (ia === -1 && ib === -1) return a.localeCompare(b);
+        if (ia === -1) return 1;
+        if (ib === -1) return -1;
+
+        return ia - ib;
+        });
 
       return `
         <div class="tag-category">
@@ -89,7 +157,7 @@ export function openTagDropdown(row, selectedBox, dropdown) {
 
           ${tags.map(tag => `
             <div class="tag-option" data-tag="${tag}">
-              <span class="tag-name">${tag}</span>
+              <span>${tag}</span>
               <span class="tag-x">✕</span>
             </div>
           `).join("")}
@@ -105,24 +173,36 @@ export function openTagDropdown(row, selectedBox, dropdown) {
       .map(c => c.dataset.tag);
 
     dropdown.querySelectorAll(".tag-option").forEach(opt => {
-      const isSelected = selected.includes(opt.dataset.tag);
-      opt.classList.toggle("selected", isSelected);
+      opt.classList.toggle("selected", selected.includes(opt.dataset.tag));
     });
   };
 
   sync();
 
-  search.addEventListener("input", () => {
+    search.addEventListener("input", () => {
     const val = search.value.toLowerCase();
 
-    dropdown.querySelectorAll(".tag-option").forEach(opt => {
-      opt.style.display = opt.textContent.toLowerCase().includes(val)
-        ? "flex"
-        : "none";
+    const categoryBlocks = dropdown.querySelectorAll(".tag-category");
+
+    categoryBlocks.forEach(block => {
+        const options = block.querySelectorAll(".tag-option");
+
+        let hasVisible = false;
+
+        options.forEach(opt => {
+        const match = opt.textContent.toLowerCase().includes(val);
+
+        opt.style.display = match ? "flex" : "none";
+
+        if (match) hasVisible = true;
+        });
+
+        // 🔥 hide whole category if nothing matches
+        block.style.display = hasVisible ? "block" : "none";
     });
 
     sync();
-  });
+    });
 
   dropdown.querySelectorAll(".tag-option").forEach(opt => {
     opt.addEventListener("click", () => {
@@ -133,13 +213,17 @@ export function openTagDropdown(row, selectedBox, dropdown) {
 
       if (existing) {
         existing.remove();
+        applyFilters(); // 🔥 FIX: re-run filters when removed
       } else {
         const chip = document.createElement("span");
         chip.className = "adv-chip";
         chip.textContent = tag;
         chip.dataset.tag = tag;
 
-        chip.onclick = () => chip.remove();
+        chip.onclick = () => {
+          chip.remove();
+          applyFilters(); // 🔥 FIX: re-run filters when removed
+        };
 
         selectedBox.appendChild(chip);
       }
@@ -221,6 +305,7 @@ export function addAdvancedRow() {
     delBtn.addEventListener("click", (e) => {
       e.stopPropagation();
       row.remove();
+      applyFilters(); // optional but recommended
     });
   }
 
@@ -239,10 +324,10 @@ export function initAdvancedUI() {
 
     rows.innerHTML = "";
     addAdvancedRow();
+    applyFilters();
   });
 
   document.getElementById("applyAdvanced")?.addEventListener("click", () => {
-    document.querySelector(".layout")?.classList.remove("filters-open");
     applyFilters();
   });
 }

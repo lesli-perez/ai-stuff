@@ -2,6 +2,7 @@ import { state } from "./state.js";
 import { applyFilters } from "./filters.js";
 import { safeList } from "./helpers.js";
 import { openAdvancedModal } from "./advanced.js";
+import { CATEGORY_ORDER, TAG_ORDER } from "./state.js";
 
 /* =========================
    TOGGLE TAG (FILTER MENU)
@@ -57,11 +58,34 @@ export function buildTagIndex() {
 export function renderTagMenu() {
   const el = document.getElementById("filterMenu");
 
-  const categories = Object.keys(state.allTagsByCategory).sort();
+
+  const categories = Object.keys(state.allTagsByCategory)
+    .sort((a, b) => {
+      const ia = CATEGORY_ORDER.indexOf(a);
+      const ib = CATEGORY_ORDER.indexOf(b);
+
+      if (ia === -1 && ib === -1) return a.localeCompare(b);
+      if (ia === -1) return 1;
+      if (ib === -1) return -1;
+
+      return ia - ib;
+    });
 
   el.innerHTML = `
     ${categories.map(cat => {
-      const tags = [...state.allTagsByCategory[cat]].sort();
+
+      const tags = [...state.allTagsByCategory[cat]].sort((a, b) => {
+      const order = TAG_ORDER[cat] || [];
+
+      const ia = order.indexOf(a);
+      const ib = order.indexOf(b);
+
+      if (ia === -1 && ib === -1) return a.localeCompare(b);
+      if (ia === -1) return 1;
+      if (ib === -1) return -1;
+
+      return ia - ib;
+    });
 
       return `
         <div class="filter-group">
