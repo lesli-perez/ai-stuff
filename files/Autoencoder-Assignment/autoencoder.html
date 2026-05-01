@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Autoencoder Assignment</title>
+
+  <link rel="stylesheet" href="../../style.css">
+</head>
+
+<body>
+
+<div class="page">
+
+  <h1>💻 Autoencoder: MNIST Reconstruction</h1>
+
+  <div class="example-banner">
+    Assignment Page and Example Output – Autoencoder Lab (PyTorch / Colab)
+  </div>
+
+  <a class="back-link" href="../../index.html">
+    ← Back to Resource Hub
+  </a>
+
+
+  <!-- CONTEXT -->
+  <div class="assignment-card">
+    <h2>Project Overview</h2>
+
+    <p>
+      This activity introduces students to autoencoders using PyTorch. The goal is to train a neural network
+      that learns to compress and reconstruct handwritten digits from the MNIST dataset.
+    </p>
+
+    <p>
+      Students work through a Colab-style notebook where they train an encoder–decoder model, observe
+      reconstruction quality, and experiment with different hyperparameters such as latent dimension,
+      batch size, learning rate, and number of training epochs.
+    </p>
+
+  </div>
+
+
+  <!-- CONTENTS -->
+  <div class="assignment-card">
+    <h2>Content</h2>
+    <ul>
+      <li>MNIST dataset loading and visualization</li>
+      <li>Fully connected autoencoder (encoder + bottleneck + decoder)</li>
+      <li>Training loop using MSE loss</li>
+      <li>Reconstruction comparison (original vs output images)</li>
+      <li>Hyperparameter experiments (latent size, batch size, learning rate, epochs)</li>
+    </ul>
+  </div>
+
+
+  <!-- NOTEBOOK -->
+  <div class="assignment-card clickable"
+       data-link="../../files/Autoencoder-Assignment/autoencoder_reconstruction_colab.ipynb">
+
+    <h2>Download .ipynb file</h2>
+    <p>
+      Click to download the assignment. Students can run each cell,
+      train the model, and visualize reconstructed digits in real time.
+    </p>
+
+  </div>
+
+
+  <!-- EXPLANATION -->
+  <div class="assignment-card">
+    <h2>What Students Learn</h2>
+
+    <p>
+      This assignment demonstrates how neural networks can learn compressed representations of data.
+      The encoder reduces the input image into a smaller latent vector, and the decoder reconstructs
+      the original image from this compressed form.
+    </p>
+
+    <p>
+      By adjusting model settings, students can observe how compression affects reconstruction quality,
+      highlighting the trade-off between information loss and model capacity.
+    </p>
+  </div>
+
+
+  <!-- EXPERIMENTS -->
+  <div class="assignment-card">
+    <h2>Suggested Experiments</h2>
+
+    <ul>
+      <li>Reduce latent dimension (e.g., 64 → 16 → 8 → 4) and observe reconstruction blur</li>
+      <li>Increase training epochs and compare output quality</li>
+      <li>Adjust learning rate and observe convergence speed</li>
+      <li>Change batch size and observe training stability</li>
+    </ul>
+  </div>
+
+
+  <!-- OUTPUT -->
+  <div class="assignment-card">
+    <h2>Expected Output</h2>
+    <p>
+      Students should be able to visualize side-by-side comparisons of original MNIST digits and their reconstructed versions.
+      The quality of reconstruction depends on the chosen latent space size and training configuration.
+    </p>
+  </div>
+
+</div>
+
+<script>
+document.querySelectorAll(".clickable").forEach(card => {
+  card.addEventListener("click", () => {
+    const link = card.getAttribute("data-link");
+    if (link) {
+      window.open(link, "_blank");
+    }
+  });
+});
+</script>
+
+</body>
+</html>

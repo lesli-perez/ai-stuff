@@ -120,12 +120,31 @@
       "Type": ["Course"],
       "Level": ["Beginner"],
       "Format": ["Self-paced"],
-      "Topic": ["Computer Science", "Binary", "Logic", "Hardware", "History of CS"]
+      "Topic": ["Computer Science", "Binary", "Logic", "Hardware", "History of CS"],
+      "Time": ["2 hours", "Multi-day"]
     },
     "description": [
       "A self-paced introductory course covering the fundamentals of computer science and programming.",
       "<ul><li><a href=\"https://learn.koriel.net/modules/binary\" target=\"_blank\">Binary Module:</a> How computers store and process data using 0s and 1s.</li><li><a href=\"https://learn.koriel.net/modules/logic\" target=\"_blank\">Logic Module:</a> How computers use boolean values to make decisions.</li><li><a href=\"https://learn.koriel.net/modules/hardware\" target=\"_blank\">Hardware Module:</a> evolution of computers and how software runs on physical systems.</li></ul>",
       "Designed for complete beginners with no prior experience, introducing core concepts that underpin all modern computing."
     ]
+  },
+  {
+    "title": "Autoencoder Reconstruction Colab",
+      "url": "./files/Autoencoder-Assignment/autoencoder.html",
+    "file": "files/Autoencoder-Assignment/autoencoder_reconstruction_colab.ipynb",
+    "image": "files/Autoencoder-Assignment/autoencoder-reconstruction.png",
+    "tags": {
+      "Type": ["Activity"],
+      "Level": ["Beginner"],
+      "Format": ["Self-paced", "Project"],
+      "Topic": ["Machine Learning", "Deep Learning", "Neural Networks", "Autoencoder", "Computer Vision"],
+      "Time": ["1 hour", "2 hours"]
+    },
+        "description": [
+        "A hands-on lab where you build and train an autoencoder using PyTorch to reconstruct MNIST handwritten digits.",
+        "<ul><li><b>Encoder:</b> Compresses 28×28 images into a low-dimensional latent vector representation.</li><li><b>Bottleneck (Latent Space):</b> The compressed representation that controls how much information is preserved; smaller dimensions increase compression but reduce detail.</li><li><b>Decoder:</b> Reconstructs the original image from the latent vector.</li><li><b>Training Exploration:</b> Students modify epochs, batch size, learning rate, and latent dimension to observe effects on reconstruction quality.</li></ul>",
+        "Focuses on understanding how compression affects reconstruction quality, loss behavior (MSE), and the trade-off between model capacity and information loss."
+      ]
   }
 ]

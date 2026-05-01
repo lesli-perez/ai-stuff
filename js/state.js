@@ -26,6 +26,6 @@ export const CATEGORY_ORDER = [
 ];
 
 export const TAG_ORDER = {
-  Time: ["5 mins.", "15 mins.", "30 mins.", "45 mins.", "1 hour", "2 hours", "multi-day"],
+  Time: ["5 mins.", "15 mins.", "30 mins.", "45 mins.", "1 hour", "2 hours", "Multi-day"],
   Level: ["Beginner", "Intermediate", "Advanced", "Expert"]
 };
