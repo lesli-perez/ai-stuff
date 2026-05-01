@@ -2,6 +2,7 @@ import { state, activeRow, activeDropdown, setActiveRow, setActiveDropdown } fro
 import { applyFilters } from "./filters.js";
 import { CATEGORY_ORDER, TAG_ORDER } from "./state.js";
 
+
 /* =========================
    GLOBAL CLICK HANDLING
 ========================= */
@@ -329,5 +330,41 @@ export function initAdvancedUI() {
 
   document.getElementById("applyAdvanced")?.addEventListener("click", () => {
     applyFilters();
+  });
+}
+
+
+export function initAdvancedHelp() {
+  const helpBtn = document.getElementById("advancedHelpBtn");
+  const tooltip = document.getElementById("advancedHelpTooltip");
+
+  if (!helpBtn || !tooltip) return;
+
+  let open = false;
+
+  const close = () => {
+    open = false;
+    tooltip.classList.remove("show");
+  };
+
+  const toggle = (e) => {
+    e.stopPropagation();
+    open = !open;
+    tooltip.classList.toggle("show", open);
+  };
+
+  helpBtn.addEventListener("click", toggle);
+
+  document.addEventListener("click", (e) => {
+    const clickedInside =
+      tooltip.contains(e.target) || helpBtn.contains(e.target);
+
+    if (!clickedInside) {
+      close();
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") close();
   });
 }

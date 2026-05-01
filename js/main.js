@@ -4,9 +4,11 @@ import { render } from "./render.js";
 import { applyFilters } from "./filters.js";
 import "./advanced.js";
 import { initAdvancedUI } from "./advanced.js";
+import { initAdvancedHelp } from "./advanced.js"; 
 
 document.addEventListener("DOMContentLoaded", () => {
   initAdvancedUI();
+  initAdvancedHelp();
 });
 
 window.state = state; // TEMP bridge

@@ -445,7 +445,7 @@ input {
 .panel-close-btn {
   background: transparent;
   border: none;
-
+  color: #666;
   width: 34px;
   height: 34px;
 
@@ -777,6 +777,7 @@ input {
   position: sticky;
   flex-direction: column;
   z-index: 1000;
+  overflow: visible;
 }
 
 /* PANEL visible only when open */
@@ -797,7 +798,7 @@ input {
 
   max-height: min(750px, 65vh);
   min-height: 230px;
-  overflow: hidden;
+  overflow: visible;
 }
 
 /* CARD AREA */
@@ -1023,4 +1024,107 @@ button:focus-visible {
 .adv-op-wrap.disabled {
   pointer-events: none;
   opacity: 0.4;
+}
+
+/* =========================
+   HEADER ACTIONS
+========================= */
+
+.advanced-header-actions {
+  display: flex;
+  align-items: center;
+}
+
+/* wrapper becomes positioning anchor */
+.help-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* hover show */
+.help-wrapper:hover .help-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+
+/* =========================
+   ? BUTTON
+========================= */
+
+.help-btn {
+  width: 26px;
+  height: 26px;
+
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  background: #fff;
+
+  font-size: 14px;
+  font-weight: 600;
+  color: #666;
+
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-5px); 
+
+  cursor: pointer;
+
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.help-btn:hover {
+  background: #f5f5f5;
+}
+
+.help-btn:active {
+  transform: scale(0.95);
+}
+
+/* =========================
+   TOOLTIP (FIXED POSITIONING)
+========================= */
+
+.help-tooltip {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 20px);
+
+  transform: translateX(-50%) translateY(6px);
+
+  width: 200px;
+
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 10px;
+
+  padding: 10px 12px;
+
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: #444;
+
+  box-shadow: 0 5px 10px rgba(0,0,0,0.12);
+
+  z-index: 9999999;
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+/* SHOW STATE */
+.help-tooltip.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+/* bold styling */
+.help-tooltip b {
+  color: #111;
 }

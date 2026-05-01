@@ -11,9 +11,9 @@
   <script type="module" src="js/main.js"></script>
 </head>
 
-<button id="scrollTopBtn" class="scroll-top-btn">↑</button>
-
 <body>
+
+<button id="scrollTopBtn" class="scroll-top-btn">↑</button>
 
 <h1>📁 Resource Hub</h1>
 
@@ -36,19 +36,61 @@
 </div>
 
 <input type="text" id="search" placeholder="Search...">
+
 <div class="layout">
+
+  <!-- =========================
+       ADVANCED PANEL
+  ========================= -->
   <div id="advancedPanel" class="advanced-panel">
-     <div class="advanced-header">
+
+    <div class="advanced-header">
       <div class="advanced-title">Advanced Filtering</div>
 
-      <button class="panel-close-btn" id="closeAdvancedPanel" aria-label="Close advanced filters">
-        ✕
-      </button>
+      <div class="advanced-header-actions">
+
+        <!-- HELP WRAPPER (IMPORTANT) -->
+        <div class="help-wrapper">
+
+          <button
+            class="help-btn"
+            id="advancedHelpBtn"
+            type="button"
+            aria-label="How advanced filtering works"
+          >
+            ?
+          </button>
+
+          <!-- TOOLTIP -->
+          <div class="help-tooltip" id="advancedHelpTooltip">
+              Select tags to build filters.<br><br>
+
+            <b>Within a row:</b> OR logic / items can match ANY selected tag.<br>
+            <b>Between rows:</b> AND / NOT logic<br><br>
+
+            Example:<br>
+            Row 1: "Plug & Play" OR "5 mins."<br>
+            Row 2 (NOT): "1 hour" or "Activity"
+          </div>
+
+        </div>
+
+        <!-- CLOSE BUTTON -->
+        <button
+          class="panel-close-btn"
+          id="closeAdvancedPanel"
+          aria-label="Close advanced filters"
+        >
+          ✕
+        </button>
+
       </div>
+    </div>
 
     <div id="advancedRows"></div>
 
     <div class="advanced-divider"></div>
+
     <button id="addAdvancedRow" class="advanced-add">
       + Add Row
     </button>
@@ -57,14 +99,19 @@
       <button id="clearAdvanced" class="btn secondary">Clear All</button>
       <button id="applyAdvanced" class="apply-btn">Apply</button>
     </div>
+
   </div>
 
+  <!-- =========================
+       MAIN CONTENT
+  ========================= -->
   <div class="main-content">
     <div id="container"></div>
   </div>
+
 </div>
 
-
+<!-- TAG DROPDOWN -->
 <div id="globalTagDropdown" class="tag-dropdown hidden"></div>
 
 </body>
