@@ -20,15 +20,29 @@ function safeList(input) {
 let activeRow = null;
 let activeDropdown = null;
 document.addEventListener("click", (e) => {
-  if (!activeDropdown) return;
+  // =========================
+  // TAG DROPDOWN LOGIC
+  // =========================
+  if (activeDropdown) {
+    const clickedInsideDropdown = activeDropdown.contains(e.target);
+    const clickedAddButton = e.target.closest(".add-tag-btn");
 
-  const clickedInsideDropdown = activeDropdown.contains(e.target);
-  const clickedAddButton = e.target.closest(".add-tag-btn");
-
-  if (!clickedInsideDropdown && !clickedAddButton) {
-    closeTagDropdown();
+    if (!clickedInsideDropdown && !clickedAddButton) {
+      closeTagDropdown();
+    }
   }
+
+  // =========================
+  // AND/NOT DROPDOWN LOGIC
+  // =========================
+  document.querySelectorAll(".adv-op-wrap.open").forEach(wrap => {
+    if (!wrap.contains(e.target)) {
+      wrap.classList.remove("open");
+    }
+  });
 });
+
+
 /* =========================
    CACHE HELPERS
 ========================= */
@@ -407,15 +421,26 @@ function addAdvancedRow() {
   const opValue = row.querySelector(".adv-op-value");
 
   if (opBtn && opMenu) {
+    const opWrap = row.querySelector(".adv-op-wrap");
+
     opBtn.addEventListener("click", (e) => {
       e.stopPropagation();
-      opMenu.classList.toggle("hidden");
+
+      const isOpen = opWrap.classList.contains("open");
+
+      document.querySelectorAll(".adv-op-wrap.open").forEach(el => {
+        el.classList.remove("open");
+      });
+
+      if (!isOpen) {
+        opWrap.classList.add("open");
+      }
     });
 
     opMenu.querySelectorAll(".adv-op-option").forEach(opt => {
       opt.addEventListener("click", () => {
         opValue.textContent = opt.dataset.value;
-        opMenu.classList.add("hidden");
+        opWrap.classList.remove("open");
       });
     });
   }
