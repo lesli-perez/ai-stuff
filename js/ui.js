@@ -3,6 +3,8 @@ import { applyFilters } from "./filters.js";
 import { safeList } from "./helpers.js";
 import { openAdvancedModal } from "./advanced.js";
 import { CATEGORY_ORDER, TAG_ORDER } from "./state.js";
+import { getAdvancedRules } from "./advanced.js";
+
 
 /* =========================
    TOGGLE TAG (FILTER MENU)
@@ -25,14 +27,56 @@ export function toggleTag(tag) {
 ========================= */
 export function updateStatus() {
   const el = document.getElementById("statusText");
-  const tags = [...state.activeTags];
 
-  el.textContent =
-    tags.length === 0 && !state.searchQuery
-      ? "Viewing All Files"
-      : `Filters: ${safeList(tags)}${
-          state.searchQuery ? " | Search: " + state.searchQuery : ""
-        }`;
+  const tags = [...state.activeTags];
+  const query = state.searchQuery;
+
+  const rules = getAdvancedRules();
+
+  let text = "";
+
+  // -------------------------
+  // DEFAULT STATE
+  // -------------------------
+  if (tags.length === 0 && !query && rules.length === 0) {
+    el.textContent = "Viewing All Files";
+    return;
+  }
+
+  // -------------------------
+  // BASIC TAG FILTERS
+  // -------------------------
+  if (tags.length > 0 && rules.length === 0) {
+    text = `Filters: ${safeList(tags)}`;
+  }
+
+  // -------------------------
+  // ADVANCED FILTERS
+  // -------------------------
+  if (rules.length > 0) {
+    const formatted = rules.map(rule => {
+      const joined = rule.tags
+        .map(t => t)
+        .join(" || ");
+
+      if (rule.op === "NOT") {
+        return `!(${joined})`;
+      }
+
+      return `(${joined})`;
+    });
+
+    text = `Filters: ${formatted.join(" && ")}`;
+  }
+
+  // -------------------------
+  // SEARCH APPEND
+  // -------------------------
+  if (query) {
+    text += ` | Search: ${query}`;
+  }
+
+  el.textContent = text;
 }
 
 /* =========================
