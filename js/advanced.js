@@ -331,6 +331,9 @@ export function initAdvancedUI() {
   document.getElementById("applyAdvanced")?.addEventListener("click", () => {
     applyFilters();
   });
+  document.getElementById("closeAdvancedPanel")?.addEventListener("click", () => {
+    document.querySelector(".layout")?.classList.remove("filters-open");
+  });
 }
 
 
