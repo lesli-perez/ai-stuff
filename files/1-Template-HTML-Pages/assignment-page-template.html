@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Page Title Here</title>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="../../style.css">
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="../../favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="../../favicon_io/site.webmanifest">
+</head>
+
+<body>
+
+<div class="page">
+
+  <!-- TITLE -->
+  <h1>Page Title Here</h1>
+
+  <!-- HEADER BANNER -->
+  <div class="example-banner">
+    Optional subtitle or banner text goes here
+  </div>
+
+  <!-- BACK LINK -->
+  <a class="back-link" href="../../index.html">
+    ← Back to Home
+  </a>
+
+  <!-- INTRO SECTION -->
+  <div class="assignment-card">
+    <h2>Introduction</h2>
+    <p>
+      Add your introduction text here.
+    </p>
+  </div>
+
+  <!-- STEP / INSTRUCTIONS SECTION -->
+  <div class="assignment-card">
+    <h2>Instructions / How It Works</h2>
+
+    <!-- STEP 1 -->
+    <div class="step">
+      <img src="path/to/image1.png" alt="Step 1 image">
+      <div class="step-text">
+        <h3>Step 1</h3>
+        <p>Describe step 1 here.</p>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="step">
+      <img src="path/to/image2.png" alt="Step 2 image">
+      <div class="step-text">
+        <h3>Step 2</h3>
+        <p>Describe step 2 here.</p>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="step">
+      <img src="path/to/image3.png" alt="Step 3 image">
+      <div class="step-text">
+        <h3>Step 3</h3>
+        <p>Describe step 3 here.</p>
+      </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="step">
+      <img src="path/to/image4.png" alt="Step 4 image">
+      <div class="step-text">
+        <h3>Step 4</h3>
+        <p>Describe step 4 here.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- EXAMPLE SECTION -->
+  <div class="assignment-card">
+    <h2>Example</h2>
+    <p>
+      Add an example explanation or sample output here.
+    </p>
+  </div>
+
+  <!-- TOOL / RESOURCES SECTION -->
+  <div class="assignment-card">
+    <h2>Tools / Options</h2>
+
+    <p>
+      Describe tools or platforms users can use.
+    </p>
+
+    <ul>
+      <li>Tool 1</li>
+      <li>Tool 2</li>
+      <li>Tool 3</li>
+    </ul>
+
+    <p>
+      Add additional notes or guidance here.
+    </p>
+  </div>
+
+  <!-- SECTION --> 
+  <div class="assignment-card clickable"
+       data-link="https://example.com">
+    <h2>Clickable Section Title</h2>
+    <img src="path/to/image.png" alt="Image">
+    <ul>
+      <li>Item 1</li>
+      <li>Item 2</li>
+      <li>Item 3</li>
+    </ul>
+
+    <P>Include the "clickable" and data-link classes when you have a link or downloadable content.</P>
+  </div>
+
+  <!-- REQUIREMENTS / CLICKABLE CARD -->
+  <div class="assignment-card clickable"
+       data-link="https://example.com">
+
+    <h2>Requirements / Resources - Clickable card</h2>
+
+    <p>Describe requirements or what users need to submit.</p>
+
+    <ul>
+      <li>File 1</li>
+      <li>File 2</li>
+      <li>File 3</li>
+    </ul>
+
+    <p>
+      Add reflection or submission requirements here.
+    </p>
+
+  </div>
+
+</div>
+
+<!-- CLICK HANDLER -->
+<script>
+document.querySelectorAll(".clickable").forEach(card => {
+  card.addEventListener("click", () => {
+    const link = card.getAttribute("data-link");
+    if (link) {
+      window.open(link, "_blank");
+    }
+  });
+});
+</script>
+
+</body>
+</html>

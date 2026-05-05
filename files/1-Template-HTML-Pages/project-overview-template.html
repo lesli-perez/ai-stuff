@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Page Title Here</title>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="../../style.css">
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="../../favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="../../favicon_io/site.webmanifest">
+</head>
+
+<body>
+
+<div class="page">
+
+  <!-- PAGE TITLE -->
+  <h1>Page Title Here</h1>
+
+  <!-- HEADER BANNER -->
+  <div class="example-banner">
+    Optional subtitle or banner text goes here
+  </div>
+
+  <!-- BACK LINK -->
+  <a class="back-link" href="../../index.html">
+    ← Back to Home
+  </a>
+
+  <!-- SECTION 1 -->
+  <div class="assignment-card">
+    <h2>Section Title</h2>
+
+    <p>
+      Add your introduction or description here. Include any additional information/explanations.
+    </p>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="assignment-card">
+    <h2>Content Overview</h2>
+
+    <ul>
+      <li>Item 1</li>
+      <li>Item 2</li>
+      <li>Item 3</li>
+    </ul>
+  </div>
+
+  <!-- CLICKABLE LINK CARD -->
+  <div class="assignment-card clickable"
+       data-link="path/to/your/file-or-page.html">
+
+    <h2>Clickable Card Title</h2>
+    <p>
+      Short description of what the user will open or download.
+    </p>
+
+  </div>
+
+  <!-- TEXT SECTION -->
+  <div class="assignment-card">
+    <h2>Section Title 2</h2>
+
+    <p>
+      Write your content here. You can add multiple paragraphs,
+      headings, or lists as needed. Copy and paste this section if you need more sections.
+    </p>
+  </div>
+
+  <!-- DOWNLOAD CARD -->
+  <div class="assignment-card clickable"
+       data-link="path/to/download.zip">
+
+    <h2>Download Files </h2>
+    <p>
+      Describe what is included in the download here. This is another clickable section.
+    </p>
+
+  </div>
+
+</div>
+
+<!-- CLICK HANDLER SCRIPT -->
+<script>
+document.querySelectorAll(".clickable").forEach(card => {
+  card.addEventListener("click", () => {
+    const link = card.getAttribute("data-link");
+    if (link) {
+      window.open(link, "_blank");
+    }
+  });
+});
+</script>
+
+</body>
+</html>
