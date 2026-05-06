@@ -1219,7 +1219,7 @@ button:focus-visible {
 /* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(0, 0, 0, 0.103) transparent;
+  scrollbar-color: rgba(0, 0, 0, 0.178) transparent;
 }
 
 /* Chrome / Edge / Safari */
@@ -1235,19 +1235,19 @@ button:focus-visible {
 
 /* thumb (the actual bar) */
 *::-webkit-scrollbar-thumb {
-  background: rgba(0,0,0,0.22);
+  background: rgba(0, 0, 0, 0.13);
   border-radius: 999px;
   transition: background 0.2s ease;
 }
 
 /* hover = slightly darker */
 *::-webkit-scrollbar-thumb:hover {
-  background: rgba(0,0,0,0.35);
+  background: rgba(0, 0, 0, 0.13);
 }
 
 /* active drag */
 *::-webkit-scrollbar-thumb:active {
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.13);
 }
 
  
