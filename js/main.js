@@ -64,4 +64,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.querySelector(".layout").classList.add("filters-open");
+
+    
 });

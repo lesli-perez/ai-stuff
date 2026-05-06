@@ -2,7 +2,7 @@ import { state, activeRow, activeDropdown, setActiveRow, setActiveDropdown } fro
 import { applyFilters } from "./filters.js"; 
 import { getAllTags } from "./helpers.js";
 import { CATEGORY_ORDER, TAG_ORDER } from "./state.js";
-import { syncCheckboxes } from "./ui.js";
+import { syncCheckboxes, updateStatus } from "./ui.js";
 
 let syncing = false;
 

@@ -1210,3 +1210,43 @@ button:focus-visible {
 .mode-toggle input:checked + .slider::after {
   content: "";
 }
+
+
+/* =========================
+   SCROLLBAR
+========================= */
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.103) transparent;
+}
+
+/* Chrome / Edge / Safari */
+*::-webkit-scrollbar {
+  width: 5px;
+  height: 6px;
+}
+
+/* track (background) */
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* thumb (the actual bar) */
+*::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.22);
+  border-radius: 999px;
+  transition: background 0.2s ease;
+}
+
+/* hover = slightly darker */
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(0,0,0,0.35);
+}
+
+/* active drag */
+*::-webkit-scrollbar-thumb:active {
+  background: rgba(0,0,0,0.5);
+}
+
