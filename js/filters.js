@@ -8,7 +8,8 @@ export function applyFilters() {
   let results = state.data;
 
   const query = state.searchQuery;
-  const tags = state.activeTags;
+
+  const isAdvancedActive = state.mode === "advanced";
 
   /* SEARCH */
   if (query) {
@@ -20,17 +21,20 @@ export function applyFilters() {
     );
   }
 
-  /* BASIC TAGS */
-  if (tags.size > 0) {
-    results = results.filter(item =>
-      [...tags].some(tag =>
-        getAllTags(state, item).includes(tag)
-      )
-    );
-  }
+  /* MODE SWITCH */
+  if (isAdvancedActive) {
+    results = applyAdvancedFilters(results);
+  } else {
+    const tags = state.activeTags;
 
-  /* ADVANCED */
-  results = applyAdvancedFilters(results);
+    if (tags.size > 0) {
+      results = results.filter(item =>
+        [...tags].some(tag =>
+          getAllTags(state, item).includes(tag)
+        )
+      );
+    }
+  }
 
   render(results);
   updateStatus();

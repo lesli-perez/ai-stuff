@@ -3,7 +3,7 @@ import { applyFilters } from "./filters.js";
 import { safeList } from "./helpers.js";
 import { openAdvancedModal } from "./advanced.js";
 import { CATEGORY_ORDER, TAG_ORDER } from "./state.js";
-import { getAdvancedRules } from "./advanced.js";
+import { getAdvancedRules, syncBasicToAdvanced  } from "./advanced.js";
 
 
 /* =========================
@@ -18,9 +18,9 @@ export function toggleTag(tag) {
     state.activeTags.add(tag);
   }
 
-  syncCheckboxes();
-  state.filtersApplied = true;
-  applyFilters();
+  syncBasicToAdvanced();
+  applyFilters(); 
+  updateStatus();
 }
 
 /* =========================
@@ -32,46 +32,48 @@ export function updateStatus() {
   const tags = [...state.activeTags];
   const query = state.searchQuery;
 
-  const rules = getAdvancedRules();
-
   let text = "";
 
   // -------------------------
-  // DEFAULT STATE
+  // DEFAULT
   // -------------------------
-  if (tags.length === 0 && !query && rules.length === 0) {
+  if (tags.length === 0 && !query) {
     el.textContent = "Viewing All Files";
     return;
   }
 
   // -------------------------
-  // BASIC TAG FILTERS
+  // ADVANCED MODE
   // -------------------------
-  if (tags.length > 0 && rules.length === 0) {
-    text = `Filters: ${safeList(tags)}`;
+  if (state.mode === "advanced") {
+    const rules = getAdvancedRules();
+
+    if (rules.length > 0) {
+      const formatted = rules.map(rule => {
+        const joined = rule.tags.join(" || ");
+
+        return rule.op === "NOT"
+          ? `!(${joined})`
+          : `(${joined})`;
+      });
+
+      text = `Filters: ${formatted.join(" && ")}`;
+    } else {
+      text = `Filters: ${safeList(tags)}`;
+    }
   }
 
   // -------------------------
-  // ADVANCED FILTERS
+  // BASIC MODE
   // -------------------------
-  if (rules.length > 0) {
-    const formatted = rules.map(rule => {
-      const joined = rule.tags
-        .map(t => t)
-        .join(" || ");
-
-      if (rule.op === "NOT") {
-        return `!(${joined})`;
-      }
-
-      return `(${joined})`;
-    });
-
-    text = `Filters: ${formatted.join(" && ")}`;
+  else {
+    if (tags.length > 0) {
+      text = `Filters: ${safeList(tags)}`;
+    }
   }
 
   // -------------------------
-  // SEARCH APPEND
+  // SEARCH
   // -------------------------
   if (query) {
     text += ` | Search: ${query}`;
@@ -160,8 +162,9 @@ export function renderTagMenu() {
    SYNC CHECKBOX STATE
 ========================= */
 export function syncCheckboxes() {
-  document.querySelectorAll("#filterMenu input[type='checkbox']")
+  document.querySelectorAll("#sideFilterMenu input[type='checkbox']")
     .forEach(cb => {
       cb.checked = state.activeTags.has(cb.dataset.tag);
     });
 }
+

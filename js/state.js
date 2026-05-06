@@ -4,6 +4,7 @@ export const state = {
   activeTags: new Set(),
   allTagsByCategory: {},
   flatTagCache: new WeakMap(),
+  mode: "basic"
 };
 
 export let activeRow = null;

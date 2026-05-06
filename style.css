@@ -578,29 +578,6 @@ input {
 }
 
 
-.apply-btn {
-  background: #af277b;
-  color: white;
-
-  border: none;
-  padding: 6px 14px;
-  border-radius: 8px;
-
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 500;
-
-  transition: background 0.15s ease, transform 0.1s ease;
-}
-
-.apply-btn:hover {
-  background: #8e1f65;
-}
-
-.apply-btn:active {
-  transform: scale(0.97);
-}
-
 /*TAG DROPDOWN*/
 
 .tag-dropdown {

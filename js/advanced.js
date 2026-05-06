@@ -2,7 +2,9 @@ import { state, activeRow, activeDropdown, setActiveRow, setActiveDropdown } fro
 import { applyFilters } from "./filters.js"; 
 import { getAllTags } from "./helpers.js";
 import { CATEGORY_ORDER, TAG_ORDER } from "./state.js";
+import { syncCheckboxes } from "./ui.js";
 
+let syncing = false;
 
 /* =========================
    GLOBAL CLICK HANDLING
@@ -208,7 +210,6 @@ export function openTagDropdown(row, selectedBox, dropdown) {
         if (match) hasVisible = true;
         });
 
-        // 🔥 hide whole category if nothing matches
         block.style.display = hasVisible ? "block" : "none";
     });
 
@@ -224,20 +225,16 @@ export function openTagDropdown(row, selectedBox, dropdown) {
 
       if (existing) {
         existing.remove();
-        applyFilters(); 
       } else {
-        const chip = document.createElement("span");
-        chip.className = "adv-chip";
-        chip.textContent = tag;
-        chip.dataset.tag = tag;
-
-        chip.onclick = () => {
-          chip.remove();
-          applyFilters(); 
-        };
-
+        const chip = createChip(tag, selectedBox);
         selectedBox.appendChild(chip);
       }
+
+      syncAdvancedToBasicTopRow();
+      syncCheckboxes();   // 🔥 ADD THIS
+
+      applyFilters();
+      updateStatus();
 
       closeTagDropdown();
     });
@@ -316,7 +313,9 @@ export function addAdvancedRow() {
     delBtn.addEventListener("click", (e) => {
       e.stopPropagation();
       row.remove();
+      syncAdvancedToBasicTopRow();
       applyFilters(); 
+      updateStatus();
     });
   }
 
@@ -340,11 +339,10 @@ export function initAdvancedUI() {
 
     resetAdvancedFilters();   
     applyFilters();
+   updateStatus();
   });
 
-  document.getElementById("applyAdvanced")?.addEventListener("click", () => {
-    applyFilters();
-  });
+
   document.getElementById("closeAdvancedPanel")?.addEventListener("click", () => {
     document.querySelector(".layout")?.classList.remove("filters-open");
   });
@@ -386,6 +384,7 @@ export function initAdvancedHelp() {
   });
 }
 
+
 export function initPanelToggle() {
   const toggleBtn = document.getElementById("toggleAdvancedMode");
   const basic = document.getElementById("basicFiltersPanel");
@@ -400,16 +399,22 @@ export function initPanelToggle() {
 
     basic.classList.toggle("hidden", isAdvanced);
     advanced.classList.toggle("hidden", !isAdvanced);
-
-    // 🔥 show help ONLY in advanced mode
     help.classList.toggle("hidden", !isAdvanced);
 
     title.textContent = isAdvanced ? "Advanced Filtering" : "Filters";
     toggleBtn.textContent = isAdvanced ? "Basic" : "Advanced";
 
-    if (isAdvanced && advanced.querySelectorAll(".advanced-row").length === 0) {
-      addAdvancedRow();
+    state.mode = isAdvanced ? "advanced" : "basic";
+
+    if (isAdvanced) {
+      syncBasicToAdvanced();
+    } else {
+      syncAdvancedToBasicTopRow();
+       syncCheckboxes();
     }
+
+    applyFilters();
+    updateStatus();
   });
 }
 
@@ -422,4 +427,77 @@ export function resetAdvancedFilters() {
   addAdvancedRow(); 
 
   closeTagDropdown();
+}
+
+
+export function syncBasicToAdvanced() {
+  const rows = document.getElementById("advancedRows");
+  if (!rows) return;
+
+  rows.innerHTML = "";
+
+  const row = document.createElement("div");
+  row.className = "advanced-row";
+
+  const box = document.createElement("div");
+  box.className = "adv-selected-tags";
+
+  state.activeTags.forEach(tag => {
+    const chip = createChip(tag, box);
+    box.appendChild(chip);
+  });
+
+  const actions = document.createElement("div");
+  actions.className = "row-actions";
+
+  const btn = document.createElement("button");
+  btn.className = "add-tag-btn";
+  btn.textContent = "+ Add Tag";
+
+  const dropdown = document.getElementById("globalTagDropdown");
+
+  btn.onclick = (e) => {
+    e.stopPropagation();
+    openTagDropdown(row, box, dropdown);
+  };
+
+  actions.appendChild(btn);
+
+  row.appendChild(box);
+  row.appendChild(actions);
+
+  rows.appendChild(row);
+}
+
+export function syncAdvancedToBasicTopRow() {
+  const firstRow = document.querySelector(".advanced-row");
+  if (!firstRow) return;
+
+  const chips = firstRow.querySelectorAll(".adv-chip");
+
+  state.activeTags.clear();
+
+  chips.forEach(chip => {
+    state.activeTags.add(chip.dataset.tag);
+  });
+
+  syncCheckboxes();
+}
+
+
+function createChip(tag, container) {
+  const chip = document.createElement("span");
+  chip.className = "adv-chip";
+  chip.textContent = tag;
+  chip.dataset.tag = tag;
+
+  chip.onclick = () => {
+    chip.remove();
+    syncAdvancedToBasicTopRow();
+    syncCheckboxes();
+    applyFilters(); 
+    updateStatus();
+  };
+
+  return chip;
 }
