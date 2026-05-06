@@ -1,5 +1,6 @@
 import { state, activeRow, activeDropdown, setActiveRow, setActiveDropdown } from "./state.js";
-import { applyFilters } from "./filters.js";
+import { applyFilters } from "./filters.js"; 
+import { getAllTags } from "./helpers.js";
 import { CATEGORY_ORDER, TAG_ORDER } from "./state.js";
 
 
@@ -35,6 +36,9 @@ export function openAdvancedModal() {
   if (rows && rows.children.length === 0) {
     addAdvancedRow();
   }
+
+  basic.classList.remove("hidden");
+  advanced.classList.add("hidden");
 }
 
 /* =========================
@@ -68,20 +72,26 @@ export function applyAdvancedFilters(data) {
   if (rules.length === 0) return data;
 
   return data.filter(item => {
-    const itemTags = new Set(Object.values(item.tags).flat());
+    const itemTags = new Set(getAllTags(state, item));
 
-    return rules.every(rule => {
-      if (!rule.tags || rule.tags.length === 0) return true;
-
+    return rules.reduce((acc, rule, index) => {
       const matchesAny = rule.tags.some(tag => itemTags.has(tag));
 
+      let result;
+
       if (rule.op === "NOT") {
-        return !matchesAny;
+        result = !matchesAny;
+      } else {
+        result = matchesAny;
       }
 
-      // OR logic inside row
-      return matchesAny;
-    });
+      if (index === 0) return result;
+
+      if (rule.op === "AND") return acc && result;
+      //if (rule.op === "OR") return acc || result;
+
+      return acc && result;
+    }, true);
   });
 }
 
@@ -214,7 +224,7 @@ export function openTagDropdown(row, selectedBox, dropdown) {
 
       if (existing) {
         existing.remove();
-        applyFilters(); // 🔥 FIX: re-run filters when removed
+        applyFilters(); 
       } else {
         const chip = document.createElement("span");
         chip.className = "adv-chip";
@@ -223,7 +233,7 @@ export function openTagDropdown(row, selectedBox, dropdown) {
 
         chip.onclick = () => {
           chip.remove();
-          applyFilters(); // 🔥 FIX: re-run filters when removed
+          applyFilters(); 
         };
 
         selectedBox.appendChild(chip);
@@ -306,7 +316,7 @@ export function addAdvancedRow() {
     delBtn.addEventListener("click", (e) => {
       e.stopPropagation();
       row.remove();
-      applyFilters(); // optional but recommended
+      applyFilters(); 
     });
   }
 
@@ -369,5 +379,32 @@ export function initAdvancedHelp() {
 
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") close();
+  });
+}
+
+export function initPanelToggle() {
+  const toggleBtn = document.getElementById("toggleAdvancedMode");
+  const basic = document.getElementById("basicFiltersPanel");
+  const advanced = document.getElementById("advancedFiltersPanel");
+  const title = document.getElementById("panelTitle");
+  const help = document.getElementById("advancedHelpWrapper");
+
+  let isAdvanced = false;
+
+  toggleBtn.addEventListener("click", () => {
+    isAdvanced = !isAdvanced;
+
+    basic.classList.toggle("hidden", isAdvanced);
+    advanced.classList.toggle("hidden", !isAdvanced);
+
+    // 🔥 show help ONLY in advanced mode
+    help.classList.toggle("hidden", !isAdvanced);
+
+    title.textContent = isAdvanced ? "Advanced Filtering" : "Filters";
+    toggleBtn.textContent = isAdvanced ? "Basic" : "Advanced";
+
+    if (isAdvanced && advanced.querySelectorAll(".advanced-row").length === 0) {
+      addAdvancedRow();
+    }
   });
 }

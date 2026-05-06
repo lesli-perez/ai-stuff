@@ -1128,3 +1128,30 @@ button:focus-visible {
 .help-tooltip b {
   color: #111;
 }
+
+/*SIDE PANEL*/
+.panel-mode.hidden {
+  display: none;
+}
+
+#sideFilterMenu {
+  overflow-y: auto;
+  max-height: 100%;
+}
+
+.hidden {
+  display: none;
+}
+
+
+
+
+.panel-mode {
+  flex: 1;
+  min-height: 0;  
+  overflow-y: auto;  /* enables scroll */
+}
+
+#sideFilterMenu {
+  padding-right: 4px;
+}

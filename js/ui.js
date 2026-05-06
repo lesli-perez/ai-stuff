@@ -100,7 +100,7 @@ export function buildTagIndex() {
    RENDER FILTER MENU
 ========================= */
 export function renderTagMenu() {
-  const el = document.getElementById("filterMenu");
+  const el = document.getElementById("sideFilterMenu");
 
 
   const categories = Object.keys(state.allTagsByCategory)
@@ -145,9 +145,6 @@ export function renderTagMenu() {
       `;
     }).join("")}
 
-    <hr>
-
-    <div id="advancedEntryBtn">⚙ Advanced Filtering</div>
   `;
 
   el.querySelectorAll("input[type='checkbox']").forEach(cb => {
@@ -156,8 +153,6 @@ export function renderTagMenu() {
 
   syncCheckboxes();
 
-  document.getElementById("advancedEntryBtn")
-    ?.addEventListener("click", openAdvancedModal);
 }
 
 /* =========================

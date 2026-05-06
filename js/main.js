@@ -5,15 +5,17 @@ import { applyFilters } from "./filters.js";
 import "./advanced.js";
 import { initAdvancedUI } from "./advanced.js";
 import { initAdvancedHelp } from "./advanced.js"; 
+import { openAdvancedModal, initPanelToggle} from "./advanced.js";
 
-document.addEventListener("DOMContentLoaded", () => {
-  initAdvancedUI();
-  initAdvancedHelp();
-});
+
 
 window.state = state; // TEMP bridge
 
 document.addEventListener("DOMContentLoaded", () => {
+
+    initAdvancedUI();
+    initAdvancedHelp();
+    initPanelToggle();
   // =========================
   // FETCH DATA
   // =========================
@@ -65,31 +67,10 @@ document.addEventListener("DOMContentLoaded", () => {
     updateStatus();
   });
 
-  // FILTER DROPDOWN TOGGLE
-  const filterBtn = document.getElementById("filterBtn");
-  const filterMenu = document.getElementById("filterMenu");
-  const arrow = document.getElementById("filterArrow");
 
-  filterBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
+    document.getElementById("filterBtn").addEventListener("click", (e) => {
+      e.stopPropagation();
+      document.querySelector(".layout").classList.add("filters-open");
+    });
 
-    const open = filterMenu.classList.toggle("show");
-    arrow.textContent = open ? "▲" : "▼";
-  });
-
-  // CLOSE DROPDOWN ON OUTSIDE CLICK
-  document.addEventListener("click", (e) => {
-    if (!e.target.closest(".filter-wrapper")) {
-      filterMenu.classList.remove("show");
-      arrow.textContent = "▼";
-    }
-  });
-
-  // ESC CLOSE
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      filterMenu.classList.remove("show");
-      arrow.textContent = "▼";
-    }
-  });
 });

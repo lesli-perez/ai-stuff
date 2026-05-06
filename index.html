@@ -32,11 +32,9 @@
 
     <div class="filter-wrapper">
       <button class="filter-btn" id="filterBtn">
-        <span id="filterArrow">▼</span>
         Filters
       </button>
 
-      <div id="filterMenu" class="filter-menu"></div>
     </div>
   </div>
 </div>
@@ -46,55 +44,69 @@
 <div class="layout">
 
   <!-- =========================
-       ADVANCED PANEL
+       SIDE PANEL
   ========================= -->
-  <div id="advancedPanel" class="advanced-panel">
+  <div id="sidePanel" class="advanced-panel">
 
-    <div class="advanced-header">
-      <div class="advanced-title">Advanced Filtering</div>
+  <div class="advanced-header">
+    <div class="advanced-title" id="panelTitle">Filters</div>
 
-      <div class="advanced-header-actions">
+    <div class="advanced-header-actions">
 
-        <!-- HELP WRAPPER (IMPORTANT) -->
-        <div class="help-wrapper">
+      <!-- HELP (FOR ADVANCED MODE) -->
+      <div class="help-wrapper hidden" id="advancedHelpWrapper">
 
-          <button
-            class="help-btn"
-            id="advancedHelpBtn"
-            type="button"
-            aria-label="How advanced filtering works"
-          >
-            ?
-          </button>
-
-          <!-- TOOLTIP -->
-          <div class="help-tooltip" id="advancedHelpTooltip">
-              Select tags to build filters.<br><br>
-
-            <b>Within a row:</b> OR logic / items can match ANY selected tag.<br>
-            <b>Between rows:</b> AND / NOT logic<br><br>
-
-            Example:<br>
-            Row 1: "Project" OR "5 mins."<br>
-            Row 2 (NOT): "1 hour"<br><br>
-
-            (Project || 5 mins.) && !(1 hour)
-          </div>
-
-        </div>
-
-        <!-- CLOSE BUTTON -->
         <button
-          class="panel-close-btn"
-          id="closeAdvancedPanel"
-          aria-label="Close advanced filters"
+          class="help-btn"
+          id="advancedHelpBtn"
+          type="button"
+          aria-label="How advanced filtering works"
         >
-          ✕
+          ?
         </button>
 
-      </div>
-    </div>
+        <div class="help-tooltip" id="advancedHelpTooltip">
+          Select tags to build filters.<br><br>
 
+          <b>Within a row:</b> OR logic / items can match ANY selected tag.<br>
+          <b>Between rows:</b> AND / NOT logic<br><br>
+
+          Example:<br>
+          Row 1: "Project" OR "5 mins."<br>
+          Row 2 (NOT): "1 hour"<br><br>
+
+          (Project || 5 mins.) && !(1 hour)
+        </div>
+
+      </div>
+
+      <!-- TOGGLE -->
+      <button
+        class="btn secondary"
+        id="toggleAdvancedMode"
+        type="button"
+      >
+        Advanced
+      </button>
+
+      <!-- CLOSE -->
+      <button
+        class="panel-close-btn"
+        id="closeAdvancedPanel"
+      >
+        ✕
+      </button>
+
+    </div>
+  </div>
+
+  <!-- BASIC FILTERS -->
+  <div id="basicFiltersPanel" class="panel-mode">
+    <div id="sideFilterMenu"></div>
+  </div>
+
+  <!-- ADVANCED FILTERS -->
+  <div id="advancedFiltersPanel" class="panel-mode hidden">
     <div id="advancedRows"></div>
 
     <div class="advanced-divider"></div>
@@ -107,8 +119,9 @@
       <button id="clearAdvanced" class="btn secondary">Clear All</button>
       <button id="applyAdvanced" class="apply-btn">Apply</button>
     </div>
-
   </div>
+
+</div>
 
   <!-- =========================
        MAIN CONTENT
