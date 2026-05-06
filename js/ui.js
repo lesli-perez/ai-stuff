@@ -119,6 +119,7 @@ export function renderTagMenu() {
     });
 
   el.innerHTML = `
+   <input type="text" id="basicTagSearch" placeholder="Search tags..." class="tag-search">
     ${categories.map(cat => {
 
       const tags = [...state.allTagsByCategory[cat]].sort((a, b) => {
@@ -149,6 +150,26 @@ export function renderTagMenu() {
     }).join("")}
 
   `;
+  
+  const search = document.getElementById("basicTagSearch");
+
+  search.addEventListener("input", () => {
+    const val = search.value.toLowerCase();
+
+    el.querySelectorAll(".filter-group").forEach(group => {
+      const items = group.querySelectorAll(".filter-item");
+
+      let hasVisible = false;
+
+      items.forEach(item => {
+        const match = item.textContent.toLowerCase().includes(val);
+        item.style.display = match ? "flex" : "none";
+        if (match) hasVisible = true;
+      });
+
+      group.style.display = hasVisible ? "block" : "none";
+    });
+  });
 
   el.querySelectorAll("input[type='checkbox']").forEach(cb => {
     cb.addEventListener("change", () => toggleTag(cb.dataset.tag));
