@@ -386,38 +386,40 @@ export function initAdvancedHelp() {
 
 
 export function initPanelToggle() {
-  const toggleBtn = document.getElementById("toggleAdvancedMode");
+  const toggle = document.getElementById("toggleAdvancedMode");
   const basic = document.getElementById("basicFiltersPanel");
   const advanced = document.getElementById("advancedFiltersPanel");
   const title = document.getElementById("panelTitle");
   const help = document.getElementById("advancedHelpWrapper");
 
-  let isAdvanced = false;
+  if (!toggle) return;
 
-  toggleBtn.addEventListener("click", () => {
-    isAdvanced = !isAdvanced;
+  toggle.addEventListener("change", () => {
+    const isAdvanced = toggle.checked;
+
+    state.mode = isAdvanced ? "advanced" : "basic";
 
     basic.classList.toggle("hidden", isAdvanced);
     advanced.classList.toggle("hidden", !isAdvanced);
     help.classList.toggle("hidden", !isAdvanced);
 
-    title.textContent = isAdvanced ? "Advanced Filtering" : "Filters";
-    toggleBtn.textContent = isAdvanced ? "Basic" : "Advanced";
-
-    state.mode = isAdvanced ? "advanced" : "basic";
+    title.textContent = isAdvanced ? "Advanced" : "Filters";
 
     if (isAdvanced) {
       syncBasicToAdvanced();
+
+      if (advanced.querySelectorAll(".advanced-row").length === 0) {
+        addAdvancedRow();
+      }
     } else {
       syncAdvancedToBasicTopRow();
-       syncCheckboxes();
+      syncCheckboxes();
     }
 
     applyFilters();
     updateStatus();
   });
 }
-
 
 export function resetAdvancedFilters() {
   const rows = document.getElementById("advancedRows");
