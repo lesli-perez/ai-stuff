@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
   // =========================
-  // SEARCH
+  // SEARCH 
   // =========================
   document.getElementById("search").addEventListener("input", (e) => {
     state.searchQuery = e.target.value.toLowerCase();
