@@ -5,7 +5,7 @@ import { applyFilters } from "./filters.js";
 import "./advanced.js";
 import { initAdvancedUI } from "./advanced.js";
 import { initAdvancedHelp } from "./advanced.js"; 
-import { openAdvancedModal, initPanelToggle} from "./advanced.js";
+import { openAdvancedModal, initPanelToggle, resetAdvancedFilters } from "./advanced.js";
 
 
 
@@ -47,25 +47,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("search").value = "";
 
+    resetAdvancedFilters();  
+
     buildTagIndex();
     applyFilters();
   });
 
-  // CLEAR FILTERS
-  document.getElementById("clearFiltersBtn").addEventListener("click", (e) => {
-    e.stopPropagation();
 
-    state.searchQuery = "";
-    state.activeTags.clear();
-
-    document.getElementById("search").value = "";
-
-    document.querySelectorAll("#filterMenu input[type='checkbox']")
-      .forEach(cb => cb.checked = false);
-
-    applyFilters();
-    updateStatus();
-  });
 
 
     document.getElementById("filterBtn").addEventListener("click", (e) => {

@@ -19,6 +19,7 @@ export function toggleTag(tag) {
   }
 
   syncCheckboxes();
+  state.filtersApplied = true;
   applyFilters();
 }
 

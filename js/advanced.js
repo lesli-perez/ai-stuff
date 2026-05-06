@@ -330,11 +330,15 @@ export function initAdvancedUI() {
   document.getElementById("addAdvancedRow")?.addEventListener("click", addAdvancedRow);
 
   document.getElementById("clearAdvanced")?.addEventListener("click", () => {
-    const rows = document.getElementById("advancedRows");
-    if (!rows) return;
+    state.activeTags.clear();
+    state.searchQuery = "";
 
-    rows.innerHTML = "";
-    addAdvancedRow();
+    document.getElementById("search").value = "";
+
+    document.querySelectorAll("#sideFilterMenu input[type='checkbox']")
+      .forEach(cb => cb.checked = false);
+
+    resetAdvancedFilters();   
     applyFilters();
   });
 
@@ -407,4 +411,15 @@ export function initPanelToggle() {
       addAdvancedRow();
     }
   });
+}
+
+
+export function resetAdvancedFilters() {
+  const rows = document.getElementById("advancedRows");
+  if (!rows) return;
+
+  rows.innerHTML = "";
+  addAdvancedRow(); 
+
+  closeTagDropdown();
 }

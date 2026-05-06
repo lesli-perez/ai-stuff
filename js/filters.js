@@ -10,9 +10,7 @@ export function applyFilters() {
   const query = state.searchQuery;
   const tags = state.activeTags;
 
-  /* =========================
-     SEARCH FILTER
-  ========================= */
+  /* SEARCH */
   if (query) {
     const q = query.toLowerCase();
 
@@ -22,9 +20,7 @@ export function applyFilters() {
     );
   }
 
-  /* =========================
-     SIMPLE TAG FILTERS
-  ========================= */
+  /* BASIC TAGS */
   if (tags.size > 0) {
     results = results.filter(item =>
       [...tags].some(tag =>
@@ -33,14 +29,9 @@ export function applyFilters() {
     );
   }
 
-  /* =========================
-     ADVANCED FILTERS (IMPORTANT FIX)
-  ========================= */
+  /* ADVANCED */
   results = applyAdvancedFilters(results);
 
-  /* =========================
-     RENDER + STATUS
-  ========================= */
   render(results);
   updateStatus();
 }
