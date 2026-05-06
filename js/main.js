@@ -58,7 +58,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("filterBtn").addEventListener("click", (e) => {
       e.stopPropagation();
-      document.querySelector(".layout").classList.add("filters-open");
+
+      const layout = document.querySelector(".layout");
+      layout.classList.toggle("filters-open");
     });
 
+    document.querySelector(".layout").classList.add("filters-open");
 });
