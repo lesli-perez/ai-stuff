@@ -1017,6 +1017,7 @@ button:focus-visible {
   position: relative;
   display: inline-flex;
   align-items: center;
+  padding-right: 8px;
 }
 
 /* hover show */
@@ -1051,6 +1052,7 @@ button:focus-visible {
   cursor: pointer;
 
   transition: background 0.15s ease, transform 0.1s ease;
+
 }
 
 .help-btn:hover {
