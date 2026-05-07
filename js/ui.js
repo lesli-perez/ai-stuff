@@ -32,13 +32,19 @@ export function updateStatus() {
   const tags = [...state.activeTags];
   const query = state.searchQuery;
 
+  const count = state.filteredCount || state.data.length;
+
   let text = "";
 
   // -------------------------
   // DEFAULT
   // -------------------------
   if (tags.length === 0 && !query) {
-    el.textContent = "Viewing All Files";
+    const resultLabel = count === 1
+      ? "1 Result"
+      : `${count} Results`;
+
+    el.textContent = `Viewing All Files | Showing ${resultLabel}`;
     return;
   }
 
@@ -79,7 +85,13 @@ export function updateStatus() {
     text += ` | Search: ${query}`;
   }
 
-  el.textContent = text;
+  const resultLabel = count === 1
+    ? "1 Result"
+    : `${count} Results`;
+
+  el.textContent = text
+    ? `${text} | Showing ${resultLabel}`
+    : `Showing ${resultLabel}`;
 }
 
 /* =========================

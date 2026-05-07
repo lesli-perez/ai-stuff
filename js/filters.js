@@ -36,6 +36,8 @@ export function applyFilters() {
     }
   }
 
+ state.filteredCount = results.length;
+
   render(results);
   updateStatus();
 }
