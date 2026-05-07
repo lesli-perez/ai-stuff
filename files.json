@@ -146,5 +146,21 @@
         "<ul><li><b>Encoder:</b> Compresses 28×28 images into a low-dimensional latent vector representation.</li><li><b>Bottleneck (Latent Space):</b> The compressed representation that controls how much information is preserved; smaller dimensions increase compression but reduce detail.</li><li><b>Decoder:</b> Reconstructs the original image from the latent vector.</li><li><b>Training Exploration:</b> Students modify epochs, batch size, learning rate, and latent dimension to observe effects on reconstruction quality.</li></ul>",
         "Focuses on understanding how compression affects reconstruction quality, loss behavior (MSE), and the trade-off between model capacity and information loss."
       ]
-  }
+  },
+  {
+    "title": "Slide Deck Archive",
+    "url": "./files/Slides/slides.html",
+    "file": "files/slides/slides-preview.png",
+    "image": "files/slides/slides-preview.png",
+    "tags": {
+      "Format": ["Reference"],
+      "Type": ["Slides"],
+      "Time": ["1 hour"],
+      "Level": ["Beginner", "Intermediate"],
+      "Topic": ["Lecture", "Presentations"]
+    },
+    "description": [
+      "A collection of miscellaneous lecture slide decks and classroom presentation materials grouped into a single archive page."
+    ]
+}
 ]

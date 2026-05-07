@@ -1250,4 +1250,88 @@ button:focus-visible {
   background: rgba(0, 0, 0, 0.13);
 }
 
- 
+ .slide-section-title {
+  margin-top: 35px;
+  margin-bottom: 10px;
+  padding-left: 5px;
+
+  font-size: 20px;
+  font-weight: 450;
+  color: #75084c;
+}
+
+/*PDF VIEWER FOR SLIDES*/
+.pdf-layout {
+  display: flex;
+  gap: 24px;
+  align-items: stretch;
+}
+
+/* LEFT = MAIN CONTENT */
+.pdf-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  gap: 10px;
+}
+
+/* RIGHT = INFO PANEL */
+.pdf-right {
+  width: 500px;
+  padding: 16px;
+  border-left: 1px solid #ddd;
+
+  overflow-wrap: break-word;
+  word-break: break-word;
+  overflow-y: auto;
+}
+
+/* TITLE spacing */
+.subtitle {
+  opacity: 0.7;
+  margin-top: -8px;
+}
+
+/* PDF container */
+.pdf-container {
+  width: 250px;
+  max-width: 100%;
+}
+
+/* canvas */
+#pdfCanvas {
+  width: 100%;
+  display: block;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* controls */
+.pdf-controls {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.page-info {
+  font-size: 14px;
+  opacity: 0.7;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  overflow-y: auto;
+}
+
+@media (max-width: 900px) {
+  .pdf-layout {
+    flex-direction: column;
+  }
+
+  .pdf-right {
+    border-left: none;
+    border-top: 1px solid #ddd;
+    width: 100%;
+  }
+}

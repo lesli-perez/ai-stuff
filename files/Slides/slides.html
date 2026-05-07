@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Slide Deck Archive</title>
+
+  <link rel="stylesheet" href="../../style.css">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="../../favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="../../favicon_io/site.webmanifest">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+
+<body>
+
+<div class="page">
+
+  <h1>📑 Slide Deck Archive</h1>
+
+  <div class="example-banner">
+    Click a deck to preview. Use arrows to flip slides.
+  </div>
+
+  <a class="back-link" href="../../index.html">
+    ← Back to Home
+  </a>
+
+  <h2 class="slide-section-title">AI</h2>
+
+  <!-- PDF/SLIDES CARD -->
+  <div class="assignment-card pdf-layout">
+    <!-- LEFT: Main Content -->
+    <div class="pdf-left">
+
+      <h2>Intro to AI</h2>
+      <p class="subtitle">Basic AI concepts and terminology.</p>
+
+      <div class="pdf-container">
+        <canvas id="pdfCanvas"></canvas>
+      </div>
+
+      <div class="pdf-controls">
+        <button class="btn" id="prevPage">← Prev</button>
+        <span class="page-info" id="pageInfo"></span>
+        <button class="btn" id="nextPage">Next →</button>
+      </div>
+    </div>
+
+    <!-- RIGHT: Description  -->
+    <div class="pdf-right">
+
+      <h3>Slide Notes</h3>
+
+      <p>
+        This slide introduces the core idea of Artificial Intelligence,
+        focusing on systems that simulate human reasoning and learning.
+      </p>
+    </div>
+  </div>
+
+  <!-- OTHER DECKS -->
+  <div class="assignment-card clickable" data-pdf="neural-networks.pdf">
+    <h2>Neural Networks</h2>
+    <p>Overview of neural architectures.</p>
+  </div>
+
+  <div class="assignment-card clickable" data-pdf="apis.pdf">
+    <h2>API Fundamentals</h2>
+    <p>HTTP requests and JSON responses.</p>
+  </div>
+
+</div>
+
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+const canvas = document.getElementById("pdfCanvas");
+const ctx = canvas.getContext("2d");
+
+let pdfDoc = null;
+let pageNum = 1;
+
+let currentFile = "../../files/slides/Intro to CS/Algorithms-Intro.pdf";
+
+function loadPDF(url) {
+  pdfjsLib.getDocument(url).promise.then(pdf => {
+    pdfDoc = pdf;
+    pageNum = 1;
+    renderPage(pageNum);
+  });
+}
+
+function renderPage(num) {
+  pdfDoc.getPage(num).then(page => {
+
+    const container = document.querySelector(".pdf-container");
+    const containerWidth = container.clientWidth;
+
+    const viewport = page.getViewport({ scale: 1 });
+
+    const scale = containerWidth / viewport.width;
+    const scaledViewport = page.getViewport({ scale });
+
+    canvas.width = scaledViewport.width;
+    canvas.height = scaledViewport.height;
+
+    page.render({
+      canvasContext: ctx,
+      viewport: scaledViewport
+    });
+
+    document.getElementById("pageInfo").textContent =
+      `Page ${num} / ${pdfDoc.numPages}`;
+  });
+}
+
+document.getElementById("nextPage").onclick = () => {
+  if (pageNum < pdfDoc.numPages) {
+    pageNum++;
+    renderPage(pageNum);
+  }
+};
+
+document.getElementById("prevPage").onclick = () => {
+  if (pageNum > 1) {
+    pageNum--;
+    renderPage(pageNum);
+  }
+};
+
+loadPDF(currentFile);
+</script>
+
+</body>
+</html>
