@@ -48,3 +48,31 @@ To add a new entry (card/resource), edit <code>files.json</code> and add a new o
   <li>The easiest way to add a new entry is to copy an existing one and modify it.</li>
   <li>Double-check that all URLs, images, and file paths are correct and working before pushing.</li>
 </ul>
+
+<hr>
+
+<h3>✚ Adding a New Slide Deck/PowerPoint</h3>
+
+<p>
+To add a new entry (slides/PowerPoint), download and save your slides as a <strong>.pdf</strong> file and add it to <code>files/Slides/PDFs</code>, edit <code>slides.json</code> and add a new object following this format:
+</p>
+
+<pre>
+  <code>{
+    "title": "Slide Deck Title",
+    "pdf": "../../files/slides/PDFs/PDF-Name.pdf",
+    "description": [
+        "Topics covered:",
+        "String (paragraph or HTML, e.g. &lt;ul&gt;&lt;li&gt;...&lt;/li&gt;&lt;/ul&gt;)"
+      ]
+  }</code>
+</pre>
+
+<h3>⚠️ Important Rules</h3>
+<ul>
+  <li><strong>All fields are required</strong></li>
+  <li>Make sure your filetype is .PDF</li>
+  <li>Do not leave trailing commas in JSON</li>
+  <li>The easiest way to add a new entry is to copy an existing one and modify it.</li>
+  <li>Double-check that all URLs, images, and file paths are correct and working before pushing.</li>
+</ul>
