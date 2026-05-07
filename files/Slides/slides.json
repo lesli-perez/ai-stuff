@@ -1,0 +1,12 @@
+[
+  {
+    "title": "Intro to AI",
+    "pdf": "../../files/slides/Intro to CS/Algorithms-Intro.pdf",
+    "description": "Topics covered: AI, reasoning, learning systems"
+  },
+  {
+    "title": "Neural Networks",
+    "pdf": "../../files/slides/Intro to CS/Careers-in-CS.pdf",
+    "description": "Topics covered: AI, deep learning, perceptrons"
+  }
+]

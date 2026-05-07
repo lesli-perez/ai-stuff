@@ -155,12 +155,12 @@
     "tags": {
       "Format": ["Reference"],
       "Type": ["Slides"],
-      "Time": ["1 hour"],
+      "Time": ["1 hour", "2 hours", "Multi-day"],
       "Level": ["Beginner", "Intermediate"],
       "Topic": ["Lecture", "Presentations"]
     },
     "description": [
-      "A collection of miscellaneous lecture slide decks and classroom presentation materials grouped into a single archive page."
+      "A collection of miscellaneous lecture PowerPoint slide decks and classroom presentation materials grouped into a single archive page."
     ]
 }
 ]

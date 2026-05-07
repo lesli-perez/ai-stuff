@@ -1335,3 +1335,11 @@ button:focus-visible {
     width: 100%;
   }
 }
+
+.banner {
+  font-size: 16px;
+  color: #444;
+  transform: translateY(-15px);
+  padding-left: 10px;
+}
+
