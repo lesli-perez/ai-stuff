@@ -150,8 +150,8 @@
   {
     "title": "Slide Deck Archive",
     "url": "./files/Slides/slides.html",
-    "file": "files/slides/slides-preview.png",
-    "image": "files/slides/slides-preview.png",
+    "file": "files/Slides/slides-preview.png",
+    "image": "files/Sides/slides-preview.png",
     "tags": {
       "Format": ["Reference"],
       "Type": ["Slides"],
