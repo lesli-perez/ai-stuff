@@ -9,7 +9,7 @@
       ]
   },
   {
-    "title": "Algorithms and Problem Solving",
+    "title": "Algorithms and Problem Solving - Part 2",
     "pdf": "PDFs/Algorithms-Problem-Solving.pdf",
     "description": [
         "Topics covered: ",
@@ -275,6 +275,237 @@
         "Topics covered: ",
         "<ul><li>Internal/External scripts</li><li>Objects & Properties</li><li>Methods & DOM</li>", 
         "<li>Statements, Comments, Variables, Functions, and Operators</li></ul>"
+      ]
+  },
+  {
+    "title": "Algorithms and Problem Solving - Part 1",
+    "pdf": "PDFs/Algorithms-Problem-Solving-Part1.pdf",
+    "description": [
+        "Topics covered: ",
+        "<ul><li>What is an algorithm?</li><li>Pseudocode & Pseudocode Primitives</li><li>Selection & Repetition Structure Flow Chart</li>", 
+        "<li>Problem Solving Definitions & Strategies</li><li>Example Problems</li></ul>"
+      ]
+  },
+  {
+    "title": "Computer Architecture",
+    "pdf": "PDFs/Architecture.pdf",
+    "description": [
+        "Topics covered: ",
+        "<ul><li>Software & Hardware Components</li><li>Instruction Sets & Types of Memory</li>", 
+        "<li>Memory Addressing</li><li>Arithmetic Logic Unit (ALU)</li><li>Pipelining (Parallel Execution)</li><li>Assembly Language</li></ul>"
+      ]
+  },
+  {
+    "title": "Computer Architecture - Basics",
+    "pdf": "PDFs/Architecture2.pdf",
+    "description": [
+        "Topics covered: ",
+        "<ul><li>Hardware Components</li><li>CPU/GPU</li><li>RAM, Main Memory, Storage/Drives</li>", 
+        "<li>Buses</li><li>Input/Output (I/O) Devices</li></ul>"
+      ]
+  },
+  {
+    "title": "Arithmetic in Non-Decimal Bases and Representing Integer Values",
+    "pdf": "PDFs/Arithmetic.pdf",
+    "description": [
+        "Topics covered: ",
+        "<ul><li>Arithmetic in Binary</li><li>Bits and Bit Patterns</li><li>Negative Values and 2's Complement</li>", 
+        "<li>Adding & Subtracting</li><li>Conversions</li><li>Storing Real Numbers</li></ul>"
+      ]
+  },
+  {
+    "title": "Basic Logic Gates",
+    "pdf": "PDFs/Basic-Logic-Gates.pdf",
+    "description": [
+        "Topics covered: ",
+        "<ul><li>NOT, AND, OR, NAND, NOR Gates</li><li>DeMorgan's Theorem</li>", 
+        "<li>Exclusive-OR (XOR) Gate</li><li>Multiple-Input Gates</li></ul>"
+      ]
+  },
+  {
+    "title": "Spotting Big O in Code",
+    "pdf": "PDFs/Big-O-in-Code.pdf",
+    "description": [
+        "Topics covered: ",
+        "<ul><li>Learn to read code and know the runtime.</li><li>O(n) - Linear Time</li><li>O(n^2) - Quadratic Time</li>", 
+        "<li>O(log n) - Logarithmic Time</li><li>Cheat Sheet for Different Runtimes</li></ul>"
+      ]
+  },
+  {
+    "title": "Intro to Boolean Algebra",
+    "pdf": "PDFs/Boolean-Algebra.pdf",
+    "description": [
+        "Topics covered: ",
+        "<ul><li>Binary Circuits</li><li>AND, OR, NOT Operations</li><li>Truth Tables</li>", 
+        "<li>Axioms of Bollean Algebra</li><li>Single Variable Rules (Theorems)</li><li>Principle of Duality</li><li>Two and Three Variable Properties</li>",
+        "<li>Equivalent & Other Notations</li><li>Precedence of Operations</li></ul>"
+      ]
+  },
+  {
+    "title": "Career Planning and Job Hunting",
+    "pdf": "PDFs/Career-Planning.pdf",
+    "description": [
+        "Topics covered: ",
+        "<ul><li>Resume, LinkedIn, Elevator Pitch</li><li>Resume Format, Structure, and Examples</li>", 
+        "<li>Joining Clubs and Orgs</li>",
+        "<li>Leetcode and Hackathons</li></ul>"
+      ]
+  },
+  {
+    "title": "Coding In Python",
+    "pdf": "PDFs/Coding-in-Python.pdf",
+    "description": [
+        "Topics covered: ",
+        "<ul><li>Variables & Data Types</li>", 
+        "<li>Output and Input Data</li><li>Decision Making</li>",
+        "<li>Data Structures</li><li>Lists, Dictionaries, and Loops</li></ul>"
+      ]
+  },
+  {
+    "title": "Computer Components",
+    "pdf": "PDFs/Computer-Components.pdf",
+    "description": [
+        "Topics covered: ",
+        "<ul><li>Parts of a Computer</li>", 
+        "<li>CPU and Memory</li>",
+        "<li>Electricity to Bits</li><li>Behind the Abstraction - Electricity & Transistors</li></ul>"
+      ]
+  },
+  {
+    "title": "Intro to Computer Vision",
+    "pdf": "PDFs/Computer-Vision-Intro.pdf",
+    "description": [
+        "Topics covered: ",
+        "<ul><li>What is Computer Vision</li><li>Real-World Applications</li><li>How do machines \"See\"?</li>", 
+        "<li>Deep Learning & Convolutional Neural Networks (CNN)</li><li>You Only Look Once (YOLO)</li>",
+        "<li>Hands-On Activity: Building with Roboflow</li></ul>"
+      ]
+  },
+  {
+    "title": "Database Systems",
+    "pdf": "PDFs/Database-Systems.pdf",
+    "description": [
+        "Topics covered: ",
+        "<ul><li>File vs Database Organization</li><li>Components of a Database System</li><li>Database Models & Relational Databases</li>", 
+        "<li>SELECT, PROJECT, JOIN Operations</li><li>SQL & SQL Examples</li>",
+        "<li>Maintaining Database Integrity</li></ul>"
+      ]
+  },
+  {
+    "title": "Digital Logic",
+    "pdf": "PDFs/Digital-Logic.pdf",
+    "description": [
+        "Topics covered: ",
+        "<ul><li>Logic Circuits & Gates</li><li>Booelan Algebra & Truth Tables</li><li>Types of Logic Gates</li><li>Combinational Circuits</li>", 
+        "<li>Boolean Algebra Rules - Axioms, Theorems, Order of Operations</li>",
+        "<li>Circuit and Boolean Expression Equivalence and Simplification</li><li>Applications of Circuits</li></ul>"
+      ]
+  },
+  {
+    "title": "Functions in Python",
+    "pdf": "PDFs/Functions-in-Python.pdf",
+    "description": [
+        "Topics covered: ",
+        "<ul><li>What is a Function?</li>", 
+        "<li>Functions in Python</li>",
+        "<li>Defining and Invoking/Calling a Function</li></ul>"
+      ]
+  },
+  {
+    "title": "Intro to Algorithms",
+    "pdf": "PDFs/Intro-to-Algorithms.pdf",
+    "description": [
+        "Topics covered: ",
+        "<ul><li>What is an Algorithm?</li><li>Algorithms in Everyday Life</li>", 
+        "<li>Linear Search, Binary Search, & Breadth-First Search</li><li>Bubble Sort</li><li>Big O Notation and Efficiency</li>",
+        "<li>Pseudocode for Algorithms</li></ul>"
+      ]
+  },
+  {
+    "title": "Logic Circuits",
+    "pdf": "PDFs/Logic-Circuits.pdf",
+    "description": [
+        "Topics covered: ",
+        "<ul><li>Computers and Electricity</li><li>NOT, AND, OR, XOR, NAND, & NOR Gates</li>", 
+        "<li>Multiple-Input Gates</li><li>Combinational Circuits</li></ul>"
+      ]
+  },
+  {
+    "title": "Number Systems - Basics",
+    "pdf": "PDFs/Number-Systems.pdf",
+    "description": [
+        "Topics covered: ",
+        "<ul><li>Decimal, Binary, and Hexadecimal Numbers</li>", 
+        "<li>Conversions with Examples</li></ul>"
+      ]
+  },
+  {
+    "title": "Number Systems",
+    "pdf": "PDFs/Number-Systems2.pdf",
+    "description": [
+        "Topics covered: ",
+        "<ul><li>Digital Represention</li><li>Types of Numbers</li><li>Positional Notation</li><li>The Binary System</li>", 
+        "<li>Conversions</li><li>Why computers use Binary and Hexadecimal Numbers.</li></ul>"
+      ]
+  },
+  {
+    "title": "OS and Computer Security",
+    "pdf": "PDFs/OS-and-Computer-Security.pdf",
+    "description": [
+        "Topics covered: ",
+        "<ul><li>Operating Systems Functions and Components</li><li>Batch & Interactive Processing</li><li>Types of Software</li>", 
+        "<li>UI, File Manager, File Types, File Protection</li><li>Memory Manager and Virtual Memory</li>",
+        "<li>Bootstrapping and the Booting Process</li><li>Processes, Time-sharing, Deadlock</li><li>Computer Security</li></ul>"
+      ]
+  },
+  {
+    "title": "Representing Non-Numeric Data",
+    "pdf": "PDFs/Other-Reps.pdf",
+    "description": [
+        "Topics covered: ",
+        "<ul><li>Representing Text - ASCII & Unicode</li>", 
+        "<li>Representing Audio Information</li><li>Representing Images & Graphics</li>",
+        "<li>Representing Vector Graphics & Videos</li></ul>"
+      ]
+  },
+  {
+    "title": "High Level Machine Language Relationship Example Problem",
+    "pdf": "PDFs/ProgExeExample.pdf",
+    "description": [
+        "Topics covered: ",
+        "<ul><li>Example Problem in C++: TotalCost = Price + ShippingCharge;</li>", 
+        "<li>Assembly and Machine Code (Hex)</li>",
+        "<li>Instruction Executions: Fetch, Decode, Execute</li></ul>"
+      ]
+  },
+  {
+    "title": "Programming Tools",
+    "pdf": "PDFs/Programming-Tools.pdf",
+    "description": [
+        "Topics covered: ",
+        "<ul><li>What is a Programming Language?</li>", 
+        "<li>Programming Tools</li>",
+        "<li>Text Editor and Compiler</li><li>Version Control System</li><li>Integrated Development Environment (IDE)</li></ul>"
+      ]
+  },
+  {
+    "title": "Reinforcement Learning and Q-Learning.pdf",
+    "pdf": "PDFs/Reinforcement-Learning-Q-Learning.pdf",
+    "description": [
+        "Topics covered: ",
+        "<ul><li>What is Reinforcement Learning?</li>", 
+        "<li>Introduction to Q-Learning</li>",
+        "<li>Exploration vs Exploitation</li></ul>"
+      ]
+  },
+  {
+    "title": "Computer Devices and Sustainability",
+    "pdf": "PDFs/Sustainability.pdf",
+    "description": [
+        "Topics covered: ",
+        "<ul><li>The Three Pillars of Sustainability:</li><ul><li>Economic</li><li>Environmental</li><li>Social</li></ul>", 
+        "<li>The Fourth Pillar/ Circles of Sustainability</li>",
+        "<li>Computer Devices and Sustainability</li></ul>"
       ]
   }
 ]
