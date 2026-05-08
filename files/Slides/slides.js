@@ -8,8 +8,12 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch("./slides.json")
     .then(res => res.json())
     .then(data => {
-      slidesData = data;
-      renderCards(slidesData);
+
+        slidesData = data.sort((a, b) =>
+            (a.title || "").localeCompare(b.title || "")
+        );
+
+        renderCards(slidesData);
     });
 
   searchBar.addEventListener("input", (e) => {
@@ -17,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const filtered = slidesData.filter(slide =>
       (slide.title || "").toLowerCase().includes(q) ||
-      (slide.description || "").toLowerCase().includes(q)
+      (slide.description.join("") || "").toLowerCase().includes(q)
     );
 
     renderCards(filtered);
@@ -50,7 +54,7 @@ function renderCards(data) {
       </div>
 
       <div class="pdf-right">
-        <p>${slide.description}</p>
+        <p>${slide.description.join("")}</p>
       </div>
     `;
 
