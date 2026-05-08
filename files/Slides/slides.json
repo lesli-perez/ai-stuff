@@ -1,7 +1,7 @@
 [
   {
     "title": "Algorithms, Data Structures, and Problem Solving",
-    "pdf": "../../files/slides/PDFs/Algorithms-Intro.pdf",
+    "pdf": "PDFs/Algorithms-Intro.pdf",
     "description": [
         "Topics covered: ",
         "<ul><li>Types of Algorithms:</li><ul><li>Search</li><li>Sort</li><li>Insert</li><li>Update</li><li>Delete</li></ul>",
@@ -10,7 +10,7 @@
   },
   {
     "title": "Algorithms and Problem Solving",
-    "pdf": "../../files/slides/PDFs/Algorithms-Problem-Solving.pdf",
+    "pdf": "PDFs/Algorithms-Problem-Solving.pdf",
     "description": [
         "Topics covered: ",
         "<ul><li>Arrays</li><li>Sequential Search</li><li>Binary Search</li><li>Selection Sort</li><li>Bubble Sort</li><li>Time Complexity</li></ul>"
@@ -18,7 +18,7 @@
   },
   {
     "title": "Algorithms and Pseudocode - Basics",
-    "pdf": "../../files/slides/PDFs/Algorithms-Pseudocode.pdf",
+    "pdf": "PDFs/Algorithms-Pseudocode.pdf",
     "description": [
         "Topics covered: ",
         "<ul><li>What is an Algorithm?</li><li>Simple Algorithm Example</li><li>Pseudocode with Examples</li><li>Problem Solving Strategies</li></ul>"
@@ -26,7 +26,7 @@
   },
   {
     "title": "Boolean Algebra and Logic Circuits",
-    "pdf": "../../files/slides/PDFs/Boolean-Algebra-Logic-Circuits.pdf",
+    "pdf": "PDFs/Boolean-Algebra-Logic-Circuits.pdf",
     "description": [
         "Topics covered: ",
         "<ul><li>Binary Circuits</li><li>Boolean Algebra</li><li>NOT, AND, OR Operators</li><li>Truth Tables</li><li>Axioms</li><li>Theorems & Properties</li><li>Gates, Circuits, and Adders</li><li>Circuits as Memory & Integrated Circuits</li></ul>"
@@ -34,7 +34,7 @@
   },
   {
     "title": "Boolean Algebra and Logic Circuits",
-    "pdf": "../../files/slides/PDFs/Boolean-Algebra-Logic-Circuits2.pdf",
+    "pdf": "PDFs/Boolean-Algebra-Logic-Circuits2.pdf",
     "description": [
         "Topics covered: ",
         "<ul><li>Binary Circuits</li><li>George Boole</li><li>Boolean Algebra</li><li>NOT, AND, OR Operators</li><li>Truth Tables</li><li>Axioms</li><li>Theorems & Properties</li><li>Gates, Circuits, and Adders</li><li>Circuits as Memory & Integrated Circuits</li></ul>"
@@ -42,7 +42,7 @@
   },
   {
     "title": "Careers in CS",
-    "pdf": "../../files/slides/PDFs/Careers-in-CS.pdf",
+    "pdf": "PDFs/Careers-in-CS.pdf",
     "description": [
         "Topics covered: ",
         "<ul><li>Career Paths in CS</li><li>Salaries for CS Majors</li><li>Software Developer vs Software Engineer</li></ul>"
@@ -50,7 +50,7 @@
   },
   {
     "title": "Careers in CS",
-    "pdf": "../../files/slides/PDFs/Careers-in-CS2.pdf",
+    "pdf": "PDFs/Careers-in-CS2.pdf",
     "description": [
         "Topics covered: ",
         "<ul><li>CS vs Other Majors Stats</li><li>Career Paths in CS</li><li>Fields that need CS Majors</li><li>Major employers in CS</li></ul>"
@@ -58,7 +58,7 @@
   },
   {
     "title": "Computer Ethics",
-    "pdf": "../../files/slides/PDFs/Computer-Ethics.pdf",
+    "pdf": "PDFs/Computer-Ethics.pdf",
     "description": [
         "Topics covered: ",
         "<ul><li>What is Ethics?</li><li>Commandments in Computer Ethics</li><li>Hacking</li><li>Internet Security</li></ul>"
@@ -66,7 +66,7 @@
   },
   {
     "title": "Conditional Statements",
-    "pdf": "../../files/slides/PDFs/Conditional-Statements.pdf",
+    "pdf": "PDFs/Conditional-Statements.pdf",
     "description": [
         "Topics covered: ",
         "<ul><li>Conditional Statements</li><li>Comparison Operators</li><li>Logical Operators</li><li>IF-ELSE Statements</li></ul>"
@@ -74,7 +74,7 @@
   },
   {
     "title": "CPU and Machine Language",
-    "pdf": "../../files/slides/PDFs/CPU-and-Machine-Language.pdf",
+    "pdf": "PDFs/CPU-and-Machine-Language.pdf",
     "description": [
         "Topics covered: ",
         "<ul><li>Computer System, Parts, and Hardware</li><li>Central Processing Unit (CPU)</li><li>Machine Instruction & Machine Language</li>",
@@ -84,7 +84,7 @@
   },
   {
     "title": "Problem Solving in CS",
-    "pdf": "../../files/slides/PDFs/CS-Problem-Solving.pdf",
+    "pdf": "PDFs/CS-Problem-Solving.pdf",
     "description": [
         "Topics covered: ",
         "<ul><li>Programmable Machines</li><li>Types of Problems that Require Computing</li><li>Questions About Artificial Intelligence (AI)</li></ul>"
@@ -92,7 +92,7 @@
   },
   {
     "title": "Data Representation - Basics",
-    "pdf": "../../files/slides/PDFs/Data-Representation.pdf",
+    "pdf": "PDFs/Data-Representation.pdf",
     "description": [
         "Topics covered: ",
         "<ul><li>Bits & Bytes</li><li>Signed Magnitude Notation</li><li>1s / 2s Complement</li><li>Binary to Decimal</li>",
@@ -101,7 +101,7 @@
   },
   {
     "title": "Data Representation",
-    "pdf": "../../files/slides/PDFs/Data-Representation2.pdf",
+    "pdf": "PDFs/Data-Representation2.pdf",
     "description": [
         "Topics covered: ",
         "<ul><li>What is data?</li><li>Bits, Bytes, Decimal, Binary, Hexadecimal</li><li>Adding & Subtracting Bits</li><li>Conversions</li>",
@@ -110,7 +110,7 @@
   },
   {
     "title": "Decision Making",
-    "pdf": "../../files/slides/PDFs/Decision-Making.pdf",
+    "pdf": "PDFs/Decision-Making.pdf",
     "description": [
         "Topics covered: ",
         "<ul><li>Decision Making</li><li>If Statements</li><li>IF-ELSE Statements</li><li>IF-ELIF-ELSE Statements</li>",
@@ -119,7 +119,7 @@
   },
   {
     "title": "History of Computers",
-    "pdf": "../../files/slides/PDFs/History-of-Computers.pdf",
+    "pdf": "PDFs/History-of-Computers.pdf",
     "description": [
         "Topics covered: ",
         "<ul><li>What is a Computer?</li><li>Early Calculating Machines</li><li>From the Analytical Engine to the Personal Computer (PC)</li></ul>"
@@ -127,7 +127,7 @@
   },
   {
     "title": "History of CS Intro",
-    "pdf": "../../files/slides/PDFs/History-of-CS-Intro.pdf",
+    "pdf": "PDFs/History-of-CS-Intro.pdf",
     "description": [
         "Topics covered: ",
         "<ul><li>First Computing Devices</li><li>Pioneers of Computing</li><li>Innovators in Hardware Architecture</li>",
@@ -136,7 +136,7 @@
   },
   {
     "title": "History of CS",
-    "pdf": "../../files/slides/PDFs/History-of-CS.pdf",
+    "pdf": "PDFs/History-of-CS.pdf",
     "description": [
         "Topics covered: ",
         "<ul><li>What is Computer Science?</li><li>The First Modern Computer and other Early Computers</li>",
@@ -145,7 +145,7 @@
   },
   {
     "title": "Intro and History of CS",
-    "pdf": "../../files/slides/PDFs/Intro-and-History.pdf",
+    "pdf": "PDFs/Intro-and-History.pdf",
     "description": [
         "Topics covered: ",
         "<ul><li>What is Computer Science?</li><li>Algorithms in CS</li><li>Systems and Applications</li><li>History of the Computer</li>",
@@ -154,7 +154,7 @@
   },
   {
     "title": "Intro to Artificial Intelligence and Deep Learning",
-    "pdf": "../../files/slides/PDFs/Intro-to-AI-and-DL.pdf",
+    "pdf": "PDFs/Intro-to-AI-and-DL.pdf",
     "description": [
         "Topics covered: ",
         "<ul><li>AI Content Generation</li><li>Where is AI heading?</li><li>What is AI?</li>",
@@ -164,7 +164,7 @@
   },
   {
     "title": "Intro to Computers and Programming",
-    "pdf": "../../files/slides/PDFs/Intro-to-Computer-Programming.pdf",
+    "pdf": "PDFs/Intro-to-Computer-Programming.pdf",
     "description": [
         "Topics covered: ",
         "<ul><li>Hardware and Software</li><li>How Computers Store Data</li><li>How a Program Works</li>",
@@ -173,7 +173,7 @@
   },
   {
     "title": "Intro to Game Development",
-    "pdf": "../../files/slides/PDFs/Intro-to-Game-Dev.pdf",
+    "pdf": "PDFs/Intro-to-Game-Dev.pdf",
     "description": [
         "Topics covered: ",
         "<ul><li>What is Game Dev?</li><li>Game Design Principles</li><li>Graphics, Animation, Physics</li>",
@@ -182,7 +182,7 @@
   },
   {
     "title": "Loops",
-    "pdf": "../../files/slides/PDFs/Loops.pdf",
+    "pdf": "PDFs/Loops.pdf",
     "description": [
         "Topics covered: ",
         "<ul><li>Looping Statements</li><li>Types of Loops</li><li>Infinite Loops</li><li>For Loop and Example Slides</li></ul>"
@@ -190,7 +190,7 @@
   },
   {
     "title": "Loops in Web Development",
-    "pdf": "../../files/slides/PDFs/Loops2.pdf",
+    "pdf": "PDFs/Loops2.pdf",
     "description": [
         "Topics covered: ",
         "<ul><li>Types of Loops</li><li>For Loop</li><li>Loops in HTML and JS (Web Dev)</li></ul>"
@@ -198,7 +198,7 @@
   },
   {
     "title": "Operators and Type Conversion",
-    "pdf": "../../files/slides/PDFs/Operators-and-Type-Conversion.pdf",
+    "pdf": "PDFs/Operators-and-Type-Conversion.pdf",
     "description": [
         "Topics covered: ",
         "<ul><li>Operators:</li><ul><li>Arithmetic</li><li>Assignment</li><li>Comparison</li><li>Logical/Boolean</li><li>Membership</li></ul>", 
@@ -207,7 +207,7 @@
   },
   {
     "title": "Python Data Types",
-    "pdf": "../../files/slides/PDFs/Python-Data-Types.pdf",
+    "pdf": "PDFs/Python-Data-Types.pdf",
     "description": [
         "Topics covered: ",
         "<ul><li>Designing a Program</li><li>Comments</li><li>Variables</li><li>Data Types</li>", 
@@ -216,7 +216,7 @@
   },
   {
     "title": "Python Functions",
-    "pdf": "../../files/slides/PDFs/Python-Functions.pdf",
+    "pdf": "PDFs/Python-Functions.pdf",
     "description": [
         "Topics covered: ",
         "<ul><li>Defining/Calling a Function</li><li>Divide & Conquer</li><li>Local variables</li><li>Void Function</li>", 
@@ -225,7 +225,7 @@
   },
   {
     "title": "Python Lists",
-    "pdf": "../../files/slides/PDFs/Python-Lists.pdf",
+    "pdf": "PDFs/Python-Lists.pdf",
     "description": [
         "Topics covered: ",
         "<ul><li>Accessing List Elements</li><li>List Characteristics & List Splicing</li><li>Adding Elements to a List</li>", 
@@ -234,7 +234,7 @@
   },
   {
     "title": "Resume Building 101",
-    "pdf": "../../files/slides/PDFs/Resume-101.pdf",
+    "pdf": "PDFs/Resume-101.pdf",
     "description": [
         "Topics covered: ",
         "<ul><li>The Hiring Process</li><li>Resume Should's and Should Not's</li><li>Resume Structure</li>", 
@@ -243,7 +243,7 @@
   },
   {
     "title": "Intro to SQL",
-    "pdf": "../../files/slides/PDFs/SQL.pdf",
+    "pdf": "PDFs/SQL.pdf",
     "description": [
         "Topics covered: ",
         "<ul><li>Creating/Modifying Tables</li><li>Database & Data Types</li><li>Inserting/Deleting/Updating Items in a Table</li>", 
@@ -252,7 +252,7 @@
   },
   {
     "title": "Web Development - CSS",
-    "pdf": "../../files/slides/PDFs/Web-Dev-CSS.pdf",
+    "pdf": "PDFs/Web-Dev-CSS.pdf",
     "description": [
         "Topics covered: ",
         "<ul><li>CSS Rules</li><li>Structure around elements in a page</li>", 
@@ -261,7 +261,7 @@
   },
   {
     "title": "Web Development - HTML",
-    "pdf": "../../files/slides/PDFs/Web-Dev-HTML.pdf",
+    "pdf": "PDFs/Web-Dev-HTML.pdf",
     "description": [
         "Topics covered: ",
         "<ul><li>HTML Structure</li><li>HTML Tags, Lists, and Links</li><li>Anchors</li><li>Images & Image Formats</li><li>Hero Section</li>", 
@@ -270,7 +270,7 @@
   },
   {
     "title": "Web Development - JavaScript (JS)",
-    "pdf": "../../files/slides/PDFs/Web-Dev-JS.pdf",
+    "pdf": "PDFs/Web-Dev-JS.pdf",
     "description": [
         "Topics covered: ",
         "<ul><li>Internal/External scripts</li><li>Objects & Properties</li><li>Methods & DOM</li>", 
