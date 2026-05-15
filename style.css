@@ -1353,3 +1353,7 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
 }
+
+.assignment-card.pdf-layout {
+  flex-direction: row;
+}
