@@ -32,7 +32,7 @@ To add a new entry (card/resource), edit <code>files.json</code> and add a new o
   <li>Name it after your resource (use hyphens or camelCase)</li>
   <li>Place all related assets inside that folder</li>
   <li>Reference them using relative paths</li>
-  <li><strong>You can find page templates under <code>/files/1-Template-HTML-Pages</code> for project/activity/assignment pages.</strong></li>
+  <li><strong>You can find page templates under <code>/Template-HTML-Pages</code> for project/activity/assignment pages.</strong></li>
 </ol>
 
 <pre><code>"file": "files/my-resource/my-file.zip",
