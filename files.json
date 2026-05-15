@@ -154,14 +154,131 @@
     "image": "files/Slides/slides-preview.png",
     "tags": {
       "Format": ["Reference"],
-      "Type": ["Slides"],
+      "Type": ["Slides", "PDFs", "Lecture", "Presentations"],
       "Time": ["1 hour", "2 hours", "Multi-day"],
       "Level": ["Beginner", "Intermediate"],
-      "Topic": ["Lecture", "Presentations"]
+      "Topic": [ "Multi-topic"]
     },
     "description": [
       "A collection of miscellaneous lecture PowerPoint slide decks and classroom presentation materials grouped into a single archive page.",
       "All slides are in .pdf format."
     ]
+},
+{
+    "title": "Assignments Archive",
+    "url": "./files/Assignments/assignments.html",
+    "file": "files/Assignments/Assignments-Preview.png",
+    "image": "files/Assignments/Assignments-Preview.png",
+    "tags": {
+      "Format": ["Reference"],
+      "Type": ["PDFs", "Activity"],
+      "Time": ["1 hour", "2 hours", "Multi-day"],
+      "Level": ["Beginner", "Intermediate"],
+      "Topic": ["Multi-topic"]
+    },
+    "description": [
+      "A collection of miscellaneous assignments and classroom work materials grouped into a single archive page."
+    ]
+},
+{
+    "title": "Cheat Sheets Archive",
+    "url": "./files/Cheat-Sheets/cheat-sheets.html",
+    "file": "files/Cheat-Sheets/cheat-sheets-preview.png",
+    "image": "files/Cheat-Sheets/cheat-sheets-preview.png",
+    "tags": {
+      "Format": ["Reference"],
+      "Type": ["PDFs", "Activity"],
+      "Time": ["1 hour", "2 hours", "Multi-day"],
+      "Level": ["Beginner", "Intermediate"],
+      "Topic": ["Multi-topic"]
+    },
+    "description": [
+      "A collection of miscellaneous cheat sheets and reference documents grouped into a single archive page."
+    ]
+},
+{
+    "title": "Exams/Quizzes Archive",
+    "url": "./files/Exams-Quizzes/exams-quizzes.html",
+    "file": "files/Exams-Quizzes/exams-quizzes-preview.png",
+    "image": "files/Exams-Quizzes/exams-quizzes-preview.png",
+    "tags": {
+      "Format": ["Reference"],
+      "Type": ["PDFs", "Activity"],
+      "Time": ["1 hour", "2 hours", "Multi-day"],
+      "Level": ["Beginner", "Intermediate"],
+      "Topic": ["Multi-topic"]
+    },
+    "description": [
+      "A collection of miscellaneous exams, quizzes, and multiple choice assignments grouped into a single archive page."
+    ]
+},
+{
+    "title": "Labs Archive",
+    "url": "./files/Labs/labs.html",
+    "file": "files/Labs/labs-preview.png",
+    "image": "files/Labs/labs-preview.png",
+    "tags": {
+      "Format": ["Reference"],
+      "Type": ["PDFs", "Activity"],
+      "Time": ["1 hour", "2 hours", "Multi-day"],
+      "Level": ["Beginner", "Intermediate"],
+      "Topic": ["Multi-topic"]
+    },
+    "description": [
+      "A collection of miscellaneous labs and short assignments grouped into a single archive page."
+    ]
+},
+{
+    "title": "TicTacToe Project",
+    "url": "./files/TicTacToe/TicTacToe.zip",
+    "file": "./files/TicTacToe/TicTacToe.zip",
+    "image": "./files/TicTacToe/TicTacToe.png",
+    "tags": {
+      "Format": ["Project", "Self-paced"],
+      "Type": ["Activity"],
+      "Time": ["1 hour"],
+      "Level": ["Beginner"],
+      "Topic": ["Python", "Programming", "Game Development", "Computer Science"]
+    },
+    "description": [
+    "A beginner-friendly Tic Tac Toe programming activity designed for introductory computer science students using Python.",
+    "Students complete missing sections of code by replacing fill-in-the-blank placeholders throughout the program.",
+    "<ul><li>Create and manage a 2D game board using lists.</li><li>Validate user input and detect invalid moves.</li><li>Place markers and update game state.</li><li>Check for winning conditions across rows, columns, and diagonals.</li><li>Detect draw conditions and control the main game loop.</li></ul>"
+  ]
+},
+{
+  "title": "Personal Website Project",
+  "url": "files/Personal-Website/Personal-Website.zip",
+  "file": "files/Personal-Website/Personal-Website.zip",
+  "image": "files/Personal-Website/Personal-Website.png",
+  "tags": {
+    "Format": ["Project", "Self-paced"],
+    "Type": ["Activity"],
+    "Time": ["2 hours", "Multi-day"],
+    "Level": ["Beginner", "Intermediate"],
+    "Topic": ["React", "Web Development", "JavaScript", "GitHub", "Vercel"]
+  },
+  "description": [
+    "A React-based project where students customize and deploy a personal portfolio website using a pre-made template.",
+    "<ul><li>Edit React components such as About, Hero, Contact, Footer, and Projects.</li><li>Update personal information, links, images, and resume files.</li><li>Deploy the website publicly using Vercel and GitHub.</li></ul>",
+    "The activity introduces students to React development, GitHub workflows, and modern website deployment."
+  ]
+},
+{
+  "title": "Conversions Assignment Problem Generator",
+  "url": "files/Problem-Generator/Problem-Generator.zip",
+  "file": "files/Problem-Generator/Problem-Generator.zip",
+  "image": "files/Problem-Generator/Problem-Generator.png",
+  "tags": {
+    "Format": ["Reference"],
+    "Type": ["Tool"],
+    "Time": ["5 mins."],
+    "Level": ["Beginner"],
+    "Topic": ["Conversions", "Binary", "Hexadecimal", "Decimal"]
+  },
+  "description": [
+    "A utility program used to generate randomized decimal, binary, and hexadecimal conversion problems for introductory computer science assignments.",
+    "The program exports generated problems into a text file that can be reused for worksheets, practice, or classroom activities."
+  ]
 }
 ]

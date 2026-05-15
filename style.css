@@ -1343,3 +1343,13 @@ button:focus-visible {
   padding-left: 10px;
 }
 
+#assignmentsContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 50px;
+}
+
+.assignment-card {
+  display: flex;
+  flex-direction: column;
+}

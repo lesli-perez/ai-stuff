@@ -32,7 +32,7 @@ export function updateStatus() {
   const tags = [...state.activeTags];
   const query = state.searchQuery;
 
-  const count = state.filteredCount || state.data.length;
+  const count = state.filteredCount ?? state.data.length;
 
   let text = "";
 
@@ -40,9 +40,15 @@ export function updateStatus() {
   // DEFAULT
   // -------------------------
   if (tags.length === 0 && !query) {
-    const resultLabel = count === 1
-      ? "1 Result"
-      : `${count} Results`;
+    let resultLabel;
+
+    if (count === 0) {
+      resultLabel = "0 Results";
+    } else if (count === 1) {
+      resultLabel = "1 Result";
+    } else {
+      resultLabel = `${count} Results`;
+    }
 
     el.textContent = `Viewing All Files | Showing ${resultLabel}`;
     return;

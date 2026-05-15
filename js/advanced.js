@@ -300,6 +300,9 @@ export function addAdvancedRow() {
       opt.addEventListener("click", () => {
         opValue.textContent = opt.dataset.value;
         opWrap.classList.remove("open");
+
+        applyFilters();
+        updateStatus();
       });
     });
   }
