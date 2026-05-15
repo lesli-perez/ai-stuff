@@ -1,6 +1,21 @@
 let assignmentsData = [];
 
 /* -------------------------
+   ONE DRIVE CONFIG
+--------------------------*/
+const ONEDRIVE_BASE =
+  "https://utrgv-my.sharepoint.com/personal/emmett_tomai_utrgv_edu/Documents/CS%20Department%20Share/Instructional%20Support/Shared%20Course%20Documents/1101/Resource%20Hub/Assignment-Files/";
+
+function getFileURL(filename) {
+  return ONEDRIVE_BASE + encodeURIComponent(filename) + "?download=1";
+}
+
+/* Single source of truth */
+function openFile(fileURL) {
+  window.open(fileURL, "_blank");
+}
+
+/* -------------------------
    INIT
 --------------------------*/
 document.addEventListener("DOMContentLoaded", () => {
@@ -11,7 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(res => res.json())
     .then(data => {
 
-      // ALPHABETICAL SORT
       assignmentsData = data.sort((a, b) =>
         (a.title || "").localeCompare(b.title || "", undefined, {
           sensitivity: "base"
@@ -34,14 +48,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     timeout = setTimeout(() => {
 
-      const cards = document.querySelectorAll(".assignment-card");
-
-      cards.forEach(card => {
-
+      document.querySelectorAll(".assignment-card").forEach(card => {
         const title = (card.dataset.title || "").toLowerCase();
-        const match = title.includes(q);
-
-        card.style.display = match ? "flex" : "none";
+        card.style.display = title.includes(q) ? "flex" : "none";
       });
 
     }, 80);
@@ -60,9 +69,9 @@ function renderCards(data) {
 
   for (const assignment of data) {
 
-    const card = document.createElement("div");
+    const fileURL = getFileURL(assignment.file);
 
-    // keep base class
+    const card = document.createElement("div");
     card.className = "assignment-card clickable";
 
     card.dataset.title = assignment.title || "";
@@ -72,21 +81,24 @@ function renderCards(data) {
         <h2>${assignment.title}</h2>
 
         <a class="btn download-btn"
-           href="${assignment.file}"
-           download>
-           Download File
+           href="${fileURL}">
+          Download File
         </a>
       </div>
     `;
 
     container.appendChild(card);
 
-    card.addEventListener("click", (e) => {
+    /* CARD CLICK */
+    card.addEventListener("click", () => {
+      openFile(fileURL);
+    });
 
-      if (e.target.closest(".download-btn")) return;
-
-      window.open(assignment.file, "_blank");
-
+    /* BUTTON CLICK (same behavior, but prevents double trigger) */
+    card.querySelector(".download-btn").addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      openFile(fileURL);
     });
 
   }
