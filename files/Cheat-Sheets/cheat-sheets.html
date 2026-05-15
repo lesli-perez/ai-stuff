@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cheat Sheets Archive</title>
+
+  <link rel="stylesheet" href="../../style.css">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="../../favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="../../favicon_io/site.webmanifest">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+
+<body>
+
+<div class="page">
+
+  <h1>📑 Cheat Sheets Archive</h1>
+
+  <div class="banner"> Click a card to download/open cheat sheets. | Filetype: .pdf | Convert PDF to Word Doc: <a href="https://www.adobe.com/acrobat/online/pdf-to-word.html" target="_blank" class="back-link">here</a> </div>
+  <a class="back-link" href="../../index.html" style=" margin-top: 0px; margin-bottom:35px;"> ← Back to Home </a>
+
+
+  <input type="text" id="searchBar" placeholder="Search cheat sheets...">
+
+  <div id="CheatSheetsContainer"></div>
+
+</div>
+
+<script>
+  pdfjsLib.GlobalWorkerOptions.workerSrc =
+    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+</script>
+
+<script src="./cheat-sheets.js"></script>
+
+</body>
+</html>

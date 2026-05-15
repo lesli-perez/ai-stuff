@@ -1,0 +1,130 @@
+[
+  {
+    "title": "Binary / Decimal / Hexadecimal (1–15)",
+    "file": "1-15-Binary-Dec-Hex.pdf"
+  },
+  {
+    "title": "Appendix C – Brookshear Machine Language Operands",
+    "file": "Appendix-C-Brookshear-Machine-Language-Operands.pdf"
+  },
+  {
+    "title": "Big O Notation",
+    "file": "Big-O-Notation.png"
+  },
+  {
+    "title": "Binary Addition",
+    "file": "Binary-Addition.pdf"
+  },
+  {
+    "title": "Binary to Decimal / Hex Conversions",
+    "file": "Binary-Decimal-Hex-Conversions.pdf"
+  },
+  {
+    "title": "Binary Fraction Conversion",
+    "file": "Binary-Fraction-Conversion.pdf"
+  },
+  {
+    "title": "Binary to Decimal Algorithm",
+    "file": "Binary-to-Decimal-Algorithm.pdf"
+  },
+  {
+    "title": "Bit Overflow",
+    "file": "Bit-Overflow.pdf"
+  },
+  {
+    "title": "Boolean Algebra Axioms & Theorems",
+    "file": "Boolean-Algebra-Axioms-Theorems.pdf"
+  },
+  {
+    "title": "Boolean Algebra Examples",
+    "file": "Boolean-Algebra-Examples.pdf"
+  },
+  {
+    "title": "Boolean Algebra Laws & Rules",
+    "file": "Boolean-Algebra-Laws-Rules.pdf"
+  },
+  {
+    "title": "Boolean Algebra Proof",
+    "file": "Boolean-Algebra-Proof.pdf"
+  },
+  {
+    "title": "Brookshear Machine Language Operands",
+    "file": "Brookshear-Machine-Language-Operands2.pdf"
+  },
+  {
+    "title": "Cloud Services Comparison",
+    "file": "Cloud-Services-Comparison.jpg"
+  },
+  {
+    "title": "Computer Parts and Ports",
+    "file": "Computer-Parts-and-Ports.jpg"
+  },
+  {
+    "title": "Course Weekly Outline",
+    "file": "Course-Weekly-Outline.pdf"
+  },
+  {
+    "title": "Floating Point in Binary",
+    "file": "Floating-Point-in-Binary.pdf"
+  },
+  {
+    "title": "Logic Gate Images",
+    "file": "Gate-Images.pdf"
+  },
+  {
+    "title": "GitHub Add Collaborators Guide",
+    "file": "GitHub-Add-Collaborators.pdf"
+  },
+  {
+    "title": "GitHub and Visual Studio Setup",
+    "file": "GitHub-and-Visual-Studio-Setup.pdf"
+  },
+  {
+    "title": "GitHub Cloning Repositories",
+    "file": "GitHub-Cloning-Repos.pdf"
+  },
+  {
+    "title": "GitHub Cheat Sheet",
+    "file": "Github-Git-Cheat-Sheet.pdf"
+  },
+  {
+    "title": "HTML5 Tags Reference",
+    "file": "HTML5-Tags.png"
+  },
+  {
+    "title": "Lego Mindstorms Installation Guide",
+    "file": "Lego-Mindstorms-Installation-Guide.pdf"
+  },
+  {
+    "title": "Logic Circuits Chapter",
+    "file": "Logic-Circuits-Chapter.pdf"
+  },
+  {
+    "title": "Microsoft Azure Services",
+    "file": "Microsoft-Azure-Services.pdf"
+  },
+  {
+    "title": "Polya Problem Solving Method",
+    "file": "Polya.pdf"
+  },
+  {
+    "title": "Algorithm Quiz Practice",
+    "file": "Quiz-Algorithms.pdf"
+  },
+  {
+    "title": "Search Algorithm Examples",
+    "file": "Search-Examples.pdf"
+  },
+  {
+    "title": "Truth Table Examples",
+    "file": "Truth-Table-Examples.pdf"
+  },
+  {
+    "title": "Deploying Websites with Vercel",
+    "file": "Vercel-Deploying-Website.pdf"
+  },
+  {
+    "title": "Web Development Overview",
+    "file": "Web-Development.pdf"
+  }
+]
